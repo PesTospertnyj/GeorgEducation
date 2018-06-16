@@ -1,0 +1,1 @@
+-cur_console:d:C:\_my\proj\geoorg-edu\ "C:\Windows\System32\cmd.exe"
