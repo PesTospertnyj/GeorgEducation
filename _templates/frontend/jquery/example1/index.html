@@ -5,19 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- include jQuery form Google CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- jQuery color animation plugin  -->
     <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src = "script/menu.js"></script>
+
     <script>
         $(document).ready(function(){
-          
-                
+        //   createMenu();
         })
     </script>
 </head>
 
 <body>
-    <p  id="hmessage">Hello form jQuery example</p>
+    <div class="menu" ></div>
+    <script>
+        var menues = ["menu 1", "menu 2", "menu 3", "menu 4"];
+        createMenu($(".menu"),menues);
+    </script>
 </body>
 </html>

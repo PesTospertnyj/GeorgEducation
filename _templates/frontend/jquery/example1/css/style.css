@@ -1,3 +1,8 @@
-.div {
+.menu {
     color: black;
+    background-color: rgb(211, 211, 211);
+    height: 50px;
+    width: 500px;
+    display: flex;
+    /* justify-content: space-around; */
 }
