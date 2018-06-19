@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <!-- include jQuery form Google CDN -->
+    <!-- include jQuery from Google CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- jQuery color animation plugin  -->
     <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -14,16 +14,18 @@
 
     <script>
         $(document).ready(function(){
-        //   createMenu();
+        
+        var menues = [{menu:'menu 1', submenu: ['submenu 11']},
+        {menu:'menu 2', submenu: ['submenu 21','submenu22 ']},
+        {menu:'menu 3', submenu: ['submenu 31','submenu 32 ','submenu33']},
+        {menu:'menu 4', submenu: ['submenu 41','submenu42','submenu 43','submenu44']}];
+        createMenu($(".menu"),menues);
         })
     </script>
 </head>
 
-<body>
+<body >
     <div class="menu" ></div>
-    <script>
-        var menues = ["menu 1", "menu 2", "menu 3", "menu 4"];
-        createMenu($(".menu"),menues);
-    </script>
+<!-- <p>body</p> -->
 </body>
 </html>
