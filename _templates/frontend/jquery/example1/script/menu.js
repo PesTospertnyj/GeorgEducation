@@ -6,6 +6,7 @@ function createMenu(wrapper, menues) {
     var itemHeight = wHeight;
     var itemColor = wrapper.css('backgroundColor');
     wrapper.css('display', 'table');
+    var submenuActive =-1;
     var menuObj = [];
     var baseLeft = 0;
         for (let i=0; i<menues.length; i++) {
@@ -33,6 +34,7 @@ function createMenu(wrapper, menues) {
                 
                  
                 customDiv.css({"display":"table"});
+                customDiv.attr({"index":$(this).attr('index')});
                  var newY = $(this).attr('y');
                  customDiv.offset({top:newY, left:$(this).attr('x')});
                  customDiv.empty();
@@ -57,15 +59,26 @@ function createMenu(wrapper, menues) {
                  }
 
                  customDiv.css({"width": (maxWidth<itemWidth+12? itemWidth+12 :maxWidth)+"px"});
+                 customDiv.mouseover(function(){
+                    // submenuActive=parseInt($(this).attr("index"));
+                    // console.log(submenuActive);
+                 });
+                 customDiv.mouseout(function(){
+                    // submenuActive = -1;
+                });
                  customDiv.show();
             });
             
             menuObj[i].id.mouseout(function(idx){
-                $(this).css("background-color", itemColor);
-                $(this).css( 'cursor', 'auto' );
-                $(this).attr('unselectable', 'off').css('user-select', 'auto');
-                customDiv.css({"width":"0px", "height":"0px"});
-                customDiv.hide();
+                // console.log("index "+parseInt($(this).attr('index')));
+                // console.log("subMenuActive "+submenuActive);
+                // if (parseInt($(this).attr('index'))!=submenuActive) {
+                    $(this).css("background-color", itemColor);
+                    $(this).css( 'cursor', 'auto' );
+                    $(this).attr('unselectable', 'off').css('user-select', 'auto');
+                    customDiv.css({"width":"0px", "height":"0px"});
+                    customDiv.hide();
+                // }
             });
         }
         var customDiv = $("<div></div>");
