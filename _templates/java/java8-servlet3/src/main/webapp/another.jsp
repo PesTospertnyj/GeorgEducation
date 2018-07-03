@@ -20,5 +20,11 @@ ${some_attr}
 <my:ifTag test="${3 > 6}">
     body of ifTag test = 3 > 6
 </my:ifTag>
+
+<%= 4 > 3 %><br>
+
+<my:ifTag test="<%= 4 > 3 %>">
+    body of ifTag test = 4 > 3<br>
+</my:ifTag>
 </body>
 </html>
