@@ -8,22 +8,24 @@ import javax.servlet.jsp.tagext.Tag;
  * Created by gaw on 7/3/2018.
  */
 public class MyIfTag implements Tag {
+    private PageContext pageContext;
+    private Tag parent;
 
     private boolean test;
 
     @Override
     public void setPageContext(final PageContext pc) {
-
+        this.pageContext = pc;
     }
 
     @Override
     public void setParent(final Tag t) {
-
+        this.parent = t;
     }
 
     @Override
     public Tag getParent() {
-        return null;
+        return parent;
     }
 
     @Override
