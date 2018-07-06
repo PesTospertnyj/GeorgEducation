@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- CDN reference to Bootstrap's stylesheet -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+            #map {
+                margin-top: 50px;
+                width: 100%;
+                height: 400px;
+            }
+    </style>
+
+    <!-- CDN reference to JQuery -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+
+        function initMap() {
+    
+            var currentPos = {lat: 51.114313, lng: 33.682583};
+            var iconUrl = 'img/group.png'
+            var map = new google.maps.Map(document.getElementById('map'), {zoom: 5, center: currentPos});
+            var marker;
+            var iIcon = {
+                        url: iconUrl,
+                        size: new google.maps.Size(30, 40),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(16, 40)
+                    };
+
+            var towns = [
+                {name: 'Minsk', divName: "#minskMarker",
+                    position: {lat: 53.883, lng: 27.556},
+                    image: iIcon,
+                    largeIcon: "https://portalv3.s3.eu-central-1.amazonaws.com/250/MyHotelFiles/02c636f7-42eb-4549-b386-957c726ac00d_1500470667026-64x64-400x400-800x800.jpeg"
+                    },
+                {name: 'Lugansk', divName: "#luganskMarker",
+                    position: {lat: 48.55, lng: 39.3},
+                    image: iIcon,
+                    largeIcon: "http://helpintourism.com/images/stories/ukraine/lugansk/lugansk3.jpg"
+                },
+                {name: 'Odessa', divName: "#odessaMarker",
+                    position: {lat: 46.48, lng: 30.75},
+                    image: iIcon,
+                    largeIcon: "https://ubr.ua/img/article/38661/46_main.jpeg"
+                }
+            ];
+
+            for (index in towns) {
+                const dName =  towns[index].divName;
+                const itemicon = towns[index].image;
+                const markerImageHover = {
+                    url: towns[index].largeIcon,
+                    scaledSize: new google.maps.Size(100, 100),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(50, 100)
+                };
+                marker = new google.maps.Marker({position: towns[index].position, map: map, title: towns[index].name, icon: itemicon});
+                marker.addListener('click', function() { gMapClick(dName)});
+                google.maps.event.addListener(marker, 'mouseover', function() {
+                    this.setIcon(markerImageHover);
+                });
+                google.maps.event.addListener(marker, 'mouseout', function() {
+                    this.setIcon(itemicon);
+                });
+            }
+
+            addLocationButton(map);
+
+        }
+
+        function gMapClick(divName) {
+            var navHeight = $('.title').height() + parseInt($('.title').css('padding-bottom')) + parseInt($('.title').css('padding-top'));
+            $('html, body').animate({
+                scrollTop: $(divName).offset().top - navHeight
+            }, 1000);
+        }
+
+        function addLocationButton(map) 
+        {
+            var controlDiv = document.createElement('div');
+            
+            var firstChild = document.createElement('button');
+            firstChild.style.backgroundColor = '#fff';
+            firstChild.style.border = 'none';
+            firstChild.style.outline = 'none';
+            firstChild.style.width = '28px';
+            firstChild.style.height = '28px';
+            firstChild.style.borderRadius = '2px';
+            firstChild.style.boxShadow = '0 1px 4px rgba(0,0,0,0.3)';
+            firstChild.style.cursor = 'pointer';
+            firstChild.style.marginRight = '10px';
+            firstChild.style.padding = '0px';
+            firstChild.title = 'Your Location';
+            controlDiv.appendChild(firstChild);
+
+            var secondChild = document.createElement('div');
+            secondChild.style.margin = '5px';
+            secondChild.style.width = '18px';
+            secondChild.style.height = '18px';
+            secondChild.style.backgroundImage = 'url(https://maps.gstatic.com/tactile/mylocation/mylocation-sprite-1x.png)';
+            secondChild.style.backgroundSize = '180px 18px';
+            secondChild.style.backgroundPosition = '0px 0px';
+            secondChild.style.backgroundRepeat = 'no-repeat';
+            secondChild.id = 'youLocationImg';
+            firstChild.appendChild(secondChild);
+            
+            controlDiv.index = 1;
+            map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controlDiv);
+            var marker;
+
+            firstChild.addEventListener('click', function() {
+                var imgX = '0';
+                var iIcon = {
+                        url: 'img/youAreHere.png',
+                        scaledSize: new google.maps.Size(40, 40),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(16, 40)
+                    };
+                if (marker) {
+                    marker.setMap(null);
+                };
+                marker = new google.maps.Marker({map: map, title: "You are here", 
+                         animation: google.maps.Animation.DROP, icon: iIcon});
+                    
+                $('#youLocationImg').css('background-position', '0px 0px');
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition( function(position) {
+                        var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                        map.panTo(latlng);
+                        marker.setPosition(latlng);
+                        marker.setVisible(true);
+                        $('#youLocationImg').css('background-position', '-144px 0px');
+                    });
+                }
+            });
+        }
+
+    </script>
+</head>
+
+<body>
+
+
+<div class="title container-fluid sticky-top text-center align-middle" style="height:50px; background-color: rgb(243, 243, 243);">
+    <span class="align-middle" style="margin-top: auto; margin-bottom: auto;">
+    Google Maps Example
+    </span>
+</div>
+
+
+<div class="container">
+    
+    <div id="map"></div>
+    <br><br>
+    <div class="container" id="minskMarker">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Minsk</h3>
+            </div>
+            <div class="col-md-6">
+                <img class="img-fluid rounded"
+                     src="https://portalv3.s3.eu-central-1.amazonaws.com/250/MyHotelFiles/02c636f7-42eb-4549-b386-957c726ac00d_1500470667026-64x64-400x400-800x800.jpeg"/>
+            </div>
+
+        </div>
+    </div>
+    <br><br>
+    <div id="luganskMarker" class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Lugansk</h3>
+            </div>
+            <div class="col-md-6">
+                <img class="img-fluid rounded"
+                     src="http://helpintourism.com/images/stories/ukraine/lugansk/lugansk3.jpg"/>
+            </div>
+
+        </div>
+    </div>
+    <br><br>
+    <div id="odessaMarker" class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Odessa</h3>
+            </div>
+            <div class="col-md-6">
+                <img class="img-fluid rounded" src="https://ubr.ua/img/article/38661/46_main.jpeg"/>
+            </div>
+
+        </div>
+    </div>
+    <br><br>
+
+
+<!-- Reference to Google Maps API-->
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEpLIkIDjGMAELPSuov74JobrW2xDwVP0&callback=initMap">
+    </script>
+</div>
+
+<!-- CDN reference to Bootstrap's scripts-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+</body>
+</html>
