@@ -1,0 +1,151 @@
+$mainColor = #2ac0f9 // accent color
+$font = 400 14px Roboto, sans-serif // main font
+$textColor = #888	// color for normal text
+
+
+.clearfix::after
+	content ""
+	clear both
+	display table	
+.reg-form
+	font $font 
+	background white
+	color $textColor
+	width 100%
+	max-width 600px
+	margin 0 auto
+	&__header
+		text-align center
+		background $mainColor
+		color white
+		padding 15px 0
+		border-radius 5px 5px 0 0
+		box-shadow 0px 6px 5px 0px rgba(191,191,191,0.63)
+		font-size 18px
+	&__body
+		border 1px solid #ddd
+		border-top none
+		border-radius 0 0 5px 5px
+		padding 15px 25px
+		padding-top 20px
+		box-shadow 0px 2px 5px 0px rgba(191,191,191,0.8)
+	&__footer
+		text-align center
+	& .row
+		width 100%
+	& .column-half
+		position relative
+		padding 12px 0
+		width 95%
+		padding-left 5%
+		margin-bottom 10px
+	& .column-select
+		padding 10px 0
+		width 100%
+		padding-left 5%
+		margin-bottom 10px
+	& .column-email
+		padding 10px 0
+		width 97.5%
+		padding-left 2.5%
+		margin-bottom 10px
+	& .col-left
+		width 47%
+		padding-right 3%
+		float left
+	& .col-right
+		width 47%
+		padding-left 3%
+		float left
+	& .labels
+		display block
+		margin-top 15px
+		width 100%
+		float left
+	& label
+		display block
+	& input
+		border 1px solid #ddd
+		color $textColor
+		position: relative
+		font $font
+	& .label
+		display block
+		position relative
+		cursor pointer
+		font-size 14px
+		margin-top 5px
+		& input:checked ~ .checkmark
+			background-color $mainColor
+	& .checkmark 
+		position absolute
+		top 3px
+		left 3px
+		height 17px
+		width 17px
+		background-color #eee
+		border-radius 50%
+	& .input-icon
+		position relative
+		& i
+			position absolute
+			z-index 0
+			top 12px
+			right 10px	
+			color #ccc
+			font-size 20px
+	& .input-email-icon
+		position relative
+		display inline-block
+		width 100%
+		& i
+			position absolute
+			z-index 0
+			top 10px
+			right 10px	
+			color #ccc
+			font-size 20px
+	& ::placeholder
+		color $textColor
+		font $font
+	& textarea
+		padding 10px
+		border-color #ddd
+	& hr
+		border none
+		color #ddd
+		background-color #ddd
+		height 1px
+		margin 15px 0 15px 0
+	& .select-parent
+		overflow hidden
+	& select
+		border 1px solid #ddd
+		padding 12px!important
+		color $textColor
+		font $font
+		-webkit-appearance: none
+		-moz-appearance: none
+		background: transparent
+		appearance: none
+		background: transparent url("https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-down-01-16.png") no-repeat 95% center
+		& option
+			background-color $mainColor
+			color white
+			font-size 18px
+		&::-ms-expand
+			display: none
+	& button
+		padding 6px 35px
+		font $font
+		border none
+		border-radius 2px
+		background-color $mainColor
+		margin-top 15px
+		color white
+		box-shadow 0px 2px 5px 0px rgb(191,191,191)
+		float right
+	& a 
+		color $mainColor
+		text-decoration none
+		
