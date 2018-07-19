@@ -1,7 +1,6 @@
-
 # Form for registrations two-column
 
-![screen form](https://psv4.userapi.com/c834600/u383500266/docs/d13/6e3a32cde63e/form.png?extra=RFgKYRqV3YnBu1vxPjt6VjZrpvZmPFLoPE5aTVqJOAemfqQS_oGl_VaakV8kjiZfOoXVrz56FxzdMB7iyoSNyOiRDABzJ3eLHRMgimomnVc_bkEC-5p6G58qq_13q3vUv5-zoZ-HHaU9jw "two-column form")
+![screen form](https://psv4.userapi.com/c834600/u383500266/docs/d13/0a92c9256696/form.png?extra=Dy36bFTSCAgBS5DCMEw547yGAkLwWj2_yQ9brYBJz8iSrCUBEmvejpI6OF0jLOqZFMWtl2FkqD2TQ8-l81zM4y6XEiHxuO91uxOWl5tDZ3fWOfe1gpeAuVNdMv_bT71-yXwJu0rRmbPJxg "two-column form")
 
 ## Description
 
