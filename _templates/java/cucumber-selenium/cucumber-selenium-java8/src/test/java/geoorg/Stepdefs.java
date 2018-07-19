@@ -14,6 +14,9 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Stepdefs {
+    {
+        System.setProperty("webdriver.gecko.driver", "C:\\_my\\install\\geckodriver.exe");
+    }
     private final WebDriver driver = new FirefoxDriver();
     @Given("^I am on the Google search page$")
     public void I_visit_google() {
