@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+
+
+<div class="reg-form">
+	<div class="reg-form__header">
+		Registration
+	</div>
+	<div class="reg-form__body">
+		<form action="/" method="POST">
+			<div class="row clearfix">
+			
+				<div class="col-left">
+					<div class="input-icon">
+						<input type="text" id="name" placeholder="First Name" class="column-half">
+						<i class="material-icons">person</i>
+					</div>
+					<div class="input-icon">
+						<input type="text" placeholder="Username" class="column-half">
+						<i class="material-icons">person</i>
+					</div>
+				</div>
+				
+				<div class="col-right">
+					<div class="input-icon">
+						<input type="text" placeholder="Last Name" class="column-half">
+						<i class="material-icons">person</i>
+					</div>
+					<div class="input-icon">
+						<input type="text" placeholder="Phone Number" class="column-half">
+						<i class="material-icons">phone</i>
+					</div>
+				</div>
+				
+				<div class="input-email-icon">
+					<input type="text" placeholder="Email Address" class="column-email">
+					<i class="material-icons">email</i>
+				</div>
+
+				<div class="col-left">
+
+						<select name="Gender"  class="column-select">
+							<option disabled selected>Gender</option>
+							<option value="male">Male</option>
+							<option value="female">Female</option>
+						</select>
+					
+					<select name="Country" class="column-select">
+						<option disabled selected>Country</option>
+						<option value="Belarus">Belarus</option>
+						<option value="Ukraine">Ukraine</option>
+						<option value="Russia">Russia</option>
+					</select>
+
+					<div class="input-icon">
+						<textarea name="HomeAddress" rows="2" placeholder="Home Address" class="column-half"></textarea>
+						<i class="material-icons">home</i>
+					</div>
+
+					<div class="input-icon">
+						<input type="password" placeholder="Password" class="column-half">
+						<i class="material-icons">lock</i>
+					</div>
+
+				</div>
+				
+				<div class="col-right">
+					<input type="text" placeholder="Date Of Birth : DD/MM/YY" class="column-half">
+				
+					
+
+					<input type="text" placeholder="Company Name" class="column-half">
+
+					<div class="input-icon">
+						<textarea name="OfficeAddress"  rows="2" placeholder="Office Address" class="column-half"></textarea>
+						<i class="material-icons">home</i>
+					</div>
+
+					<div class="input-icon">
+						<input type="password" placeholder="Confirm Password" class="column-half">
+						<i class="material-icons">lock</i>
+					</div>
+				</div>
+
+				<div class="labels">
+					<label for="conditions"> 
+						<input type="checkbox" id="conditions" name="conditions">I agree with the terms and conditions
+					</label>
+
+					<label for="news"> 
+						<input type="checkbox" id="news" name="news">Receive news and offers
+					</label>
+					
+					<label class="label">
+						<input type="radio" name="radio"> kek 1
+							<span class="checkmark"></span>
+					</label>
+					<label class="label">
+						<input type="radio" name="radio"> kek 2
+						<span class="checkmark"></span>
+					</label>
+				</div>
+
+				<div class="col-left">
+					<button>Button</button>
+				</div>
+
+				<div class="col-right">
+					<button>Register</button>
+				</div>
+			</div>
+		</form>
+
+		<hr>
+
+		<div class="reg-form__footer">
+			Already have an account ? <a href="/">Login</a>
+		</div>
+		</div>	
+</div>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link rel="stylesheet" href="main.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+      <script src="js/main.js"></script>
+
+
+</body>
+</html>

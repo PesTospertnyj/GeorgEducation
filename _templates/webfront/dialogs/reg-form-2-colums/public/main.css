@@ -1,0 +1,175 @@
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.reg-form {
+  font: 400 14px Roboto, sans-serif;
+  background: #fff;
+  color: #888;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.reg-form__header {
+  text-align: center;
+  background: #2ac0f9;
+  color: #fff;
+  padding: 15px 0;
+  border-radius: 5px 5px 0 0;
+  box-shadow: 0px 6px 5px 0px rgba(191,191,191,0.63);
+  font-size: 18px;
+}
+.reg-form__body {
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  padding: 15px 25px;
+  padding-top: 20px;
+  box-shadow: 0px 2px 5px 0px rgba(191,191,191,0.8);
+}
+.reg-form__footer {
+  text-align: center;
+}
+.reg-form .row {
+  width: 100%;
+}
+.reg-form .column-half {
+  position: relative;
+  padding: 12px 0;
+  width: 95%;
+  padding-left: 5%;
+  margin-bottom: 10px;
+}
+.reg-form .column-select {
+  padding: 10px 0;
+  width: 100%;
+  padding-left: 5%;
+  margin-bottom: 10px;
+}
+.reg-form .column-email {
+  padding: 10px 0;
+  width: 97.5%;
+  padding-left: 2.5%;
+  margin-bottom: 10px;
+}
+.reg-form .col-left {
+  width: 47%;
+  padding-right: 3%;
+  float: left;
+}
+.reg-form .col-right {
+  width: 47%;
+  padding-left: 3%;
+  float: left;
+}
+.reg-form .labels {
+  display: block;
+  margin-top: 15px;
+  width: 100%;
+  float: left;
+}
+.reg-form label {
+  display: block;
+}
+.reg-form input {
+  border: 1px solid #ddd;
+  color: #888;
+  position: relative;
+  font: 400 14px Roboto, sans-serif;
+}
+.reg-form .label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 5px;
+}
+.reg-form .label input:checked ~ .checkmark {
+  background-color: #2ac0f9;
+}
+.reg-form .checkmark {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  height: 17px;
+  width: 17px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+.reg-form .input-icon {
+  position: relative;
+}
+.reg-form .input-icon i {
+  position: absolute;
+  z-index: 0;
+  top: 12px;
+  right: 10px;
+  color: #ccc;
+  font-size: 20px;
+}
+.reg-form .input-email-icon {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.reg-form .input-email-icon i {
+  position: absolute;
+  z-index: 0;
+  top: 10px;
+  right: 10px;
+  color: #ccc;
+  font-size: 20px;
+}
+.reg-form ::placeholder {
+  color: #888;
+  font: 400 14px Roboto, sans-serif;
+}
+.reg-form textarea {
+  padding: 10px;
+  border-color: #ddd;
+}
+.reg-form hr {
+  border: none;
+  color: #ddd;
+  background-color: #ddd;
+  height: 1px;
+  margin: 15px 0 15px 0;
+}
+.reg-form .select-parent {
+  overflow: hidden;
+}
+.reg-form select {
+  border: 1px solid #ddd;
+  padding: 12px !important;
+  color: #888;
+  font: 400 14px Roboto, sans-serif;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  appearance: none;
+  background: transparent url("https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-down-01-16.png") no-repeat 95% center;
+}
+.reg-form select option {
+  background-color: #2ac0f9;
+  color: #fff;
+  font-size: 18px;
+}
+.reg-form select::-ms-expand {
+  display: none;
+}
+.reg-form button {
+  padding: 6px 35px;
+  font: 400 14px Roboto, sans-serif;
+  border: none;
+  border-radius: 2px;
+  background-color: #2ac0f9;
+  margin-top: 15px;
+  color: #fff;
+  box-shadow: 0px 2px 5px 0px #bfbfbf;
+  float: right;
+}
+.reg-form a {
+  color: #2ac0f9;
+  text-decoration: none;
+}
