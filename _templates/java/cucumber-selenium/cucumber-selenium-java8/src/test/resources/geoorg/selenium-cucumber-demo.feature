@@ -1,7 +1,14 @@
 Feature: Open google
   Open google
 
-  Scenario: Finding some cheese
+  Scenario Outline: Finding some cheese
     Given I am on the Google search page
-    When I search for "Cheese!"
-    Then the page title should start with "cheese"
+    When I search for "<term>"
+    Then the page title should start with "<titleStartWith>"
+
+    Examples:
+      | term        | titleStartWith |
+      | Cheese!     | cheese         |
+      | Some bread! | some bread     |
+
+
