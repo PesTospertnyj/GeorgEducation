@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+
+<div class="container ">
+	<div class="row justify-content-center">
+		<div class="btn-group">
+			<button type="button" class="btn btn-outline-dark" disabled>Modal dialog</button>
+			<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#simpleModal">Open simple modal</button>
+			<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#loginModal">Open login modal</button>
+			<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#registerModal">Open register modal</button>
+			<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#newModal">Open message modal</button>
+		</div>
+	</div>	
+</div>
+
+<!-------------------------------- SIMPLE DIALOG ------------------------------------------>
+<div class="modal fade" id="simpleModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Simple modal</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Some text&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div> 
+</div>
+
+
+<!-------------------------------- LOGIN DIALOG ------------------------------------------>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+	<form action="">
+    <div class="modal-content">
+		<div class="modal-header">
+			<h4 class="modal-title">Login modal</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+        <div class="modal-body">
+      		<div class="form-group">
+      			<label for="modalFormLogin" class="col-form-label">Login:</label>
+      			<input type="text" id="modalFormLogin" class="form-control">
+      		</div>
+      		<div class="form-group">
+      			<label for="modalFormPassord" class="col-form-label">Password</label>
+      			<input type="password" id="modalFormPassord" class="form-control">
+      		</div>
+      		<div class="form-group">
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" id="modalFormRemember">
+					<label class="custom-control-label" for="modalFormRemember">Remember me</label>   
+				</div>
+      		</div>
+        </div>
+        <div class="modal-footer">
+			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>   
+        </div>
+    </div>
+	</form>
+  </div> 
+</div>
+
+
+
+
+<!-------------------------------- REGISTER DIALOG ------------------------------------------>
+
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+	<form action="">
+    <div class="modal-content">
+		<div class="modal-header">
+			<h4 class="modal-title">Register modal</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+        <div class="modal-body">
+      		<div class="form-group">
+      			<label for="modalFormFirstName" class="col-form-label">First Name:</label>
+      			<div class="input-group">
+	      			<input type="text" id="modalFormFirstName" class="form-control py-2 border-right-0 border" placeholder="First Name">
+	      			<span class="input-group-append">
+                  		<div class="input-group-text bg-transparent"><i class="fa fa-user"></i></div>
+            		</span>
+      			</div>
+      		</div>
+      		<div class="form-group">
+      			<label for="modalFormLastName" class="col-form-label">Last Name:</label>
+      			<div class="input-group">
+	      			<input type="text" id="modalFormLastName" class="form-control py-2 border-right-0 border" placeholder="Last Name">
+	      			<span class="input-group-append">
+                  		<div class="input-group-text bg-transparent"><i class="fa fa-user"></i></div>
+            		</span>
+      			</div>
+      		</div>
+      		<div class="form-group">
+      			<label for="modalFormUsername" class="col-form-label">Username:</label>
+      			<div class="input-group">
+	      			<input type="text" id="modalFormUsername" class="form-control py-2 border-right-0 border" placeholder="Username">
+	      			<span class="input-group-append">
+                  		<div class="input-group-text bg-transparent"><i class="fa fa-user"></i></div>
+            		</span>
+      			</div>
+      		</div>
+      		<div class="form-group">
+      			<label for="modalFormPassword" class="col-form-label">Password:</label>
+      			<div class="input-group">
+	      			<input type="password" id="modalFormPassword" class="form-control py-2 border-right-0 border" placeholder="Password">
+	      			<span class="input-group-append">
+                  		<div class="input-group-text bg-transparent"><i class="fa fa-lock"></i></div>
+            		</span>
+      			</div>
+      		</div>
+      		<div class="form-group">
+      			<label for="modalFormRadioMale" class="col-form-label">Gender:</label>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="modalFormRadioMale" name="customRadio" class="custom-control-input">
+					<label class="custom-control-label" for="modalFormRadioMale">Male</label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="modalFormRadioFemale" name="customRadio" class="custom-control-input">
+					<label class="custom-control-label" for="modalFormRadioFemale">Female</label>
+				</div>
+      		</div>
+      		<div class="form-group">
+      			<label for="modalFormSelect" class="col-form-label">Country</label>
+      			<select class="custom-select" id="modalFormSelect">
+				  <option selected>Open this select menu</option>
+				  <option value="1">USA</option>
+				  <option value="2">Ukraine</option>
+				  <option value="3">Russian</option>
+				</select>
+      		</div>
+			<div class="form-group">
+				<label for="message-text" class="col-form-label">Message:</label>
+				<div class="input-group">
+				<textarea class="form-control py-2 border-right-0 border" id="message-text" placeholder="Message"></textarea>
+	      			<span class="input-group-append">
+                  		<div class="input-group-text bg-transparent"><i class="fa fa-envelope"></i></div>
+            		</span>
+      			</div>
+			</div>
+      		<div class="form-group">
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" id="modalFormAccept">
+					<label class="custom-control-label" for="modalFormAccept">Accept License Agreement</label>   
+				</div>
+      		</div>
+        </div>
+        <div class="modal-footer">
+			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>   
+        </div>
+    </div>
+	</form>
+  </div> 
+</div>
+
+
+
+<!-------------------------------- LOGIN FULL DIALOG ------------------------------------------>
+
+<style>
+
+	.input-icon ~ .form-control {
+		padding-right: 35px;
+	}
+
+	.input-icon {
+		position: absolute;
+	    right: 15px;
+	    top: 8px;
+	    z-index: 4;
+	    color: buttonface;
+	}
+		
+	.modal-header-bg, .modal-header-bg .close{
+		color: #fff;
+	}
+
+	textarea.form-control {
+		min-height: 38px;
+	}
+</style>
+
+<div class="modal fade" id="newModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+	<form action="" class="was-validated">
+    <div class="modal-content">
+		<div class="modal-header modal-header-bg bg-primary">
+			<h4 class="modal-title">Message modal</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+        <div class="modal-body">
+  			<label for="modalFormLogin" class="col-form-label">Login:</label>
+  			<div class="input-group">
+      			<span class="input-icon"><i class="fa fa-user"></i></span>
+      			<input type="text" id="modalFormLogin" class="form-control" placeholder="Login" required>
+      			<div class="invalid-feedback">
+ 					Enter login!
+      			</div>
+  			</div>
+
+  			<label for="modalFormPassord" class="col-form-label">Email</label>
+  			<div class="input-group">
+      			<span class="input-icon"><i class="fa fa-lock"></i></span>      			
+  				<input type="email" id="modalFormPassord" class="form-control" placeholder="example@mail.com" required>
+      			<div class="invalid-feedback">
+ 					Enter the correct email!
+      			</div>
+  			</div>
+
+  			<label for="modalFormPassord" class="col-form-label">Password</label>
+  			<div class="input-group">
+      			<span class="input-icon"><i class="fa fa-lock"></i></span>      			
+  				<input type="password" id="modalFormPassord" class="form-control" placeholder="Password" required >
+      			<div class="invalid-feedback">
+ 					Enter password!
+      			</div>
+  			</div>
+
+  			<label for="message-text" class="col-form-label">Message:</label>
+			<div class="input-group">
+	      		<span class="input-icon"><i class="fa fa-envelope"></i></span>
+				<textarea class="form-control " id="message-text" rows='5' minlength="10" maxlength="255" title="Enter the message between 10 and 255 characters!" placeholder="This is the area for text input" required></textarea>
+	      		<div class="invalid-feedback">
+ 					Enter the message between 10 and 255 characters!
+      			</div>
+      		</div>
+        </div>
+        <div class="modal-footer">
+			<button type="submit" class="btn btn-primary ">Submit</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>   
+        </div>
+    </div>
+	</form>
+  </div> 
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
