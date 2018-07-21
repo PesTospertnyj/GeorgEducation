@@ -1,0 +1,116 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": 0,
+      "options": {
+        "fillColor": "#00FF00",
+        "strokeColor": "#43863d",
+        "opacity": 0.5,
+        "strokeWidth": 3
+        },
+      "properties": {
+            "balloonContentHeader": "MEMORY SQUARE",
+            "balloonContent": "<div class='balloon_content'><img src='images/memory_square.jpg'><p>Адрес: ул. Советская, 78, Луганск, Луганськая область, 91000</p></div>", 
+            "hintContent": "Сквер Памяти"
+        },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [39.31758414, 48.56868448],
+            [39.31768904, 48.56673341],
+            [39.32046046, 48.56667237],
+            [39.32036290, 48.56886250]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 1,
+      "options": {
+            "strokeColor": ["#000","#FFFF00"],
+            "strokeWidth": [8,5]
+        },
+      "properties": {
+            "balloonContentHeader": "OBORONNAYA STREET",
+            "balloonContent": "<div class='balloon_content'><img src='images/obor_street.jpg'><p>Адрес: ул. Оборонная, Луганск, Луганськая область, 91000</p></div>", 
+            "hintContent": "Сквер Памяти"
+        },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            39.31526344, 48.56876518
+          ],
+          [
+            39.31614151, 48.56206098
+          ],
+          [
+            39.31640732, 48.56147997
+          ],
+          [
+            39.34458631, 48.53289145
+          ],
+          [
+            39.34999312, 48.52845068
+          ],
+          [
+            39.35286845, 48.52588520
+          ],
+          [
+            39.35784697, 48.52238278
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "options": {"fillColor": "#66ff99", "strokeColor": "#55aa99", "opacity": 0.5},
+      "properties": {"balloonContent": "Содержимое балуна", "hintContent": "Текст подсказки"},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              55.810156563965364,
+              37.777862548828125
+            ],
+            [
+              55.82635894724889,
+              37.777862548828125
+            ],
+            [
+              55.82635894724889,
+              37.81837463378906
+            ],
+            [
+              55.810156563965364,
+              37.81837463378906
+            ],
+            [
+              55.810156563965364,
+              37.777862548828125
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 3,
+      "properties": {
+        "balloonContentHeader": "HOTEL LUGANSK",
+        "balloonContent": "<div class='balloon_content'><img src='images/hotel_lugansk.jpg'><p>Адрес: ул. Советская, 76, Луганск, Луганськая область, 91000</p></div>", 
+        "hintContent": "Гостинница \"Луганск\""
+    },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [39.31596941, 48.56832678]
+      }
+    }
+  ]
+}

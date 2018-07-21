@@ -1,0 +1,10 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {"type": "Feature", "id": 0, "geometry": {"type": "Point", "coordinates": [39.32076262, 48.55967446]}, "properties": {"balloonContent": "STADIUM AVANTGARD", "clusterCaption": "Еще одна метка", "hintContent": "Стадион Авангард"}},
+        {"type": "Feature", "id": 1, "geometry": {"type": "Point", "coordinates": [39.32316588, 48.56255156]}, "properties": {"balloonContent": "LUGANSK CIRCUS", "clusterCaption": "Еще одна метка", "hintContent": "Луганский цирк"}},
+        {"type": "Feature", "id": 2, "geometry": {"type": "Point", "coordinates": [39.30698679, 48.56559939]}, "properties": {"balloonContent": "CRNTRAL MARKET", "clusterCaption": "Еще одна метка", "hintContent": "Центральный рынок"}},
+        {"type": "Feature", "id": 3, "geometry": {"type": "Point", "coordinates": [39.30726605, 48.57542564]}, "properties": {"balloonContent": "MUSEUM OF LOCAL LORE", "clusterCaption": "Еще одна метка", "hintContent": "Краеведческий музей"}},
+        {"type": "Feature", "id": 4, "geometry": {"type": "Point", "coordinates": [39.28831491, 48.57561713]}, "properties": {"balloonContent": "TRAIN STATION", "clusterCaption": "Еще одна метка", "hintContent": "Железнодорожный вокзал"}}
+    ]
+}
