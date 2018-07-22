@@ -15,6 +15,10 @@ public class App
     public static void main( String[] args )
     {
         Runnable runnable = () -> {
+            LOGGER.trace("Hello trace");
+            LOGGER.debug("debug");
+            LOGGER.error("error");
+            LOGGER.fatal("fatal");
             LOGGER.info("Hello java 8 and log4j-1");
         };
         new Thread(runnable).start();
