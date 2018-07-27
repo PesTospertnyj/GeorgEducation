@@ -25,18 +25,18 @@ function init () {
     // create simple object manager for get geo object
     objectManager = new ymaps.ObjectManager();
 
-    // Загружаем GeoJSON файл с описанием объектов.
+    // Load the GeoJSON file with a description of the objects.
     $.getJSON('data.json')
         .done(function (geoJson) {
-            // Добавляем описание объектов в формате JSON в менеджер объектов.
+            // Add the description of objects in the JSON format to the object manager.
             objectManager.add(geoJson);
-            // Добавляем объекты на карту.
+            // Add objects to the map.
             map.geoObjects.add(objectManager);
     });
 
     objectManagerPoint = new ymaps.ObjectManager({
-            // Чтобы метки начали кластеризоваться, выставляем опцию. 
-            // Only if all geo object are points
+            // To make the tags begin to cluster, we set the option.
+            // Only if all geo object are points!
             clusterize: true,
            // geoObjectOpenBalloonOnClick: false,
             clusterOpenBalloonOnClick: false

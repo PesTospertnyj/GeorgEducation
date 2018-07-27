@@ -69,34 +69,15 @@
     {
       "type": "Feature",
       "id": 2,
-      "options": {"fillColor": "#66ff99", "strokeColor": "#55aa99", "opacity": 0.5},
-      "properties": {"balloonContent": "Содержимое балуна", "hintContent": "Текст подсказки"},
+      "properties": {
+        "balloonContentHeader": "CENTRAL MARKET",
+        "balloonContent": "", 
+        "hintContent": "Центральный рынок"
+      },
       "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              55.810156563965364,
-              37.777862548828125
-            ],
-            [
-              55.82635894724889,
-              37.777862548828125
-            ],
-            [
-              55.82635894724889,
-              37.81837463378906
-            ],
-            [
-              55.810156563965364,
-              37.81837463378906
-            ],
-            [
-              55.810156563965364,
-              37.777862548828125
-            ]
-          ]
-        ]
+        "type": "Circle",
+        "coordinates": [39.30698679, 48.56559939],
+        "radius": 250
       }
     },
     {
