@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>google markers clusters</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <style>
+        #map {
+            margin-top: 50px;
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+
+    <script src="script/custommap.js"></script>
+
+    <script>
+            var places = [
+                { position: {lat: 49.785, lng: 15.785}, title: "marker #1"},
+                { position: {lat: 49.7, lng: 16.0}},
+                { position: {lat: 49.8, lng: 15.7}}
+            ];
+
+
+            var dataSource = function(id, callback) {
+                setTimeout(function() { callback(new InfoWindowContent(
+                    {title: "Title for marker # "+id, 
+                    text: "Some text for marker #"+id,
+                    img: 'img/group.png',
+                    onClick: 'alert("Some function in action")', 
+                    link2show: "Details",
+                    }
+                ))},2000);
+            } 
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div id="map"></div>
+        <script>
+            var mMap = new CustomMap("map", dataSource)
+                    .enableClustering()
+                    .enableCurrentPosition();
+            mMap.addMarkers(places);
+            
+        </script>
+    </div>
+
+    <script>
+        var iw = new InfoWindowContent({title:"Some title", img: 'img/group.png', text: "some description", onClick: 'alert("Some function in action")'})
+        setTimeout(function() {mMap.addMarkers([{ position: {lat: 50.0, lng: 16.0}, icon: 'img/group.png', infoWindowContent: iw, isLoaded: true}])}, 200)
+        setTimeout(function() {mMap.addMarkers([{ position: {lat: 48.0, lng: 16.5}}])},2000)
+        
+        setTimeout(function() {mMap.removeMarker(0)}, 3000);
+        setTimeout(function() {mMap.addMarkers([{ position: {lat: 49.5, lng: 16.387}, title: "Near"}])},5000)
+        setTimeout(function() {mMap.availableData(3)}, 8000);
+    
+    </script>
+
+</body>
+</html>
