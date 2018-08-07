@@ -41,6 +41,6 @@ public class GoogleHomePage {
     }
 
     public void closeWindow() {
-        webDriver.quit();
+        webDriver.close();
     }
 }

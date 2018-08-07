@@ -33,4 +33,9 @@ public class GooglePageStepDefinitions {
     ) {
         assertTrue(googleHomePage.getTitle().toLowerCase().startsWith(titleStartsWith.toLowerCase()));
     }
+
+    @After
+    public void clear() {
+        googleHomePage.closeWindow();
+    }
 }
