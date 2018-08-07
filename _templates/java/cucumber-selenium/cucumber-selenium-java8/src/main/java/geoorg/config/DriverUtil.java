@@ -1,12 +1,13 @@
 package geoorg.config;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.util.concurrent.TimeUnit;
-
 public class DriverUtil {
+
+    private static final Logger LOGGER = Logger.getLogger(DriverUtil.class);
 
     private DriverUtil() {
     }
@@ -26,6 +27,17 @@ public class DriverUtil {
             CHROME_DRIVER = new ChromeDriver(options);
         }
         return CHROME_DRIVER;
+    }
+
+    static {
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            @Override
+            public void run() {
+                LOGGER.info("Shutting down after tests");
+
+                CHROME_DRIVER.quit();
+            }
+        }));
     }
 
 }
