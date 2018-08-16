@@ -11,9 +11,14 @@
                 var $dropdownContainer = $(this);
                 var $dropdownButton = $dropdownContainer.find("button.dropdown-toggle");
                 var $dropdownMenu = $dropdownContainer.find(".dropdown-menu");
+                var $selectedCarrierDivs = $dropdownContainer.find(".selected-carrier");
+                var $carrierTab = $dropdownContainer.find("a[href='#menu1']");
+                var $planTab = $dropdownContainer.find("a[href='#menu2']");
+                var $planTabContent = $dropdownContainer.find(".planTabContainer");
                 var $input = $dropdownContainer.find(".autocomplete-tabs-input");
 
                 $dropdownButton.hide();
+
                 $dropdownButton.on("click", function() {
                     $dropdownMenu.show();
                 });
@@ -28,6 +33,48 @@
                         $dropdownMenu.hide();
                     }
                 });
+
+                $(".carrier-option").click(function () {
+                    var $clickedOption = $(this);
+                    var carrierId = $clickedOption.data("carrier-id");
+                    selectCarrier(carrierId);
+                    filterPlans();
+                    activatePlanTab();
+                    $planTab.click();
+
+                });
+
+                function selectCarrier(carrierId) {
+                    $dropdownContainer.data("selected-carrier", carrierId);
+                    var selectedCarrierName = $("li[data-carrier-id='" + carrierId + "']").first().text();
+                    $selectedCarrierDivs.text(selectedCarrierName);
+                    console.log("carrier click " + carrierId);
+                }
+
+                function getSelectedCarrierId() {
+                    var result =  $dropdownContainer.data("selected-carrier");
+                    if (typeof result === "undefined") {
+                        return -1;
+                    } else {
+                        return result;
+                    }
+                }
+
+                function filterPlans() {
+                    $planTabContent.find(".plan-option").each(function() {
+                        var $this = $(this);
+                        if ($this.data("carrier-id") === getSelectedCarrierId() ) {
+                            $this.show();
+                        } else {
+                            $this.hide();
+                        }
+                    });
+                }
+
+                function activatePlanTab() {
+                    $planTab.attr("data-toggle", "tab");
+                }
+
             });
         });
     </script>
@@ -42,53 +89,53 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <ul class="nav nav-tabs">
                 <li><a data-toggle="tab" href="#menu1">Choose carrier</a></li>
-                <li><a data-toggle="tab" href="#menu2">Choose plan</a></li>
+                <li><a href="#menu2" >Choose plan</a></li>
             </ul>
 
             <div class="tab-content">
                 <div id="menu1" class="tab-pane fade in active">
-                    <div class="selected-carrier">selected carrier</div>
-                    <ol class="selectable" id="selectable">
-                        <li class="ui-widget-content" data-carrier-id="2">I'm paying for myself</li>
-                        <li class="ui-widget-content" data-carrier-id="">I'll choose my insurance later</li>
+                    <div class="selected-carrier"></div>
+                    <ol class="">
+                        <li class="" data-carrier-id="1">I'm paying for myself</li>
+                        <li class="" data-carrier-id="">I'll choose my insurance later</li>
                     </ol>
-                    <div class="selected-carrier">Popular carriers</div>
-                    <ol class="selectable">
-                        <li class="ui-widget-content" data-carrier-id="2">Aetna</li>
-                        <li class="ui-widget-content" data-carrier-id="3">Cigna</li>
+                    <div class="">Popular carriers</div>
+                    <ol class="">
+                        <li class="carrier-option" data-carrier-id="2">Aetna</li>
+                        <li class="carrier-option" data-carrier-id="3">Cigna</li>
                     </ol>
-                    <div class="selected-carrier">All carriers</div>
-                    <ol class="selectable">
-                        <li class="ui-widget-content" data-carrier-id="2">Aetna</li>
-                        <li class="ui-widget-content" data-carrier-id="3">Cigna</li>
-                        <li class="ui-widget-content" data-carrier-id="4">BCBS</li>
+                    <div class="">All carriers</div>
+                    <ol class="">
+                        <li class="carrier-option" data-carrier-id="2">Aetna</li>
+                        <li class="carrier-option" data-carrier-id="3">Cigna</li>
+                        <li class="carrier-option" data-carrier-id="4">BCBS</li>
                     </ol>
                 </div>
-                <div id="menu2" class="tab-pane fade">
-                    <div class="selected-carrier">selected carrier</div>
-                    <div class="selected-carrier">Popular plans</div>
-                    <ol class="selectable">
-                        <li class="ui-widget-content" data-carrier-id="2" data-plan-id="2">Aetna HMO</li>
-                        <li class="ui-widget-content" data-carrier-id="2" data-plan-id="3">Aetna NYC</li>
+                <div id="menu2" class="planTabContainer tab-pane fade">
+                    <div class="selected-carrier"></div>
+                    <div class="">Popular plans</div>
+                    <ol class="">
+                        <li class="plan-option" data-carrier-id="2" data-plan-id="2">Aetna HMO</li>
+                        <li class="plan-option" data-carrier-id="2" data-plan-id="3">Aetna NYC</li>
 
-                        <li class="ui-widget-content" data-carrier-id="3" data-plan-id="5">Cigna HMO</li>
+                        <li class="plan-option" data-carrier-id="3" data-plan-id="5">Cigna HMO</li>
 
-                        <li class="ui-widget-content" data-carrier-id="4" data-plan-id="8">BCBS HMO</li>
-                        <li class="ui-widget-content" data-carrier-id="4" data-plan-id="9">BCBS NYC</li>
+                        <li class="plan-option" data-carrier-id="4" data-plan-id="8">BCBS HMO</li>
+                        <li class="plan-option" data-carrier-id="4" data-plan-id="9">BCBS NYC</li>
                     </ol>
-                    <div class="selected-carrier">All plans</div>
-                    <ol class="selectable">
-                        <li class="ui-widget-content" data-carrier-id="2" data-plan-id="2">Aetna HMO</li>
-                        <li class="ui-widget-content" data-carrier-id="2" data-plan-id="3">Aetna NYC</li>
-                        <li class="ui-widget-content" data-carrier-id="2" data-plan-id="4">Aetna EPO</li>
+                    <div class="">All plans</div>
+                    <ol class="">
+                        <li class="plan-option" data-carrier-id="2" data-plan-id="2">Aetna HMO</li>
+                        <li class="plan-option" data-carrier-id="2" data-plan-id="3">Aetna NYC</li>
+                        <li class="plan-option" data-carrier-id="2" data-plan-id="4">Aetna EPO</li>
 
-                        <li class="ui-widget-content" data-carrier-id="3" data-plan-id="5">Cigna HMO</li>
-                        <li class="ui-widget-content" data-carrier-id="3" data-plan-id="6">Cigna NYC</li>
-                        <li class="ui-widget-content" data-carrier-id="3" data-plan-id="7">Cigna EPO</li>
+                        <li class="plan-option" data-carrier-id="3" data-plan-id="5">Cigna HMO</li>
+                        <li class="plan-option" data-carrier-id="3" data-plan-id="6">Cigna NYC</li>
+                        <li class="plan-option" data-carrier-id="3" data-plan-id="7">Cigna EPO</li>
 
-                        <li class="ui-widget-content" data-carrier-id="4" data-plan-id="8">BCBS HMO</li>
-                        <li class="ui-widget-content" data-carrier-id="4" data-plan-id="9">BCBS NYC</li>
-                        <li class="ui-widget-content" data-carrier-id="4" data-plan-id="10">BCBS EPO</li>
+                        <li class="plan-option" data-carrier-id="4" data-plan-id="8">BCBS HMO</li>
+                        <li class="plan-option" data-carrier-id="4" data-plan-id="9">BCBS NYC</li>
+                        <li class="plan-option" data-carrier-id="4" data-plan-id="10">BCBS EPO</li>
                     </ol>
                 </div>
             </div>
