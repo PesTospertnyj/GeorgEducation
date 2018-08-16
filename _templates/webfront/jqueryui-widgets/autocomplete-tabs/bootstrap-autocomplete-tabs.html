@@ -8,12 +8,27 @@
     <script>
         $( function() {
             $(".autocomplete-tabs").each(function () {
-                $dropdownContainer = $(this);
-                $dropdownButton = $dropdownContainer.find("button.dropdown-toggle");
-                    console.log("autocomplete-tabs " + $dropdownContainer + " " + $dropdownButton);
+                var $dropdownContainer = $(this);
+                var $dropdownButton = $dropdownContainer.find("button.dropdown-toggle");
+                var $dropdownMenu = $dropdownContainer.find(".dropdown-menu");
+                var $input = $dropdownContainer.find(".autocomplete-tabs-input");
+
+                $dropdownButton.hide();
+                $dropdownButton.on("click", function() {
+                    $dropdownMenu.show();
+                });
+                $input.focus(function () {
+                    $dropdownButton.trigger("click");
+                });
+                $(document).mouseup(function(e)
+                {
+                    $dropdownButton.trigger("click");
+                    if (!$dropdownMenu.is(e.target) && $dropdownMenu.has(e.target).length === 0 && !$input.is(e.target))
+                    {
+                        $dropdownMenu.hide();
+                    }
+                });
             });
-
-
         });
     </script>
 </head>
@@ -21,7 +36,8 @@
 
 <div class="container">
     <div class="dropdown autocomplete-tabs">
-        <button id="dropdownMenuButton" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tutorials
+        <input id="dropdownMenuInput" class="autocomplete-tabs-input" />
+        <button id="dropdownMenuButton" class="btn btn-default dropdown-toggle" type="button">Tutorials
             <span class="caret"></span></button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <ul class="nav nav-tabs">
