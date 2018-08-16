@@ -29,6 +29,11 @@
             border: 1px solid red;
             display: none;
         }
+
+        .selectable .ui-selecting { background: #FECA40; }
+        .selectable .ui-selected { background: #F39814; color: white; }
+        .selectable { list-style-type: none; margin: 0; padding: 0; width: 90%; }
+        .selectable li { margin: 3px; padding: 0.4em; font-size: 14px; height: 18px; }
     </style>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -83,11 +88,13 @@
                 _init: function() {
                     var input = this.input;
                     var selectId = input.attr("data-select-id");
+                    var div = $("div.dropdown[data-select-id=" + selectId + "]");
                     console.log(selectId);
                     input.focus(function () {
-                        console.log("show content");
-                        var div = $("div.dropdown[data-select-id=" + selectId + "]");
-                        $( div ).toggle();
+                        $( div ).show();
+                    });
+                    input.focusout(function () {
+                        $( div ).hide();
                     });
                 },
 
@@ -179,8 +186,11 @@
             });
 
             $( ".combobox" ).combobox();
+            $( ".tabs" ).tabs();
+            $( ".selectable" ).selectable();
             $( "#toggle" ).on( "click", function() {
                 $( ".combobox" ).toggle();
+
             });
         } );
     </script>
@@ -201,23 +211,40 @@
         <option value="cigna_ppo">PPO</option>
     </select>
     <div id="dropdown" class="dropdown" data-select-id="insurance">
-        <div id="tabs">
+        <div class="tabs">
             <ul>
                 <li><a href="#tabs-carrier">Choose carrier</a></li>
                 <li><a href="#tabs-plan">Choose plan</a></li>
             </ul>
             <div id="tabs-carrier">
-                <ol id="selectable">
-                    <li class="ui-widget-content">Item 1</li>
-                    <li class="ui-widget-content">Item 2</li>
-                    <li class="ui-widget-content">Item 3</li>
-                    <li class="ui-widget-content">Item 4</li>
-                    <li class="ui-widget-content">Item 5</li>
-                    <li class="ui-widget-content">Item 6</li>
+                <div class="selected-carrier"></div>
+                <ol class="selectable" id="selectable">
+                    <li class="ui-widget-content">I'm paying for myself</li>
+                    <li class="ui-widget-content">I'll choose my insurance later</li>
+                </ol>
+                <div class="selected-carrier">Popular carriers</div>
+                <ol class="selectable">
+                    <li class="ui-widget-content">Aetna</li>
+                    <li class="ui-widget-content">Cigna</li>
+                </ol>
+                <div class="selected-carrier">All carriers</div>
+                <ol class="selectable">
+                    <li class="ui-widget-content">Aetna</li>
+                    <li class="ui-widget-content">Cigna</li>
                 </ol>
             </div>
             <div id="tabs-plan">
-                <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+                <div class="selected-carrier"></div>
+                <div class="selected-carrier">Popular plans</div>
+                <ol class="selectable">
+                    <li class="ui-widget-content">Aetna</li>
+                    <li class="ui-widget-content">Cigna</li>
+                </ol>
+                <div class="selected-carrier">All plans</div>
+                <ol class="selectable">
+                    <li class="ui-widget-content">Aetna</li>
+                    <li class="ui-widget-content">Cigna</li>
+                </ol>
             </div>
         </div>
     </div>
