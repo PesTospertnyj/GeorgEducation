@@ -93,8 +93,12 @@
                     input.focus(function () {
                         $( div ).show();
                     });
-                    input.focusout(function () {
-                        $( div ).hide();
+                    $(document).mouseup(function(e)
+                    {
+                        if (!div.is(e.target) && div.has(e.target).length === 0 && !input.is(e.target))
+                        {
+                            div.hide();
+                        }
                     });
                 },
 
