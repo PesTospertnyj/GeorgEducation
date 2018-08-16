@@ -191,10 +191,10 @@
 
             $( ".combobox" ).combobox();
             $( ".tabs" ).tabs();
-            $( ".selectable" ).selectable();
+
+            // $( ".selectable" ).selectable();
             $( "#toggle" ).on( "click", function() {
                 $( ".combobox" ).toggle();
-
             });
         } );
     </script>
@@ -204,15 +204,15 @@
 <button id="toggle">Show underlying select</button>
 
 <div class="ui-widget">
-    <div>Your preferred programming language: </div>
+    <div>Select insupance plan: </div>
     <select id="insurance" class="combobox">
         <option value="">Select one...</option>
         <option value="paying-for-myself">I'm paying for myself</option>
         <option value="choose-later">I'll choose my insurance later</option>
         <option value="aetna_elect-choice-epo">Elect Choice EPO</option>
-        <option value="aetna_hmo">HMO</option>
-        <option value="cigna_hmo">HMO</option>
-        <option value="cigna_ppo">PPO</option>
+        <option value="aetna_hmo">Aetna HMO</option>
+        <option value="cigna_hmo">Cigna HMO</option>
+        <option value="cigna_ppo">Cigna PPO</option>
     </select>
     <div id="dropdown" class="dropdown" data-select-id="insurance">
         <div class="tabs">
@@ -223,31 +223,46 @@
             <div id="tabs-carrier">
                 <div class="selected-carrier"></div>
                 <ol class="selectable" id="selectable">
-                    <li class="ui-widget-content">I'm paying for myself</li>
-                    <li class="ui-widget-content">I'll choose my insurance later</li>
+                    <li class="ui-widget-content" data-carrier-id="2">I'm paying for myself</li>
+                    <li class="ui-widget-content" data-carrier-id="">I'll choose my insurance later</li>
                 </ol>
                 <div class="selected-carrier">Popular carriers</div>
                 <ol class="selectable">
-                    <li class="ui-widget-content">Aetna</li>
-                    <li class="ui-widget-content">Cigna</li>
+                    <li class="ui-widget-content" data-carrier-id="2">Aetna</li>
+                    <li class="ui-widget-content" data-carrier-id="3">Cigna</li>
                 </ol>
                 <div class="selected-carrier">All carriers</div>
                 <ol class="selectable">
-                    <li class="ui-widget-content">Aetna</li>
-                    <li class="ui-widget-content">Cigna</li>
+                    <li class="ui-widget-content" data-carrier-id="2">Aetna</li>
+                    <li class="ui-widget-content" data-carrier-id="3">Cigna</li>
+                    <li class="ui-widget-content" data-carrier-id="4">BCBS</li>
                 </ol>
             </div>
             <div id="tabs-plan">
                 <div class="selected-carrier"></div>
                 <div class="selected-carrier">Popular plans</div>
                 <ol class="selectable">
-                    <li class="ui-widget-content">Aetna</li>
-                    <li class="ui-widget-content">Cigna</li>
+                    <li class="ui-widget-content" data-carrier-id="2" data-plan-id="2">Aetna HMO</li>
+                    <li class="ui-widget-content" data-carrier-id="2" data-plan-id="3">Aetna NYC</li>
+
+                    <li class="ui-widget-content" data-carrier-id="3" data-plan-id="5">Cigna HMO</li>
+
+                    <li class="ui-widget-content" data-carrier-id="4" data-plan-id="8">BCBS HMO</li>
+                    <li class="ui-widget-content" data-carrier-id="4" data-plan-id="9">BCBS NYC</li>
                 </ol>
                 <div class="selected-carrier">All plans</div>
                 <ol class="selectable">
-                    <li class="ui-widget-content">Aetna</li>
-                    <li class="ui-widget-content">Cigna</li>
+                    <li class="ui-widget-content" data-carrier-id="2" data-plan-id="2">Aetna HMO</li>
+                    <li class="ui-widget-content" data-carrier-id="2" data-plan-id="3">Aetna NYC</li>
+                    <li class="ui-widget-content" data-carrier-id="2" data-plan-id="4">Aetna EPO</li>
+
+                    <li class="ui-widget-content" data-carrier-id="3" data-plan-id="5">Cigna HMO</li>
+                    <li class="ui-widget-content" data-carrier-id="3" data-plan-id="6">Cigna NYC</li>
+                    <li class="ui-widget-content" data-carrier-id="3" data-plan-id="7">Cigna EPO</li>
+
+                    <li class="ui-widget-content" data-carrier-id="4" data-plan-id="8">BCBS HMO</li>
+                    <li class="ui-widget-content" data-carrier-id="4" data-plan-id="9">BCBS NYC</li>
+                    <li class="ui-widget-content" data-carrier-id="4" data-plan-id="10">BCBS EPO</li>
                 </ol>
             </div>
         </div>
