@@ -145,7 +145,9 @@
                 var $dropdownContainer = $(this);
                 var $mainSelect = $dropdownContainer.find("select.autocomplete-tabs-select");
 
-                $mainSelect.combobox();
+                var $combobox = $mainSelect.combobox();
+                var $input = $dropdownContainer.find(".custom-combobox-input");
+                console.log("$input " + $input);
 
                 var $dropdownButton = $dropdownContainer.find("button.dropdown-toggle");
                 var $dropdownMenu = $dropdownContainer.find(".dropdown-menu");
@@ -153,7 +155,7 @@
                 var $carrierTab = $dropdownContainer.find("a[href='#menu1']");
                 var $planTab = $dropdownContainer.find("a[href='#menu2']");
                 var $planTabContent = $dropdownContainer.find(".planTabContainer");
-                var $input = $dropdownContainer.find(".autocomplete-tabs-input");
+                // var $input = $dropdownContainer.find(".autocomplete-tabs-input");
 
                 $dropdownButton.hide();
 
@@ -267,7 +269,7 @@
             <option data-carrier-id="4" value="10">BCBS EPO</option>
         </select>
 
-        <input id="dropdownMenuInput" class="autocomplete-tabs-input" />
+        <!--<input id="dropdownMenuInput" class="autocomplete-tabs-input" />-->
         <button id="dropdownMenuButton" class="btn btn-default dropdown-toggle" type="button">Tutorials
             <span class="caret"></span></button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
