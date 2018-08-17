@@ -159,20 +159,24 @@
                 var $dropdownContent = $dropdownContainer.find(".dropdown-menu");
                 var $dropdownSelectedPlan = $dropdownContainer.find(".dropdown-selected-plan");
 
-                var $selectedCarrierDivs = $dropdownContainer.find(".selected-carrier-id");
+                var $selectedCarrierDivs = $dropdownContainer.find(".selected-carrier-container");
+                $selectedCarrierDivs.hide();
+
                 var $carrierTabHeader = $dropdownContainer.find("a[href='#menu1']");
                 var $planTabHeader = $dropdownContainer.find("a[href='#menu2']");
                 var $planTabContent = $dropdownContainer.find(".planTabContainer");
+
+                var $selectedPlanSpans = $(".selected-carrier-id");
                 // var $autocompleteInput = $dropdownContainer.find(".autocomplete-tabs-input");
 
                 $dropdownButton.hide();
                 $dropdownSelectedPlan.hide();
 
                 $dropdownButton.on("click", function() {
-                    if ($dropdownContainer.data("selected-plan-id")) {
-                        console.log("show selected plan");
+                    if ($dropdownContainer.data("selected-plan-option")) {
                         dropDownSelectedPlan();
                         $dropdownSelectedPlan.show();
+                        $autocompleteInput.val('');
                     } else {
                         $dropdownContent.show();
                     }
@@ -190,6 +194,10 @@
                     if (!$dropdownSelectedPlan.is(e.target) && $dropdownSelectedPlan.has(e.target).length === 0 && !$autocompleteInput.is(e.target))
                     {
                         $dropdownSelectedPlan.hide();
+                        if ($dropdownContainer.data("selected-plan-option")) {
+                            var planDisplayValue = getPlanDisplayed($dropdownContainer.data("selected-plan-option"));
+                            $autocompleteInput.val(planDisplayValue);
+                        }
                     }
                 });
 
@@ -213,7 +221,8 @@
                     $dropdownContainer.removeData();
                     $autocompleteInput.val('');
                     $mainSelect.val('');
-                    $selectedCarrierDivs.text('');
+                    $selectedPlanSpans.text('');
+                    $selectedCarrierDivs.hide();
                     deactivatePlanTab();
                 }
 
@@ -222,8 +231,12 @@
                     $dropdownSelectedPlan.hide();
                 });
 
+                $(".clear-plan").click(function () {
+                    clearSelectedData();
+                });
+
                 function dropDownSelectedPlan() {
-                    $dropdownContainer.find(".selected-plan-text").text(getPlanDisplayed($("li.plan-option[data-plan-id='" + getSelectedPlanId() + "']").first()));
+                    $dropdownContainer.find(".selected-plan-text").text(getPlanDisplayed( getSelectedPlanId()));
                 }
 
                 function getPlanDisplayed($clickedOption) {
@@ -237,23 +250,25 @@
                     $mainSelect.val(planId);
                     var planDisplayValue = getPlanDisplayed($clickedOption);
                     $autocompleteInput.val(planDisplayValue);
-                    $dropdownContainer.data("selected-plan-id", planId);
+                    $dropdownContainer.data("selected-plan-option", $clickedOption);
                     $dropdownContent.hide();
                 }
 
                 function selectCarrier(carrierId) {
+                    console.log("selectCarrier");
                     var selectedCarrierName = $("li[data-carrier-id='" + carrierId + "']").first().text();
 
                     //refactor to id
+                    $selectedCarrierDivs.show();
                     $dropdownContainer.data("selected-carrier-id", carrierId);
                     $dropdownContainer.data("selected-carrier-name", selectedCarrierName);
 
-                    $selectedCarrierDivs.text(selectedCarrierName);
+                    $selectedPlanSpans.text(selectedCarrierName);
                     console.log("carrier click " + carrierId);
                 }
 
                 function getSelectedPlanId() {
-                    var result =  $dropdownContainer.data("selected-plan-id");
+                    var result =  $dropdownContainer.data("selected-plan-option");
                     if (typeof result === "undefined") {
                         return -1;
                     } else {
@@ -341,7 +356,11 @@
 
             <div class="tab-content">
                 <div id="menu1" class="tab-pane fade in active">
-                    <div class="selected-carrier-id"></div>
+                    <div class="selected-carrier-container">
+                        <span class="selected-carrier-id"></span>
+                        <span>&nbsp;</span>
+                        <span class="clear-plan">X</span>
+                    </div>
                     <ol class="">
                         <li class="" data-carrier-id="1">I'm paying for myself</li>
                         <li class="" data-carrier-id="">I'll choose my insurance later</li>
@@ -359,7 +378,11 @@
                     </ol>
                 </div>
                 <div id="menu2" class="planTabContainer tab-pane fade">
-                    <div class="selected-carrier-id"></div>
+                    <div class="selected-carrier-container">
+                        <span class="selected-carrier-id"></span>
+                        <span>&nbsp;</span>
+                        <span class="clear-plan">X</span>
+                    </div>
                     <div class="">Popular plans</div>
                     <ol class="">
                         <li class="plan-option" data-carrier-id="2" data-plan-id="2">Aetna HMO</li>
