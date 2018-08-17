@@ -152,31 +152,31 @@
                 var $mainSelect = $dropdownContainer.find("select.autocomplete-tabs-select");
 
                 var $combobox = $mainSelect.combobox();
-                var $input = $dropdownContainer.find(".custom-combobox-input");
-                console.log("$input " + $input);
+                var $autocompleteInput = $dropdownContainer.find(".custom-combobox-input");
+                console.log("$autocompleteInput " + $autocompleteInput);
 
                 var $dropdownButton = $dropdownContainer.find("button.dropdown-toggle");
-                var $dropdownMenu = $dropdownContainer.find(".dropdown-menu");
+                var $dropdownContent = $dropdownContainer.find(".dropdown-menu");
                 var $selectedCarrierDivs = $dropdownContainer.find(".selected-carrier");
-                var $carrierTab = $dropdownContainer.find("a[href='#menu1']");
-                var $planTab = $dropdownContainer.find("a[href='#menu2']");
+                var $carrierTabHeader = $dropdownContainer.find("a[href='#menu1']");
+                var $planTabHeader = $dropdownContainer.find("a[href='#menu2']");
                 var $planTabContent = $dropdownContainer.find(".planTabContainer");
-                // var $input = $dropdownContainer.find(".autocomplete-tabs-input");
+                // var $autocompleteInput = $dropdownContainer.find(".autocomplete-tabs-input");
 
                 $dropdownButton.hide();
 
                 $dropdownButton.on("click", function() {
-                    $dropdownMenu.show();
+                    $dropdownContent.show();
                 });
-                $input.focus(function () {
+                $autocompleteInput.focus(function () {
                     $dropdownButton.trigger("click");
                 });
                 $(document).mouseup(function(e)
                 {
                     $dropdownButton.trigger("click");
-                    if (!$dropdownMenu.is(e.target) && $dropdownMenu.has(e.target).length === 0 && !$input.is(e.target))
+                    if (!$dropdownContent.is(e.target) && $dropdownContent.has(e.target).length === 0 && !$autocompleteInput.is(e.target))
                     {
-                        $dropdownMenu.hide();
+                        $dropdownContent.hide();
                     }
                 });
 
@@ -186,7 +186,7 @@
                     selectCarrier(carrierId);
                     filterPlans();
                     activatePlanTab();
-                    $planTab.click();
+                    $planTabHeader.click();
 
                 });
 
@@ -241,7 +241,7 @@
                 }
 
                 function activatePlanTab() {
-                    $planTab.attr("data-toggle", "tab");
+                    $planTabHeader.attr("data-toggle", "tab");
                 }
 
             });
