@@ -157,7 +157,7 @@
 
                 var $dropdownButton = $dropdownContainer.find("button.dropdown-toggle");
                 var $dropdownContent = $dropdownContainer.find(".dropdown-menu");
-                var $selectedCarrierDivs = $dropdownContainer.find(".selected-carrier");
+                var $selectedCarrierDivs = $dropdownContainer.find(".selected-carrier-id");
                 var $carrierTabHeader = $dropdownContainer.find("a[href='#menu1']");
                 var $planTabHeader = $dropdownContainer.find("a[href='#menu2']");
                 var $planTabContent = $dropdownContainer.find(".planTabContainer");
@@ -192,19 +192,28 @@
 
                 $(".plan-option").click(function () {
                     var $clickedOption = $(this);
-                    var planId = $clickedOption.data("plan-id");
-                    selectPlan(planId);
+                    selectPlan($clickedOption);
                 });
 
-                function selectPlan(planId) {
-                    console.log("todo select plan");
+                function getPlanDisplayed($clickedOption) {
+                    var carrierId = $clickedOption.data("carrier-id");
+                    var carrierLiOption = $dropdownContainer.find("li.carrier-option[data-carrier-id='" + carrierId + "']").first();
+                    return carrierLiOption.text() + " - " + $clickedOption.text();
+                }
+
+                function selectPlan($clickedOption) {
+                    var planId = $clickedOption.data("plan-id");
+                    $mainSelect.val(planId);
+                    var planDisplayValue = getPlanDisplayed($clickedOption);
+                    $autocompleteInput.val(planDisplayValue);
+
                 }
 
                 function selectCarrier(carrierId) {
                     var selectedCarrierName = $("li[data-carrier-id='" + carrierId + "']").first().text();
 
                     //refactor to id
-                    $dropdownContainer.data("selected-carrier", carrierId);
+                    $dropdownContainer.data("selected-carrier-id", carrierId);
                     $dropdownContainer.data("selected-carrier-name", selectedCarrierName);
 
                     $selectedCarrierDivs.text(selectedCarrierName);
@@ -212,7 +221,7 @@
                 }
 
                 function getSelectedCarrierId() {
-                    var result =  $dropdownContainer.data("selected-carrier");
+                    var result =  $dropdownContainer.data("selected-carrier-id");
                     if (typeof result === "undefined") {
                         return -1;
                     } else {
@@ -253,8 +262,9 @@
 <div class="container">
     <div class="dropdown autocomplete-tabs">
         <select class="autocomplete-tabs-select">
+            <option value=""></option>
             <option value="1">I'm paying for myself</option>
-            <option value="">I'll choose my insurance later</option>
+            <option value="later">I'll choose my insurance later</option>
 
             <!-- carriers -->
             <option value="" data-carrier-id="2">Aetna</option>
@@ -286,7 +296,7 @@
 
             <div class="tab-content">
                 <div id="menu1" class="tab-pane fade in active">
-                    <div class="selected-carrier"></div>
+                    <div class="selected-carrier-id"></div>
                     <ol class="">
                         <li class="" data-carrier-id="1">I'm paying for myself</li>
                         <li class="" data-carrier-id="">I'll choose my insurance later</li>
@@ -304,7 +314,7 @@
                     </ol>
                 </div>
                 <div id="menu2" class="planTabContainer tab-pane fade">
-                    <div class="selected-carrier"></div>
+                    <div class="selected-carrier-id"></div>
                     <div class="">Popular plans</div>
                     <ol class="">
                         <li class="plan-option" data-carrier-id="2" data-plan-id="2">Aetna HMO</li>
