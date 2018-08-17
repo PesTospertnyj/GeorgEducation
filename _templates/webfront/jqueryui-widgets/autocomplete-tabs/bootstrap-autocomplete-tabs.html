@@ -50,7 +50,13 @@
                             });
                         },
 
-                        autocompletechange: "_removeIfInvalid"
+                        autocompletechange: "_removeIfInvalid",
+                        autocompletesearch: function(event, ui) {
+                            var $this = $(this.input);
+                            var $dropDownBody = $this.closest(".autocomplete-tabs").find(".dropdown-menu");
+                            console.log($dropDownBody.attr("aria-labelledby"));
+                            $dropDownBody.hide();
+                        }
                     });
                 },
 
