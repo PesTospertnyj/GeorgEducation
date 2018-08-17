@@ -157,6 +157,8 @@
 
                 var $dropdownButton = $dropdownContainer.find("button.dropdown-toggle");
                 var $dropdownContent = $dropdownContainer.find(".dropdown-menu");
+                var $dropdownSelectedPlan = $dropdownContainer.find(".dropdown-selected-plan");
+
                 var $selectedCarrierDivs = $dropdownContainer.find(".selected-carrier-id");
                 var $carrierTabHeader = $dropdownContainer.find("a[href='#menu1']");
                 var $planTabHeader = $dropdownContainer.find("a[href='#menu2']");
@@ -164,9 +166,16 @@
                 // var $autocompleteInput = $dropdownContainer.find(".autocomplete-tabs-input");
 
                 $dropdownButton.hide();
+                $dropdownSelectedPlan.hide();
 
                 $dropdownButton.on("click", function() {
-                    $dropdownContent.show();
+                    if ($dropdownContainer.data("selected-plan-id")) {
+                        console.log("show selected plan");
+                        dropDownSelectedPlan();
+                        $dropdownSelectedPlan.show();
+                    } else {
+                        $dropdownContent.show();
+                    }
                 });
                 $autocompleteInput.focus(function () {
                     $dropdownButton.trigger("click");
@@ -177,6 +186,10 @@
                     if (!$dropdownContent.is(e.target) && $dropdownContent.has(e.target).length === 0 && !$autocompleteInput.is(e.target))
                     {
                         $dropdownContent.hide();
+                    }
+                    if (!$dropdownSelectedPlan.is(e.target) && $dropdownSelectedPlan.has(e.target).length === 0 && !$autocompleteInput.is(e.target))
+                    {
+                        $dropdownSelectedPlan.hide();
                     }
                 });
 
@@ -195,6 +208,24 @@
                     selectPlan($clickedOption);
                 });
 
+                function clearSelectedData() {
+                    $carrierTabHeader.click();
+                    $dropdownContainer.removeData();
+                    $autocompleteInput.val('');
+                    $mainSelect.val('');
+                    $selectedCarrierDivs.text('');
+                    deactivatePlanTab();
+                }
+
+                $(".choose-different-insurance").click(function () {
+                    clearSelectedData();
+                    $dropdownSelectedPlan.hide();
+                });
+
+                function dropDownSelectedPlan() {
+                    $dropdownContainer.find(".selected-plan-text").text(getPlanDisplayed($("li.plan-option[data-plan-id='" + getSelectedPlanId() + "']").first()));
+                }
+
                 function getPlanDisplayed($clickedOption) {
                     var carrierId = $clickedOption.data("carrier-id");
                     var carrierLiOption = $dropdownContainer.find("li.carrier-option[data-carrier-id='" + carrierId + "']").first();
@@ -206,7 +237,8 @@
                     $mainSelect.val(planId);
                     var planDisplayValue = getPlanDisplayed($clickedOption);
                     $autocompleteInput.val(planDisplayValue);
-
+                    $dropdownContainer.data("selected-plan-id", planId);
+                    $dropdownContent.hide();
                 }
 
                 function selectCarrier(carrierId) {
@@ -218,6 +250,15 @@
 
                     $selectedCarrierDivs.text(selectedCarrierName);
                     console.log("carrier click " + carrierId);
+                }
+
+                function getSelectedPlanId() {
+                    var result =  $dropdownContainer.data("selected-plan-id");
+                    if (typeof result === "undefined") {
+                        return -1;
+                    } else {
+                        return result;
+                    }
                 }
 
                 function getSelectedCarrierId() {
@@ -251,6 +292,10 @@
 
                 function activatePlanTab() {
                     $planTabHeader.attr("data-toggle", "tab");
+                }
+
+                function deactivatePlanTab() {
+                    $planTabHeader.removeAttr("data-toggle");
                 }
 
             });
@@ -341,6 +386,11 @@
                     </ol>
                 </div>
             </div>
+        </div>
+
+        <div class="dropdown-selected-plan" aria-labelledby="dropdownMenuButton">
+            <div class="selected-plan-text"></div>
+            <div class="choose-different-insurance">Choose a different insurance</div>
         </div>
     </div>
 </div>
