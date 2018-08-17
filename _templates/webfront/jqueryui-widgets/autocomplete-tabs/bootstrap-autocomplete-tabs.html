@@ -44,15 +44,38 @@
 
                 });
 
+                $(".plan-option").click(function () {
+                    var $clickedOption = $(this);
+                    var planId = $clickedOption.data("plan-id");
+                    selectPlan(planId);
+                });
+
+                function selectPlan(planId) {
+                    console.log("todo select plan");
+                }
+
                 function selectCarrier(carrierId) {
-                    $dropdownContainer.data("selected-carrier", carrierId);
                     var selectedCarrierName = $("li[data-carrier-id='" + carrierId + "']").first().text();
+
+                    //refactor to id
+                    $dropdownContainer.data("selected-carrier", carrierId);
+                    $dropdownContainer.data("selected-carrier-name", selectedCarrierName);
+
                     $selectedCarrierDivs.text(selectedCarrierName);
                     console.log("carrier click " + carrierId);
                 }
 
                 function getSelectedCarrierId() {
                     var result =  $dropdownContainer.data("selected-carrier");
+                    if (typeof result === "undefined") {
+                        return -1;
+                    } else {
+                        return result;
+                    }
+                }
+
+                function getSelectedCarrierName() {
+                    var result =  $dropdownContainer.data("selected-carrier-name");
                     if (typeof result === "undefined") {
                         return -1;
                     } else {
@@ -82,6 +105,9 @@
 <body>
 
 <div class="container">
+    <!--<select>-->
+        <!--<option></option>-->
+    <!--</select>-->
     <div class="dropdown autocomplete-tabs">
         <input id="dropdownMenuInput" class="autocomplete-tabs-input" />
         <button id="dropdownMenuButton" class="btn btn-default dropdown-toggle" type="button">Tutorials
