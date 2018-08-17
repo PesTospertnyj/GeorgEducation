@@ -48,6 +48,26 @@
                             this._trigger( "select", event, {
                                 item: ui.item.option
                             });
+                            //
+                            var $this = $(this.input);
+                            var $selectOption = $(ui.item.option);
+                            var selectedVal = $selectOption.val();
+                            var $autoCompleteTabs = $this.closest(".autocomplete-tabs");
+
+                            //define if it is plan or carrier and select that
+                            var optionCategory = $selectOption.data("category");
+                            if (optionCategory == 'carrier') {
+                                var selectedCarrierId = $selectOption.data("carrier-id");
+                                $autoCompleteTabs.find(".dropdown-menu #menu1 li[data-carrier-id = '" + selectedCarrierId + "' ]").click();
+                                return;
+                            } else if (optionCategory == 'auxiliary-option') {
+                            } else {//insurance plan
+                                var selectedPlanId = $selectOption.val();
+                                $autoCompleteTabs.find(".dropdown-menu #menu2 li[data-plan-id = '" + selectedPlanId + "' ]").click();
+                            }
+                            var $dropDownSelectedPlan  = $autoCompleteTabs.find(".dropdown-selected-plan");
+                            $dropDownSelectedPlan.hide();
+                            //clear selected plan
                         },
 
                         autocompletechange: "_removeIfInvalid",
@@ -59,39 +79,6 @@
                         }
                     });
                 },
-
-                // _createShowAllButton: function() {
-                //     var input = this.input,
-                //         wasOpen = false;
-                //
-                //     $( "<a>" )
-                //         .attr( "tabIndex", -1 )
-                //         .attr( "title", "Show All Items" )
-                //         .tooltip()
-                //         .appendTo( this.wrapper )
-                //         .button({
-                //             icons: {
-                //                 primary: "ui-icon-triangle-1-s"
-                //             },
-                //             text: false
-                //         })
-                //         .removeClass( "ui-corner-all" )
-                //         .addClass( "custom-combobox-toggle ui-corner-right" )
-                //         .on( "mousedown", function() {
-                //             wasOpen = input.autocomplete( "widget" ).is( ":visible" );
-                //         })
-                //         .on( "click", function() {
-                //             input.trigger( "focus" );
-                //
-                //             // Close if already visible
-                //             if ( wasOpen ) {
-                //                 return;
-                //             }
-                //
-                //             // Pass empty string as value to search for, displaying all results
-                //             input.autocomplete( "search", "" );
-                //         });
-                // },
 
                 _source: function( request, response ) {
                     var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
@@ -197,11 +184,14 @@
                         if ($dropdownContainer.data("selected-plan-option")) {
                             var planDisplayValue = getPlanDisplayed($dropdownContainer.data("selected-plan-option"));
                             $autocompleteInput.val(planDisplayValue);
+                            $mainSelect.val($dropdownContainer.data("selected-plan-option").data("plan-id"));
                         }
                     }
                 });
 
                 $(".carrier-option").click(function () {
+                    console.log(".carrier-option click");
+                    $dropdownContent.show();
                     var $clickedOption = $(this);
                     var carrierId = $clickedOption.data("carrier-id");
                     selectCarrier(carrierId);
@@ -246,6 +236,7 @@
                 }
 
                 function selectPlan($clickedOption) {
+                    console.log("selectPlan");
                     var planId = $clickedOption.data("plan-id");
                     $mainSelect.val(planId);
                     var planDisplayValue = getPlanDisplayed($clickedOption);
@@ -258,7 +249,6 @@
                     console.log("selectCarrier");
                     var selectedCarrierName = $("li[data-carrier-id='" + carrierId + "']").first().text();
 
-                    //refactor to id
                     $selectedCarrierDivs.show();
                     $dropdownContainer.data("selected-carrier-id", carrierId);
                     $dropdownContainer.data("selected-carrier-name", selectedCarrierName);
@@ -305,6 +295,7 @@
                     });
                 }
 
+
                 function activatePlanTab() {
                     $planTabHeader.attr("data-toggle", "tab");
                 }
@@ -324,12 +315,12 @@
         <select class="autocomplete-tabs-select">
             <option value=""></option>
             <option value="1">I'm paying for myself</option>
-            <option value="later">I'll choose my insurance later</option>
+            <option value="later" data-category="auxiliary-option">I'll choose my insurance later</option>
 
             <!-- carriers -->
-            <option value="" data-carrier-id="2">Aetna</option>
-            <option value="" data-carrier-id="3">Cigna</option>
-            <option value="" data-carrier-id="4">BCBS</option>
+            <option value="carrier-1" data-carrier-id="2" data-category="carrier">Aetna</option>
+            <option value="carrier-2" data-carrier-id="3" data-category="carrier">Cigna</option>
+            <option value="carrier-3" data-carrier-id="4" data-category="carrier">BCBS</option>
 
             <!-- plans -->
             <option data-carrier-id="2" value="2">Aetna HMO</option>
