@@ -35,11 +35,6 @@
                             delay: 0,
                             minLength: 0,
                             source: $.proxy( this, "_source" )
-                        })
-                        .tooltip({
-                            classes: {
-                                "ui-tooltip": "ui-state-highlight"
-                            }
                         });
 
                     this._on( this.input, {
@@ -72,9 +67,26 @@
 
                         autocompletechange: "_removeIfInvalid",
                         autocompletesearch: function(event, ui) {
-                            var $this = $(this.input);
-                            var $dropDownBody = $this.closest(".autocomplete-tabs").find(".dropdown-menu");
-                            console.log($dropDownBody.attr("aria-labelledby"));
+                            var $input = $(this.input);
+                            var $container = $input.closest(".autocomplete-tabs");
+                            var $dropDownBody = $container.find(".dropdown-menu");
+                            if ($container.data("selected-carrier-id")) {
+                                var selectedCarrierId = $container.data("selected-carrier-id");
+                                var currentInputValue = $input.val();
+                                console.log(currentInputValue);
+                                $dropDownBody.find(".planTabContainer li.plan-option").each(function() {
+                                    var $this = $(this);
+                                    if ($this.text().toLowerCase().includes(currentInputValue.toLowerCase())
+                                    && $this.data("carrier-id") == selectedCarrierId) {
+                                        $this.show();
+                                    } else {
+                                        $this.hide();
+                                    }
+                                });
+                                return;
+                            }
+                            //different behaviour depending on carrier selected or not
+
                             $dropDownBody.hide();
                         }
                     });
@@ -83,6 +95,11 @@
                 _source: function( request, response ) {
                     var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
                     response( this.element.children( "option" ).map(function() {
+                        var $this = $( this );
+                        var $container = $this.closest(".autocomplete-tabs");
+                        if ($container.data("selected-carrier-id")) {
+                            return;
+                        }
                         var text = $( this ).text();
                         if ( this.value && ( !request.term || matcher.test(text) ) )
                             return {
@@ -119,12 +136,8 @@
                     // Remove invalid value
                     this.input
                         .val( "" )
-                        .attr( "title", value + " didn't match any item" )
-                        .tooltip( "open" );
+                        .attr( "title", value + " didn't match any item" );
                     this.element.val( "" );
-                    this._delay(function() {
-                        this.input.tooltip( "close" ).attr( "title", "" );
-                    }, 2500 );
                     this.input.autocomplete( "instance" ).term = "";
                 },
 
