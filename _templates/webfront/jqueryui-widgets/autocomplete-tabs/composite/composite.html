@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>jQuery UI Autocomplete - Combobox</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <style>
+        .custom-combobox {
+            position: relative;
+            display: inline-block;
+        }
+        .custom-combobox-toggle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin-left: -1px;
+            padding: 0;
+        }
+        .custom-combobox-input {
+            margin: 0;
+            padding: 5px 10px;
+        }
+        .ui-widget {
+            position: relative;
+        }
+        .dropdown {
+            position: absolute;
+            border: 1px solid red;
+            /*display: none;*/
+        }
+
+        .selectable .ui-selecting { background: #FECA40; }
+        .selectable .ui-selected { background: #F39814; color: white; }
+        .selectable { list-style-type: none; margin: 0; padding: 0; width: 90%; }
+        .selectable li { margin: 3px; padding: 0.4em; font-size: 14px; height: 18px; }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="combobox-wizard.js"></script>
+    <script src="custom-combobox.js"></script>
+    <script src="custom-wizard.js"></script>
+
+    <script>
+        $( function() {
+            $('.autocomplete-tabs').each(function() {
+                var comboboxWizard = new CustomComboboxWizard({id: this.id});
+                comboboxWizard.init();
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+
+    <div id="autocomplete-tabs" class="dropdown autocomplete-tabs" >
+        <select id="autocomplete-tabs-select" class="autocomplete-tabs-select">
+            <option value=""></option>
+            <option value="1">I'm paying for myself</option>
+            <option value="later" data-category="auxiliary-option">I'll choose my insurance later</option>
+
+            <!-- carriers -->
+            <option value="carrier-1" data-carrier-id="2" data-category="carrier">Aetna</option>
+            <option value="carrier-2" data-carrier-id="3" data-category="carrier">Cigna</option>
+            <option value="carrier-3" data-carrier-id="4" data-category="carrier">BCBS</option>
+
+            <!-- plans -->
+            <option data-carrier-id="2" value="2">Aetna HMO</option>
+            <option data-carrier-id="2" value="3">Aetna NYC</option>
+            <option data-carrier-id="2" value="4">Aetna EPO</option>
+
+            <option data-carrier-id="3" value="5">Cigna HMO</option>
+            <option data-carrier-id="3" value="6">Cigna NYC</option>
+            <option data-carrier-id="3" value="7">Cigna EPO</option>
+
+            <option data-carrier-id="4" value="8">BCBS HMO</option>
+            <option data-carrier-id="4" value="9">BCBS NYC</option>
+            <option data-carrier-id="4" value="10">BCBS EPO</option>
+        </select>
+
+        <!--<input id="dropdownMenuInput" class="autocomplete-tabs-input" />-->
+        <button id="dropdownMenuButton" class="btn btn-default dropdown-toggle" type="button">Tutorials
+            <span class="caret"></span></button>
+        <div id="autocomplete-tabs-wizard" class="dropdown-wizard" aria-labelledby="dropdownMenuButton">
+            <ul class="nav nav-tabs">
+                <li><a data-toggle="tab" href="#menu1">Choose carrier</a></li>
+                <li><a href="#menu2" >Choose plan</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="menu1" class="tab-pane fade in active">
+                    <div class="selected-carrier-container">
+                        <span class="selected-carrier-id"></span>
+                        <span>&nbsp;</span>
+                        <span class="clear-plan">X</span>
+                    </div>
+                    <ol class="">
+                        <li class="" data-carrier-id="1">I'm paying for myself</li>
+                        <li class="" data-carrier-id="">I'll choose my insurance later</li>
+                    </ol>
+                    <div class="">Popular carriers</div>
+                    <ol class="">
+                        <li class="carrier-option" data-carrier-id="2">Aetna</li>
+                        <li class="carrier-option" data-carrier-id="3">Cigna</li>
+                    </ol>
+                    <div class="">All carriers</div>
+                    <ol class="">
+                        <li class="carrier-option" data-carrier-id="2">Aetna</li>
+                        <li class="carrier-option" data-carrier-id="3">Cigna</li>
+                        <li class="carrier-option" data-carrier-id="4">BCBS</li>
+                    </ol>
+                </div>
+                <div id="menu2" class="planTabContainer tab-pane fade">
+                    <div class="selected-carrier-container">
+                        <span class="selected-carrier-id"></span>
+                        <span>&nbsp;</span>
+                        <span class="clear-plan">X</span>
+                    </div>
+                    <div class="">Popular plans</div>
+                    <ol class="">
+                        <li class="plan-option" data-carrier-id="2" data-plan-id="2">Aetna HMO</li>
+                        <li class="plan-option" data-carrier-id="2" data-plan-id="3">Aetna NYC</li>
+
+                        <li class="plan-option" data-carrier-id="3" data-plan-id="5">Cigna HMO</li>
+
+                        <li class="plan-option" data-carrier-id="4" data-plan-id="8">BCBS HMO</li>
+                        <li class="plan-option" data-carrier-id="4" data-plan-id="9">BCBS NYC</li>
+                    </ol>
+                    <div class="">All plans</div>
+                    <ol class="">
+                        <li class="plan-option" data-carrier-id="2" data-plan-id="2">Aetna HMO</li>
+                        <li class="plan-option" data-carrier-id="2" data-plan-id="3">Aetna NYC</li>
+                        <li class="plan-option" data-carrier-id="2" data-plan-id="4">Aetna EPO</li>
+
+                        <li class="plan-option" data-carrier-id="3" data-plan-id="5">Cigna HMO</li>
+                        <li class="plan-option" data-carrier-id="3" data-plan-id="6">Cigna NYC</li>
+                        <li class="plan-option" data-carrier-id="3" data-plan-id="7">Cigna EPO</li>
+
+                        <li class="plan-option" data-carrier-id="4" data-plan-id="8">BCBS HMO</li>
+                        <li class="plan-option" data-carrier-id="4" data-plan-id="9">BCBS NYC</li>
+                        <li class="plan-option" data-carrier-id="4" data-plan-id="10">BCBS EPO</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="dropdown-selected-plan" aria-labelledby="dropdownMenuButton">
+            <div class="selected-plan-text"></div>
+            <div class="choose-different-insurance">Choose a different insurance</div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
