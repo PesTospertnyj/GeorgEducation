@@ -1,6 +1,6 @@
 package geoorg;
 
-import geoorg.model.Student;
+import geoorg.model.Employee;
 
 import java.util.List;
 
@@ -17,20 +17,20 @@ public class App {
     public static void main(String[] args) {
 
         // Create two Students
-        create(1, "Alice", 22);     // Alice will get an id 1
-        create(2, "Bob", 20);       // Bob will get an id 2
-        create(3, "Charlie", 25);   // Charlie will get an id 3
+        create( "Alice", 22);     // Alice will get an id 1
+        create( "Bob", 20);       // Bob will get an id 2
+        create( "Charlie", 25);   // Charlie will get an id 3
 
         // Update the age of Bob using the id
         upate(2, "Bob", 25);
 
         // Delete the Alice from database
-        delete(1);
+//        delete(1);
 
         // Print all the Students
-        List<Student> students = readAll();
-        if (students != null) {
-            for (Student stu : students) {
+        List<Employee> employees = readAll();
+        if (employees != null) {
+            for (Employee stu : employees) {
                 System.out.println(stu);
             }
         }
@@ -40,12 +40,12 @@ public class App {
     }
 
     /**
-     * Create a new Student.
+     * Create a new Employee.
      *
      * @param name
      * @param age
      */
-    public static void create(int id, String name, int age) {
+    public static void create(String name, int age) {
         // Create an EntityManager
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
@@ -56,9 +56,9 @@ public class App {
             // Begin the transaction
             transaction.begin();
 
-            // Create a new Student object
-            Student stu = new Student();
-            stu.setId(id);
+            // Create a new Employee object
+            Employee stu = new Employee();
+//            stu.setId(id);
             stu.setName(name);
             stu.setAge(age);
 
@@ -85,9 +85,9 @@ public class App {
      *
      * @return a List of Students
      */
-    public static List<Student> readAll() {
+    public static List<Employee> readAll() {
 
-        List<Student> students = null;
+        List<Employee> employees = null;
 
         // Create an EntityManager
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
@@ -100,7 +100,7 @@ public class App {
             transaction.begin();
 
             // Get a List of Students
-            students = manager.createQuery("SELECT s FROM Student s", Student.class).getResultList();
+            employees = manager.createQuery("SELECT s FROM Employee s", Employee.class).getResultList();
 
             // Commit the transaction
             transaction.commit();
@@ -115,11 +115,11 @@ public class App {
             // Close the EntityManager
             manager.close();
         }
-        return students;
+        return employees;
     }
 
     /**
-     * Delete the existing Student.
+     * Delete the existing Employee.
      *
      * @param id
      */
@@ -134,8 +134,8 @@ public class App {
             // Begin the transaction
             transaction.begin();
 
-            // Get the Student object
-            Student stu = manager.find(Student.class, id);
+            // Get the Employee object
+            Employee stu = manager.find(Employee.class, id);
 
             // Delete the student
             manager.remove(stu);
@@ -156,7 +156,7 @@ public class App {
     }
 
     /**
-     * Update the existing Student.
+     * Update the existing Employee.
      *
      * @param id
      * @param name
@@ -173,8 +173,8 @@ public class App {
             // Begin the transaction
             transaction.begin();
 
-            // Get the Student object
-            Student stu = manager.find(Student.class, id);
+            // Get the Employee object
+            Employee stu = manager.find(Employee.class, id);
 
             // Change the values
             stu.setName(name);

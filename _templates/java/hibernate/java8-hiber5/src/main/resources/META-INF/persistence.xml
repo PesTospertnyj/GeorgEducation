@@ -7,7 +7,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <!-- Entity classes -->
-        <class>geoorg.model.Student</class>
+        <class>geoorg.model.Employee</class>
 
         <properties>
             <!-- The JDBC URL to the database instance -->

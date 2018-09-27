@@ -11,16 +11,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "student")
-public class Student implements Serializable {
+@Table(name = "employee")
+public class Employee implements Serializable {
     @Id
-    @Column(name = "student_id", unique = true)
+    @Column(name = "employee_id", unique = true)
     private int id;
 
-    @Column(name = "student_name", nullable = false)
+    @Column(name = "employee_name", nullable = false)
     private String name;
 
-    @Column(name = "student_age", nullable = false)
+    @Column(name = "employee_age", nullable = false)
     private int age;
 
     public int getId() {
