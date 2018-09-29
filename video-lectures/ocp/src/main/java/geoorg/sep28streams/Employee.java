@@ -32,6 +32,13 @@ public class Employee extends Person {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "Employee{" +
+                "salary=" + salary +
+                '}';
+    }
+
     public double getSalary() {
         return salary;
     }

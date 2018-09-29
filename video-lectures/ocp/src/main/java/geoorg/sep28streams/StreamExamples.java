@@ -1,10 +1,11 @@
 package geoorg.sep28streams;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
-import java.util.function.BinaryOperator;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
+import java.util.function.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -58,11 +59,51 @@ public class StreamExamples {
 
         Stream<Double> doubleStream = Stream.of(1.0, 3.0, -2.0);
         BinaryOperator<Double> addition = (d1, d2) -> d1 + d2;
-//        BinaryOperator<Integer> addition2 = Integer::;
-        Optional<Double> reduce = doubleStream.reduce(addition);
+        BinaryOperator<Double> addition2 = Double::sum;
+        Optional<Double> reduce = doubleStream.reduce(addition2);
         System.out.println("reduce " + reduce);
 
+        Stream<Integer> integerStream = Stream.empty();//Stream.of(5, 8, -3);
+        Integer reduce1 = integerStream.reduce(2, (i1, i2) -> i1*i2);
+        System.out.println("reduce 1 = " + reduce1);
 
+        Function<Integer, Integer> identityFunction = Function.identity();
+        Integer apply = identityFunction.apply(23);
+        System.out.println("identity function result = " + apply);
+
+        //reduce 3
+        stream = createStream();
+        final Double sumSalary = stream.reduce(0.0, (final Double oldSum, final Employee currentEmployee) ->
+                {
+                    return oldSum + currentEmployee.getSalary();
+                }
+                , Double::sum);
+        System.out.println("sum salary " + sumSalary);
+
+        final BiFunction<Integer, Person, Integer> ageFunction =
+                (Integer oldSumAge, Person person) -> oldSumAge + person.getAge();
+        final int sumAge = createStream().reduce(0, ageFunction, Integer::sum);
+        System.out.println("sumAge = " + sumAge);
+
+        //collect 1
+        ArrayList<Employee> collect = createStream().parallel().collect(
+                () -> {
+                    System.out.println("supplier was invoked");
+                    return new ArrayList<Employee>();
+                },
+                (ArrayList<Employee> list, Employee employee) -> {
+                    System.out.println("accumulator was invoked list size = " + list.size() + " emp = " + employee);
+                    list.add(employee);
+                },
+                (ArrayList<Employee> list1, ArrayList<Employee> list2) -> {
+                    System.out.println("combiner was invoked " + list1 + " " + list2);
+                    list1.addAll(list2);
+                }
+        );
+        System.out.println("collect size = " + collect.size() + " result " + collect);
+
+        List<Employee> collect1 = createStream().collect(Collectors.toList());
+        System.out.println("collect size = " + collect1.size() + " result " + collect1);
 
 
     }
