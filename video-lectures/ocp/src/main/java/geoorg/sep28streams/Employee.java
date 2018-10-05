@@ -14,6 +14,7 @@ public class Employee extends Person {
 
     @Override
     public boolean equals(Object o) {
+        System.out.println("Equals invoked for employee " + o);
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
@@ -25,6 +26,7 @@ public class Employee extends Person {
 
     @Override
     public int hashCode() {
+        System.out.println("hashcode invoked for " + this);
         int result = super.hashCode();
         long temp;
         temp = Double.doubleToLongBits(salary);

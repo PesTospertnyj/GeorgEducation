@@ -1,9 +1,6 @@
 package geoorg.sep28streams;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -108,6 +105,18 @@ public class StreamExamples {
 
     }
 
+    public static List<Departament> createDepartaments() {
+        Employee employee1 = new Employee("Ivan", 25, 1000);
+        Employee employee2 = new Employee("Ivan", 26, 1200);
+        Departament departament = new Departament("IT", Arrays.asList(employee1, employee2));
+
+        Employee employee3 = new Employee("Peter", 20, 800);
+        Employee employee4 = new Employee("Mariya", 23, 1300);
+        Employee employee5 = new Employee("Sidor", 19, 1100);
+        Departament departament2 = new Departament("Support", Arrays.asList(employee3, employee4, employee5 ));
+        return Arrays.asList(departament, departament2);
+    }
+
     public static Stream<Employee> createStream() {
         Employee employee1 = new Employee("Ivan", 25, 1000);
         Employee employee2 = new Employee("Ivan", 26, 1200);
@@ -117,4 +126,6 @@ public class StreamExamples {
 
         return Stream.of(employee1, employee2, employee3, employee4, employee5);
     }
+
+
 }
