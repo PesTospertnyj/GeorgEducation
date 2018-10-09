@@ -1,9 +1,13 @@
 package geoorg.sep28streams;
 
+import java.util.Comparator;
+import java.util.function.ToDoubleFunction;
+
 /**
  * Created by gd on 9/28/2018.
  */
-public class Employee extends Person {
+public class Employee extends Person //implements Comparable<Employee>
+{
 
     private double salary;
 
@@ -47,5 +51,20 @@ public class Employee extends Person {
 
     public void setSalary(double salary) {
         this.salary = salary;
+    }
+
+    public int compareTo(Employee o) {
+        //1
+        //return (int) (this.getSalary() - o.getSalary());
+        //2
+        //return Double.compare(this.getSalary(), o.getSalary());
+        //3
+        //return new Double(this.getSalary()).compareTo(o.getSalary());
+        //4
+        final ToDoubleFunction<Employee> salaryExtractor = (Employee e) -> e.getSalary();
+        final ToDoubleFunction<Employee> salaryExtractor2 = Employee::getSalary;
+        final Comparator<Employee> salaryEmployeeComparator =
+                Comparator.comparingDouble(salaryExtractor2).reversed();
+        return salaryEmployeeComparator.compare(this, o);
     }
 }

@@ -8,17 +8,17 @@ import java.util.List;
  * Created by gd on 9/13/2018.
  */
 
-class Bag<T> implements Iterable<T> {
+class Bag<TYPE> implements Iterable<TYPE> {
 
-    private List<T> stringList;
+    private List<TYPE> stringList;
 
-    public Bag(List<T> stringList) {
+    public Bag(List<TYPE> stringList) {
         this.stringList = stringList;
     }
 
     @Override
-    public Iterator<T> iterator() {
-        return new Iterator<T>() {
+    public Iterator<TYPE> iterator() {
+        return new Iterator<TYPE>() {
 
             private int i = 0;
 
@@ -28,7 +28,7 @@ class Bag<T> implements Iterable<T> {
             }
 
             @Override
-            public T next() {
+            public TYPE next() {
                 return stringList.get(i++);
             }
         };

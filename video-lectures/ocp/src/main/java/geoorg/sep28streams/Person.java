@@ -1,9 +1,12 @@
 package geoorg.sep28streams;
 
+import java.util.Comparator;
+
 /**
  * Created by gd on 9/28/2018.
  */
-public class Person {
+public class Person //implements Comparable<Person>
+{
 
     private String name;
     private int age;
@@ -58,5 +61,10 @@ public class Person {
 
     public void printMyAge() {
         System.out.println(this.getAge());
+    }
+
+    public int compareTo(Person o) {
+        final Comparator<Person> ageComparator = Comparator.comparingInt(Person::getAge);
+        return ageComparator.compare(this, o);
     }
 }

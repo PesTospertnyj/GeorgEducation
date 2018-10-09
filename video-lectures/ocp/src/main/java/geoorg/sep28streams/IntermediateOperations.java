@@ -1,8 +1,7 @@
 package geoorg.sep28streams;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -35,7 +34,7 @@ public class IntermediateOperations
         Stream.of("1", "two", "3", "two").skip(2).limit(2).distinct().forEach(System.out::println);
 
         //map example
-        Supplier<Stream<Employee>> streamSupplier = () -> {
+        Supplier<Stream<Employee>> streamEmployeeSupplier = () -> {
             return createStream();
         };
 
@@ -50,10 +49,10 @@ public class IntermediateOperations
             return person.getName();
         };
 
-        Stream<String> stringStream = streamSupplier.get().map(employeeObjectFunction);
+        Stream<String> stringStream = streamEmployeeSupplier.get().map(employeeObjectFunction);
 
-        Stream<Object> objectStream = streamSupplier.get().map(personStringFunction);
-        Stream<Object> objectStream2 = streamSupplier.get().map(employeeObjectFunction1);
+        Stream<Object> objectStream = streamEmployeeSupplier.get().map(personStringFunction);
+        Stream<Object> objectStream2 = streamEmployeeSupplier.get().map(employeeObjectFunction1);
 
         stringStream.forEach(System.out::println);
 
@@ -67,6 +66,43 @@ public class IntermediateOperations
 
         Stream<List<Employee>> listStream = deparatamentStreamSupplier.get().map((dep) -> dep.getEmployees());
 
+        //sorted
+        System.out.println("sorted method:");
+//        streamEmployeeSupplier.get().sorted().forEach(System.out::println);
+
+        //sorted 2
+        System.out.println("sorted using comparator:");
+        final Comparator<Employee> salaryComparator = new Comparator<Employee>() {
+            @Override
+            public int compare(Employee o1, Employee o2) {
+                return (int) (o1.getSalary() - o2.getSalary());
+            }
+        }.reversed();
+        streamEmployeeSupplier.get().sorted(salaryComparator).forEach(System.out::println);
+
+        //reveredOrder example
+        System.out.println("reveredOrder example:");
+//        Stream.of("1", "two", "3", "two").sorted(Comparator::reverseOrder).forEach(System.out::println);
+
+        //
+        System.out.println("peek example");
+        final Consumer<Object> toStringConsumer = (Object o) -> System.out.println(o);
+        long count = streamEmployeeSupplier.get().peek(toStringConsumer).filter((Person p) -> p.getAge() > 20).count();
+        System.out.println("result " + count);
+
+        //hung
+        System.out.println("hung example");
+        Stream<Integer> generateStream = Stream.generate(() -> 1);
+        Stream<Integer> stream2 = generateStream.sorted(Integer::compareTo);
+        foo(stream2);
+//        stream2.forEach(System.out::println);
     }
+
+    private static void foo(Stream<Integer> stream2) {
+        if (new Random().nextBoolean()) {
+            stream2.forEach(System.out::println);
+        }
+    }
+
 
 }
