@@ -94,7 +94,8 @@ public class IntermediateOperations
         System.out.println("hung example");
         Stream<Integer> generateStream = Stream.generate(() -> 1);
         Stream<Integer> stream2 = generateStream.sorted(Integer::compareTo);
-        foo(stream2);
+        //foo(stream2);
+        System.out.println(stream2);
 //        stream2.forEach(System.out::println);
     }
 
