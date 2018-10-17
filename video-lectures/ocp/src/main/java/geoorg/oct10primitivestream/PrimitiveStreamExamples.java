@@ -4,9 +4,9 @@ package geoorg.oct10primitivestream;
 import geoorg.sep28streams.Employee;
 import geoorg.sep28streams.StreamExamples;
 
-import java.util.DoubleSummaryStatistics;
-import java.util.IntSummaryStatistics;
-import java.util.OptionalDouble;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.*;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
@@ -86,6 +86,17 @@ public class PrimitiveStreamExamples
 
         System.out.println("squared / n = " + doubleBox.getValue() / doubleSummaryStatistics.getCount());
 
+    }
+
+    private static void foo() {
+        List<? super IOException> exceptions = null;//new ArrayList<Object>();
+        bar(new ArrayList<IOException>());
+    }
+
+    private static void bar(List<? super IOException> exceptions) {
+        exceptions.add(new Exception());	 // DOES NOT COMPILE
+        exceptions.add(new IOException());
+        exceptions.add(new FileNotFoundException());
     }
 
 
