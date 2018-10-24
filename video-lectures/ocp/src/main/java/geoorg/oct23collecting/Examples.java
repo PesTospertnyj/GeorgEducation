@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -48,6 +49,33 @@ public class Examples {
 
         System.out.println("allEmployeesNames = " + allEmployeesNames);
 
+        //
+        Map<Department, Set<Employee>> empoyeesByDepartmentSet = StreamExamples.createStream().collect(
+                Collectors.groupingBy((e) -> e.getDepartment(), Collectors.toSet())
+        );
+        System.out.println("empoyeesByDepartmentSet = " + empoyeesByDepartmentSet);
+
+        //
+        Map<Department, List<String>> employeesNamesByDepMap = StreamExamples.createStream()
+                .collect(Collectors.groupingBy(Employee::getDepartment,
+                Collectors.mapping(Employee::getName, Collectors.toList())));
+        System.out.println("employeesNamesByDepMap = " + employeesNamesByDepMap);
+
+        Map<Department, Long> employeesNumberByDepartmentMap = StreamExamples.createStream()
+                .collect(
+                        Collectors.groupingBy(Employee::getDepartment,
+                Collectors.counting()));
+
+        Map<Department, Double> totalSalaryByDepartmentMap = StreamExamples.createStream().collect(Collectors.groupingBy(Employee::getDepartment,
+                Collectors.summingDouble(Employee::getSalary)
+                ));
+
+        //
+        TreeMap<Department, Set<Employee>> empoyeesByDepartmentTreeMap = StreamExamples.createStream().collect(
+                Collectors.groupingBy((e) -> e.getDepartment(), () -> new TreeMap(Comparator.comparing(Department::getName).reversed()), Collectors.toSet())
+        );
+        System.out.println("empoyeesByDepartmentTreeMap = " + empoyeesByDepartmentTreeMap);
+
         //max by, mim by
         Optional<Employee> employeeWithMaxSalary = StreamExamples.createStream().collect(Collectors.maxBy(Comparator.comparing((emp) -> emp.getSalary())));
         System.out.println("employeeWithMaxSalary " + employeeWithMaxSalary);
@@ -71,6 +99,20 @@ public class Examples {
                         Comparator.comparing(Employee::getAge)
                 )));
         System.out.println("set = " + set);
+
+        //toMap
+        Map<String, Employee> name2EmployeeMap = StreamExamples.createStream().collect(Collectors.toMap(
+                (employee) -> employee.getName(), (employee) -> employee));
+        System.out.println();
+
+        //
+        Stream<String> ohMy = Stream.of("lions", "tigers", "bears", "bears");
+        Map<String, Integer> map = ohMy.collect(
+                Collectors.toMap(Function.identity(), String::length, Integer::sum, TreeMap::new));
+        System.out.println(map); // {lions=5, bears=5, tigers=6}
+
+
+
     }
 
     <R> R foo(Collector<Employee, Employee, R> collector) {

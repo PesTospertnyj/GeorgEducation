@@ -119,7 +119,7 @@ public class StreamExamples {
 
     public static Stream<Employee> createStream() {
         Employee employee1 = new Employee("Ivan", 25, 1000);
-        Employee employee2 = new Employee("Ivan", 26, 1200);
+        Employee employee2 = new Employee("Ivan1", 26, 1200);
 
         Department department1 = new Department("Sales", Arrays.asList(employee1, employee2));
 
