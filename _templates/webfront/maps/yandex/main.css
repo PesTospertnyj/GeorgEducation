@@ -1,0 +1,23 @@
+#map {
+	width: 100%;
+	height: 800px;
+}
+
+.balloon_content {
+	max-width: 320px;
+	text-align: justify;
+}
+
+.balloon_content h3{
+	text-align: center;
+}
+
+.balloon_content img {
+	max-width: 320px;
+	max-height : 240px;
+	height: auto;
+}
+
+body {
+	height: 2000px;
+}
