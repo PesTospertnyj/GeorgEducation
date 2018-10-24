@@ -5,7 +5,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static geoorg.sep28streams.StreamExamples.createStream;
@@ -57,11 +56,11 @@ public class IntermediateOperations
         stringStream.forEach(System.out::println);
 
         //flat map example
-        Supplier<Stream<Departament>> deparatamentStreamSupplier = () -> {
+        Supplier<Stream<Department>> deparatamentStreamSupplier = () -> {
             return StreamExamples.createDepartaments().stream();
         };
 
-        Stream<Employee> employeeStream = deparatamentStreamSupplier.get().flatMap((Departament departament) -> departament.getEmployees().stream());
+        Stream<Employee> employeeStream = deparatamentStreamSupplier.get().flatMap((Department department) -> department.getEmployees().stream());
         employeeStream.forEach(System.out::println);
 
         Stream<List<Employee>> listStream = deparatamentStreamSupplier.get().map((dep) -> dep.getEmployees());

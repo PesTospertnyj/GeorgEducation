@@ -105,24 +105,30 @@ public class StreamExamples {
 
     }
 
-    public static List<Departament> createDepartaments() {
+    public static List<Department> createDepartaments() {
         Employee employee1 = new Employee("Ivan", 25, 1000);
         Employee employee2 = new Employee("Ivan", 26, 1200);
-        Departament departament = new Departament("IT", Arrays.asList(employee1, employee2));
+        Department department = new Department("IT", Arrays.asList(employee1, employee2));
 
         Employee employee3 = new Employee("Peter", 20, 800);
         Employee employee4 = new Employee("Mariya", 23, 1300);
         Employee employee5 = new Employee("Sidor", 19, 1100);
-        Departament departament2 = new Departament("Support", Arrays.asList(employee3, employee4, employee5 ));
-        return Arrays.asList(departament, departament2);
+        Department department2 = new Department("Support", Arrays.asList(employee3, employee4, employee5 ));
+        return Arrays.asList(department, department2);
     }
 
     public static Stream<Employee> createStream() {
         Employee employee1 = new Employee("Ivan", 25, 1000);
         Employee employee2 = new Employee("Ivan", 26, 1200);
+
+        Department department1 = new Department("Sales", Arrays.asList(employee1, employee2));
+
+
         Employee employee3 = new Employee("Peter", 20, 800);
         Employee employee4 = new Employee("Mariya", 23, 1300);
         Employee employee5 = new Employee("Sidor", 19, 1100);
+
+        Department department2 = new Department("IT", Arrays.asList(employee3, employee4, employee5));
 
         return Stream.of(employee1, employee2, employee3, employee4, employee5);
     }
