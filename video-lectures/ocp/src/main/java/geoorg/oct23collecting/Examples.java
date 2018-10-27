@@ -16,8 +16,6 @@ import java.util.stream.Stream;
  */
 public class Examples {
 
-
-
     public static void main(String[] args) {
         Stream<Employee> employeeStream = StreamExamples.createStream();
         employeeStream.forEach(System.out::println);

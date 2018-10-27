@@ -58,4 +58,8 @@ public class Department {
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
+
+    public static void staticMethod() {
+
+    }
 }
