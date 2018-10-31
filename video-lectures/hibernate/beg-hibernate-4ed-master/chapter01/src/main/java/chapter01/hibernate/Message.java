@@ -3,9 +3,11 @@ package chapter01.hibernate;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "message")
 public class Message {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)//for postgres
+    @GeneratedValue(strategy = GenerationType.AUTO)//for mysql
     Long id;
     @Column(nullable = false)
     String text;
