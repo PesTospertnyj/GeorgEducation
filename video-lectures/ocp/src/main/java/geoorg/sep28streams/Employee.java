@@ -11,14 +11,24 @@ public class Employee extends Person //implements Comparable<Employee>
 
     private double salary;
 
+    private Department department;
+
     public Employee(String name, int age, double salary) {
         super(name, age);
         this.salary = salary;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
     @Override
     public boolean equals(Object o) {
-        System.out.println("Equals invoked for employee " + o);
+//        System.out.println("Equals invoked for employee " + o);
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
@@ -30,7 +40,7 @@ public class Employee extends Person //implements Comparable<Employee>
 
     @Override
     public int hashCode() {
-        System.out.println("hashcode invoked for " + this);
+//        System.out.println("hashcode invoked for " + this);
         int result = super.hashCode();
         long temp;
         temp = Double.doubleToLongBits(salary);
@@ -40,8 +50,9 @@ public class Employee extends Person //implements Comparable<Employee>
 
     @Override
     public String toString() {
-        return super.toString() + "Employee{" +
+        return super.toString() + "{" +
                 "salary=" + salary +
+                ", department=" + (department == null ? "null" : department.getName()) +
                 '}';
     }
 

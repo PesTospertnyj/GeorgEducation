@@ -94,7 +94,7 @@ public class PrimitiveStreamExamples
     }
 
     private static void bar(List<? super IOException> exceptions) {
-        exceptions.add(new Exception());	 // DOES NOT COMPILE
+//        exceptions.add(new Exception());	 // DOES NOT COMPILE
         exceptions.add(new IOException());
         exceptions.add(new FileNotFoundException());
     }
