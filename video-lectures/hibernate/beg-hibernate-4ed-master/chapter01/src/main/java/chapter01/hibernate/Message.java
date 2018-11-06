@@ -8,9 +8,9 @@ public class Message {
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)//for postgres
     @GeneratedValue(strategy = GenerationType.AUTO)//for mysql
-    Long id;
-    @Column(nullable = false)
-    String text;
+    private Long id;
+    @Column(nullable = false, name = "text")
+    private String text;
 
     public Message(String text) {
         setText(text);
@@ -37,7 +37,7 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{" +
+        return "Mes sage{" +
                 "id=" + getId() +
                 ", text='" + getText() + '\'' +
                 '}';

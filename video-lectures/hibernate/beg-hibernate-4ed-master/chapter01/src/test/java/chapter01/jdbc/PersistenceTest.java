@@ -62,10 +62,10 @@ public class PersistenceTest {
             try (PreparedStatement ps = connection.prepareStatement(SELECT)) {
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
-                        Message message = new Message();
-                        message.setId(rs.getLong(1));
-                        message.setText(rs.getString(2));
-                        list.add(message);
+//                        Message message = new Message();
+//                        message.setId(rs.getLong(1));
+//                        message.setText(rs.getString(2));
+//                        list.add(message);
                     }
 
                     assertEquals(list.size(), 1);

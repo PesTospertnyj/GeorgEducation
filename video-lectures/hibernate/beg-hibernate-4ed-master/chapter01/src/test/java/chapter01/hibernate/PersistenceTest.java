@@ -26,7 +26,7 @@ public class PersistenceTest {
 
     @Test
     public void saveMessage() {
-        Message message = new Message("Hallo, welt");
+        Message message = new Message("Hallo, welt4");
         try (Session session = factory.openSession()) {
             Transaction tx = session.beginTransaction();
             session.persist(message);

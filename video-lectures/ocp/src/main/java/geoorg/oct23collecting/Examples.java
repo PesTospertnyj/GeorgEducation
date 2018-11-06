@@ -64,25 +64,34 @@ public class Examples {
                         Collectors.groupingBy(Employee::getDepartment,
                 Collectors.counting()));
 
-        Map<Department, Double> totalSalaryByDepartmentMap = StreamExamples.createStream().collect(Collectors.groupingBy(Employee::getDepartment,
+        Map<Department, Double> totalSalaryByDepartmentMap = StreamExamples.createStream().
+                collect(Collectors.groupingBy(Employee::getDepartment,
                 Collectors.summingDouble(Employee::getSalary)
                 ));
 
         //
         TreeMap<Department, Set<Employee>> empoyeesByDepartmentTreeMap = StreamExamples.createStream().collect(
-                Collectors.groupingBy((e) -> e.getDepartment(), () -> new TreeMap(Comparator.comparing(Department::getName).reversed()), Collectors.toSet())
+                Collectors.groupingBy((e) -> e.getDepartment(),
+                        () -> new TreeMap(Comparator.comparing(Department::getName).reversed()),
+                        Collectors.toSet())
         );
         System.out.println("empoyeesByDepartmentTreeMap = " + empoyeesByDepartmentTreeMap);
 
         //max by, mim by
-        Optional<Employee> employeeWithMaxSalary = StreamExamples.createStream().collect(Collectors.maxBy(Comparator.comparing((emp) -> emp.getSalary())));
+        Optional<Employee> employeeWithMaxSalary = StreamExamples.createStream()
+                .collect(Collectors.maxBy(Comparator.comparing((emp) -> emp.getSalary())));
         System.out.println("employeeWithMaxSalary " + employeeWithMaxSalary);
 
-        Map<Boolean, List<Employee>> mapSalaryGreater1100 = StreamExamples.createStream().collect(Collectors.partitioningBy((employee) -> employee.getSalary() > 1100));
+        //get max salary
+        OptionalDouble max = StreamExamples.createStream().mapToDouble(Employee::getSalary).max();
+
+        Map<Boolean, List<Employee>> mapSalaryGreater1100 = StreamExamples.createStream()
+                .collect(Collectors.partitioningBy((employee) -> employee.getSalary() > 1100));
         System.out.println("mapSalaryGreater1100 " + mapSalaryGreater1100);
 
         //summary statistics
-        DoubleSummaryStatistics salaryStatistics = StreamExamples.createStream().collect(Collectors.summarizingDouble((employee) -> employee.getSalary()));
+        DoubleSummaryStatistics salaryStatistics = StreamExamples.createStream()
+                .collect(Collectors.summarizingDouble((employee) -> employee.getSalary()));
         System.out.println("salaryStatistics = " + salaryStatistics);
 
         List<Employee> employees = StreamExamples.createStream().collect(Collectors.toList());
@@ -90,7 +99,7 @@ public class Examples {
 
         LinkedList<Employee> linkedList = StreamExamples.createStream().collect
                 (Collectors.toCollection(() -> new LinkedList<Employee>()));
-        System.out.println("treeSetEmployyes = " + linkedList);
+        System.out.println("linkedList Employyes = " + linkedList);
 
         Set<Employee> set = StreamExamples.createStream().collect
                 (Collectors.toCollection(() -> new TreeSet<Employee>(
@@ -99,8 +108,9 @@ public class Examples {
         System.out.println("set = " + set);
 
         //toMap
-        Map<String, Employee> name2EmployeeMap = StreamExamples.createStream().collect(Collectors.toMap(
-                (employee) -> employee.getName(), (employee) -> employee));
+        Map<String, Double> name2SalaryMap = StreamExamples.createStream()
+                .collect(Collectors.toMap(
+                (employee) -> employee.getName(), (employee) -> employee.getSalary()));
         System.out.println();
 
         //
