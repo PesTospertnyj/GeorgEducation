@@ -10,6 +10,7 @@
         <!--<property name="connection.username">sa</property>-->
         <!--<property name="connection.password"/>-->
         <!--<property name="dialect">org.hibernate.dialect.H2Dialect</property>-->
+
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/hiber1</property>
         <property name="hibernate.connection.username">user1</property>
@@ -26,7 +27,7 @@
         <!--  Echo all executed SQL to stdout  -->
         <property name="show_sql">true</property>
         <!--  Drop and re-create the database schema on startup  -->
-        <property name="hbm2ddl.auto">validate</property>
+        <property name="hbm2ddl.auto">create-drop</property>
         <mapping class="chapter03.hibernate.Person"/>
         <mapping class="chapter03.hibernate.Ranking"/>
         <mapping class="chapter03.hibernate.Skill"/>
