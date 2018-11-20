@@ -2,6 +2,7 @@ package com.mycompany.service.impl;
 
 import com.mycompany.service.MySecondService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
