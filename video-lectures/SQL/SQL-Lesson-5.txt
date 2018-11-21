@@ -1,0 +1,254 @@
+﻿/***************** практическое применение нормализации************************
+http://postgresql.ru.net/doc/dbguide/4-6.html
+https://ru.wikipedia.org/wiki/%D0%9D%D0%BE%D1%80%D0%BC%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D1%84%D0%BE%D1%80%D0%BC%D0%B0
+Понятие сущности и связи
+
+**************************************************/
+select * from employee
+
+/*** Types of constraints***********************************************
+1. Primary key
+2. Foreign key
+3. Unique
+4. Check
+5. Not null
+*************************************************************************/
+/*********  посмотреть информацию о существующих constraints********************************/
+select * from  information_schema.table_constraints where table_name='EMPLOYEE'
+
+/*************** CREATE TABLE ***************************
+****************  создадим таблицу клиентов *******************************************/
+drop table CLIENTS
+create table CLIENTS --таблица клиентов
+( CLIENT_ID INTEGER PRIMARY KEY
+  ,VIP_FLG VARCHAR(1) CHECK (VIP_FLG in ('Y','N'))
+  ,MANAGER_ID INT references EMPLOYEE(ID) --менеджер клиента, сотрудник из EMPLOYEE
+  , FIRST_NAME VARCHAR(100) NOT NULL
+  ,LAST_NAME VARCHAR(100) NOT NULL
+  , BIRTHDAY DATE
+  );
+
+/************** sequence для генерации идентификаторов клиентов****************************/
+Create sequence SQ_CLIENTS start with 1001;
+/******************** заполним таблицу клиентов  ***********************************/
+insert into CLIENTS values (nextval('SQ_CLIENTS'),'N',125, 'Stan', 'Marsh');
+insert into CLIENTS values (nextval('SQ_CLIENTS'),'N',125, 'Kyle', 'Broflovski');
+insert into CLIENTS values (nextval('SQ_CLIENTS'),'N',136, 'Eric', 'Cartman');
+insert into CLIENTS values (nextval('SQ_CLIENTS'),'Y',125, 'Wendy', 'Testaburger');
+commit;
+
+select * from CLIENTS
+alter table CLIENTS drop column birthday
+update clients set vip_flg='Y' where client_id=1004
+
+/************** create table ADDRESS*****************************************/
+drop table address
+create table ADDRESS (
+    ADDRESS_ID INT PRIMARY KEY
+    ,POST_COD VARCHAR(50)
+    ,COUNTRY  VARCHAR(50)
+    ,REGION   VARCHAR(50)
+    ,CITY     VARCHAR(50)
+    ,STREET   VARCHAR(50)
+    ,Building VARCHAR(50)
+    ,flour    INT
+    ,flat     INT
+);
+
+/************* sequence SQ_ADDRESS****************************/
+
+drop sequence SQ_ADDRESS;
+
+create sequence SQ_ADDRESS start with 100001;
+select nextval ('SQ_ADDRESS')
+
+/************* заполним таблицу ADDRESS данными**************************************/
+insert into address values (nextval('SQ_ADDRESS'),'123457','TANZANIA','ZANZIBAR','Narrow_street', '5a', 4,12);
+insert into address values (nextval('SQ_ADDRESS'),'123457','TANZANIA','ZANZIBAR','Wide_street', '8b', 1,9);
+insert into address values (nextval('SQ_ADDRESS'),'21354','URUGVAI','Rivera','Super_street', '8b', 1,9);
+insert into address values (nextval('SQ_ADDRESS'),'895522','Kenya','Nairobi','Another_street', '8b', 1,9);
+commit;
+select * from address
+
+/************** таблица связей между адресом и адресатом**************************************/
+drop table ADDRESS_LINKS;
+
+create table ADDRESS_LINKS
+
+                  ( ADDRESS_ID INTEGER references ADDRESS (ADDRESS_ID)
+                    ,ADDRESS_OWNER_ID INT
+                    ,IS_ACTUAL       VARCHAR(1)
+                   ,IS_MAIN         VARCHAR(1) CHECK (IS_MAIN in ('Y','N'))
+                    ,START_DATE      DATE   CHECK (START_DATE<=END_DATE)
+                    ,END_DATE        DATE
+                        ,CHECK (START_DATE<=END_DATE)
+                 );
+---- constraint  можно добавить и после создания таблицы
+ALTER table ADDRESS_LINKS add constraint is_actual_check CHECK ( IS_ACTUAL in ('Y','N'));
+
+/******* добавим еще одну колонку в таблицу связей адресов для возможности хранить адреса
+ и сотрудников (EMPLOYEE),
+ и клиентов (CLIENTS), и тд. (в будущем, возможно еще и контрагентов и др)
+ ************************************************/
+ALTER table ADDRESS_LINKS add column LNKD_ENTITY varchar(50) NOT NULL
+select * from address_links
+--------------назначаем сотруднику адрес - вставляем в таблицу свзяей адресов запись о связи
+insert into address_links
+values (100002, 125, 'Y', 'Y', to_date('1990-01-01','yyyy-mm-dd'),
+        to_date('9999-01-01','yyyy-mm-dd'),'EMPLOYEE');
+----------- назначаем клиенту адрес -------
+insert into address_links
+values (100003, 1002, 'Y', 'Y', to_date('1990-01-01','yyyy-mm-dd'),
+        to_date('9999-01-01','yyyy-mm-dd'),'CLIENTS');
+
+insert into address_links
+
+values (100002, 1002, 'N', 'N', to_date('1990-01-01','yyyy-mm-dd'),
+        to_date('9999-01-01','yyyy-mm-dd'),'CLIENTS');
+
+select * from address_links
+
+commit;
+
+select * from employee
+/***********************  добавим constraint в существующую таблицу EMPLOYEE**********************/
+update EMPLOYEE set fire_date=to_date('9999-01-01','yyyy-mm-dd') where fire_date is null
+commit;
+select * from employee;
+
+ALTER table EMPLOYEE ADD constraint check_hire_date CHECK (hire_date<fire_date)
+alter table EMPLOYEE drop constraint check_salary
+ALTER table EMPLOYEE ADD constraint check_salary CHECK (salary>0 AND salary is not null) --error
+
+update employee set salary=1 where salary=0 or salary is null
+commit;
+
+
+
+
+/************** CTAS= Create as select ****************************************************
+-*********** Создадим таблицу PERSON как результат запроса********************************************************************************/
+CREATE sequence SQ_PERSON;
+
+drop table person;
+create table PERSON as
+  select nextval('SQ_PERSON') person_id, FIRST_NAME, LAST_NAME from CLIENTS
+    union
+  select nextval('SQ_PERSON') , FIRST_name, LAST_NAME from EMPLOYEE
+---------------
+create table PERSON as
+select nextval('SQ_PERSON') person_id, FIRST_NAME, LAST_NAME from CLIENTS where 1=0
+-------------
+select * from person
+
+/**************** добавим еще одну колонку в таблицу PERSON***************************/
+  alter table person add column SOCIAL varchar(100) UNIQUE
+
+
+/***************** добавим constraint в таблицу PERSON********************************************************/
+alter table person add constraint pk_person PRIMARY KEY (person_id)
+
+select * from person
+
+update  person set social=trunc(person_id*random()*100000000000)
+commit;
+select * from person
+/******** преобразуем таблицу связей адресов в просто таблицу связей ***************************/
+  select * from address_links
+
+  alter table ADDRESS_LINkS add column ENTITY2 VARCHAR(50) not null;--err
+alter table ADDRESS_LINkS add column ENTITY2 VARCHAR(50);
+select * from ADDRESS_LINKS
+/********* пока в этой таблице у нас содержаться только адреса, поэтому ставим ENTITY2='ADDRESS'
+ ***************************************для все строк****************************/
+ update ADDRESS_LINKS set entity2='ADDRESS'
+
+ /********* добавим constraint ********************************************************/
+ alter table ADDRESS_LINKS add constraint check_ENITITY2 CHECK (Entity2 is not null);
+
+select * from address_links
+/************ удалим ненужный constraint, ссылающийся на ADDRESS,
+т.к. теперь у нас в этой таблицы будут связи и других сущностей между собой************************************/
+ ALTER TABLE ADDRESS_LINKS drop constraint ADDRESS_LINKS_ADDRESS_ID_FKEY
+/************ переименуем колонки *****************************************/
+
+alter table ADDRESS_LINKS rename column lnkd_entity to entity1
+alter table ADDRESS_LINKS rename column ADDRESS_ID to Entity1_ID
+alter table ADDRESS_LINKS rename column ADDRESS_OWNER_ID to Entity2_ID
+
+/************ переименуем таблицу **********************************/
+drop table links
+
+alter table address_links rename to LINKS
+/*************************************************/
+select * from links
+
+/********** вставим связи таблицы PERSON и EMPLOYEE****************************************/
+insert into links
+select e.ID,
+       P.Person_id,
+       'Y',
+       'Y',
+       to_date('1990-01-01','yyyy-mm-dd'),
+       to_date('9999-01-01','yyyy-mm-dd'),
+       'EMPLOYEE',
+       'PERSON'
+from EMPLOYEE e join person p on e.first_name=p.FIRST_NAME and e.LAST_NAME=p.LAST_NAME
+
+/************* добавим связи таблиц PERSON и CLIENTS**********************************************/
+insert into links
+select e.client_ID,
+       P.Person_id,
+       'Y',
+       'Y',
+       to_date('1990-01-01','yyyy-mm-dd'),
+       to_date('9999-01-01','yyyy-mm-dd'),
+       'CLIENT',
+       'PERSON'
+from CLIENTS e join person p on e.first_name=p.FIRST_NAME and e.LAST_NAME=p.LAST_NAME
+
+commit;
+
+select * from links
+
+---------------------------------------------------
+
+--------------------
+create view EMPLOYEE_V as
+
+select
+     p.FIRST_NAME,
+     p.LAST_NAME,
+     p. social,
+     e.salary
+    -- l.entity1_id,
+    -- l.entity2_id
+
+from employee e join links l on e.id=l.entity1_id and l.entity1='EMPLOYEE'
+                                join person p on l.entity2_id=p.person_id and l.entity2='PERSON'
+
+-----------------
+select * from employee_v
+------------
+
+
+select * from employee
+select * from person
+select * from links where entity1_id=777
+--------------------------------------
+select
+       p.FIRST_NAME,
+       p.LAST_NAME,
+       p. social,
+       c.manager_id,
+       l.entity1_id,
+       l.entity2_id
+
+from clients c join links l on c.client_id=l.entity1_id and l.entity1='CLIENTS'
+                join person p on l.entity2_id=p.person_id and l.entity2='PERSON'
+----
+
+select * from links
+  /**************** для таблицы links добавим составной primary key**************************************/
+  select * from links
+alter table links add constraint pk_links primary key (entity1_id, entity2_id, entity1, entity2)
