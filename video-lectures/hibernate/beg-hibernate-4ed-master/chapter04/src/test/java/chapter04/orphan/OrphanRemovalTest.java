@@ -4,6 +4,7 @@ import com.autumncode.hibernate.util.SessionUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -36,6 +37,42 @@ public class OrphanRemovalTest {
             Query<Book> query = session.createQuery("from Book b", Book.class);
             List<Book> books = query.list();
             assertEquals(books.size(), 2);
+
+            tx.commit();
+        }
+    }
+
+    @Test
+    @Ignore
+    public void orphanNotRemovalTest() {
+        Long id = createLibrary();
+
+        try (Session session = SessionUtil.getSession()) {
+            Transaction tx = session.beginTransaction();
+
+            Library library = session.load(Library.class, id);
+            assertEquals(library.getBooks().size(), 3);
+
+
+            Book toBeRemoved = library.getBooks().remove(0);
+            toBeRemoved.setLibrary(null);
+//            Book toBeRemovedFromLibrary = session.load( Book.class, 3L);
+//            toBeRemovedFromLibrary.setLibrary(null);
+
+            assertEquals(library.getBooks().size(), 2);
+
+            tx.commit();
+        }
+
+        try (Session session = SessionUtil.getSession()) {
+            Transaction tx = session.beginTransaction();
+
+            Library l2 = session.load(Library.class, id);
+            assertEquals(l2.getBooks().size(), 2);
+
+            Query<Book> query = session.createQuery("from Book b", Book.class);
+            List<Book> books = query.list();
+            assertEquals(books.size(), 3);
 
             tx.commit();
         }

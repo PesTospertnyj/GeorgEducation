@@ -1,5 +1,7 @@
 package chapter04.orphan;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +12,7 @@ public class Book {
     @Column
     String title;
     @ManyToOne
+//            @Cascade(org.hibernate.annotations.CascadeType.ALL)
     Library library;
 
     public Book() {

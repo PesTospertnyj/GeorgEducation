@@ -1,9 +1,12 @@
 package chapter04.general;
 
+import chapter04.mapped.Email;
+import chapter04.mapped.Message;
 import chapter04.model.SimpleObject;
 import com.autumncode.hibernate.util.SessionUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -120,5 +123,23 @@ public class PersistingEntitiesTest {
         // saveOrUpdate() will update a row in the database
         // if one matches. This is what one usually expects.
         assertEquals(id, obj.getId());
+    }
+
+    @Test
+    @Ignore
+    public void cascadingTest() {
+        try(Session session = SessionUtil.getSession()) {
+            Transaction tx=session.beginTransaction();
+
+            Email email = new Email("Email title");
+            Message message = new Message("Message content");
+            email.setMessage(message);
+            message.setEmail(email);
+
+            session.persist(email);
+//            session.save(message);
+
+            tx.commit();
+        }
     }
 }

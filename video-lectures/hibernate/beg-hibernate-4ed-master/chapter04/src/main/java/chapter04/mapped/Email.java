@@ -1,5 +1,7 @@
 package chapter04.mapped;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 @Entity(name = "Email2")
@@ -9,7 +11,10 @@ public class Email {
     Long id;
     @Column
     String subject;
-    @OneToOne(mappedBy = "email")
+    @OneToOne(mappedBy = "email"
+            //, cascade = CascadeType.PERSIST
+    )
+//            @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     Message message;
 
     public Email() {

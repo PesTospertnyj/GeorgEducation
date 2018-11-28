@@ -1,5 +1,7 @@
 package chapter04.mapped;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 @Entity(name = "Message2")
@@ -12,6 +14,8 @@ public class Message {
     String content;
 
     @OneToOne
+//            (cascade = {CascadeType.PERSIST})
+//            @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     Email email;
 
     public Message() {
