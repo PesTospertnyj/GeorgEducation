@@ -8,6 +8,8 @@ public class App {
 
         //Reader reader2 = null;
 
+
+
         try (Reader reader1 = new FileReader(new File("some.txt"));
              Reader reader2 = new FileReader(new File("another.txt"))) {
             reader1.read();
