@@ -1,6 +1,7 @@
 package chapter04.orphan;
 
 import com.autumncode.hibernate.util.SessionUtil;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;

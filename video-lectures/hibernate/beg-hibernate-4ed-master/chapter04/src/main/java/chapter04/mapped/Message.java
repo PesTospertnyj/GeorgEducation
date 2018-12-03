@@ -10,12 +10,12 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column
+//    @Column
     String content;
 
-    @OneToOne
+    @OneToOne//(fetch = FetchType.LAZY)
 //            (cascade = {CascadeType.PERSIST})
-//            @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+            @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     Email email;
 
     public Message() {

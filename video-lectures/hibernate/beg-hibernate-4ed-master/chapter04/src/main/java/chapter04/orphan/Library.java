@@ -13,7 +13,9 @@ public class Library {
     Long id;
     @Column
     String name;
-    @OneToMany(orphanRemoval = true, mappedBy = "library")
+    @OneToMany(orphanRemoval = true, mappedBy = "library",
+            fetch = FetchType.LAZY
+    )
     List<Book> books = new ArrayList<>();
 
     public Library() {

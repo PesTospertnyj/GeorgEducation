@@ -30,11 +30,14 @@ public class App {
         List<String> strings = Collections.checkedList(strings2, String.class);
 
         List rawList = strings;
-        rawList.add(new Integer(12));
+//        rawList.add(new Integer(12));//Attempt to insert class java.lang.Integer element into collection with element type class java.lang.String
         System.out.println(strings);
 
         String s = strings.get(0);
         System.out.println();
+
+
+
 
     }
 }
