@@ -18,7 +18,10 @@
         <!--  Drop and re-create the database schema on startup  -->
         <property name="hbm2ddl.auto">create</property>
 
-        <mapping class="chapter06.ourexamples.Employee"/>
+        <!--<mapping class="chapter06.ourexamples.Employee"/>-->
+
+        <mapping class="chapter06.ourexamples.embedableid.GlobalStudentGroup"/>
+        <!--<mapping class="chapter06.ourexamples.embedableid.GlobalGroupId"/>-->
 
         <!--<mapping class="chapter06.primarykey.after.Book"/>-->
         <!--<mapping class="chapter06.compoundpk.CPKBook"/>-->
