@@ -1,5 +1,6 @@
-package chapter06.ourexamples.idembedable;
+package chapter06.ourexamples.embedableid.idembedable;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -14,7 +15,7 @@ public class GlobalStudentGroup {
         this.studentsNumber = studentsNumber;
     }
 
-    @Id
+    @EmbeddedId
     private GlobalGroupId globalGroupId;
     private Integer studentsNumber;
 

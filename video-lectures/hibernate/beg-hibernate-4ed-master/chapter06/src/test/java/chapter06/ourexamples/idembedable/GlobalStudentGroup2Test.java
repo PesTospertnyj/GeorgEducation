@@ -8,16 +8,16 @@ import org.testng.annotations.Test;
 /**
  * Created by gd on 12/5/2018.
  */
-public class GlobalStudentGroupTest {
+public class GlobalStudentGroup2Test {
 
     @Test
     public void test() {
         try (Session session = SessionUtil.getSession()) {
             Transaction transaction = session.beginTransaction();
-            GlobalGroupId globalGroupId = new GlobalGroupId("BGU", "I-01");
-            GlobalStudentGroup globalStudentGroup = new GlobalStudentGroup(globalGroupId, 30);
+            EmbedableGlobalGroupId embedableGlobalGroupId = new EmbedableGlobalGroupId("BGU", "I-01");
+            GlobalStudentGroup2 globalStudentGroup2 = new GlobalStudentGroup2(embedableGlobalGroupId, 30);
 
-            session.save(globalStudentGroup);
+            session.save(globalStudentGroup2);
             transaction.commit();
         }
     }

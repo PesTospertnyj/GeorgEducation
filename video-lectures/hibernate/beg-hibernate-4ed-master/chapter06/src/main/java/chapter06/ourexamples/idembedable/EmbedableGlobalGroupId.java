@@ -7,12 +7,12 @@ import java.io.Serializable;
  * Created by gd on 12/5/2018.
  */
 @Embeddable
-public class GlobalGroupId implements Serializable {
+public class EmbedableGlobalGroupId implements Serializable {
 
     private String univCode;
     private String groupCode;
 
-    public GlobalGroupId(String univCode, String groupCode) {
+    public EmbedableGlobalGroupId(String univCode, String groupCode) {
         this.univCode = univCode;
         this.groupCode = groupCode;
     }
@@ -38,7 +38,7 @@ public class GlobalGroupId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        GlobalGroupId that = (GlobalGroupId) o;
+        EmbedableGlobalGroupId that = (EmbedableGlobalGroupId) o;
 
         if (univCode != null ? !univCode.equals(that.univCode) : that.univCode != null) return false;
         return groupCode != null ? groupCode.equals(that.groupCode) : that.groupCode == null;
