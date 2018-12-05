@@ -1,11 +1,9 @@
-package chapter06.ourexamples.embedableid.idembedable;
+package chapter06.ourexamples.embedableid;
 
 import com.autumncode.hibernate.util.SessionUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.*;
 
 public class GlobalStudentGroupTest {
     @Test

@@ -1,6 +1,5 @@
-package chapter06.ourexamples.embedableid.idembedable;
+package chapter06.ourexamples.embedableid;
 
-import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 /**

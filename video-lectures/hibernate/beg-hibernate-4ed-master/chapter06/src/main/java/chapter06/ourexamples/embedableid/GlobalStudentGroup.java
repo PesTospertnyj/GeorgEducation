@@ -1,8 +1,7 @@
-package chapter06.ourexamples.embedableid.idembedable;
+package chapter06.ourexamples.embedableid;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
 /**
  * Created by gd on 12/5/2018.
