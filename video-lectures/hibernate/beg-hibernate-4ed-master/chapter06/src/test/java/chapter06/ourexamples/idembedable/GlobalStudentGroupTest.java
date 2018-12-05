@@ -1,11 +1,9 @@
-package chapter06.ourexamples.embedableid;
+package chapter06.ourexamples.idembedable;
 
 import com.autumncode.hibernate.util.SessionUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.*;
 
 /**
  * Created by gd on 12/5/2018.

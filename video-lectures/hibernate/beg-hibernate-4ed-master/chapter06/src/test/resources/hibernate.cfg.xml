@@ -20,8 +20,8 @@
 
         <!--<mapping class="chapter06.ourexamples.Employee"/>-->
 
-        <mapping class="chapter06.ourexamples.embedableid.GlobalStudentGroup"/>
-        <!--<mapping class="chapter06.ourexamples.embedableid.GlobalGroupId"/>-->
+        <mapping class="chapter06.ourexamples.idembedable.GlobalStudentGroup"/>
+        <!--<mapping class="chapter06.ourexamples.idembedable.GlobalGroupId"/>-->
 
         <!--<mapping class="chapter06.primarykey.after.Book"/>-->
         <!--<mapping class="chapter06.compoundpk.CPKBook"/>-->
