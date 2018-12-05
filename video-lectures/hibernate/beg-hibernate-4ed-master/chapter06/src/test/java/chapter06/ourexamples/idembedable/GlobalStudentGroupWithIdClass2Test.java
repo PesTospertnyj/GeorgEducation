@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 /**
  * Created by gd on 12/5/2018.
  */
-public class GlobalStudentGroup2Test {
+public class GlobalStudentGroupWithIdClass2Test {
 
     @Test
     public void test() {

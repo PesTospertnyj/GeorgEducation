@@ -5,7 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.testng.annotations.Test;
 
-public class GlobalStudentGroupTest {
+public class GlobalStudentGroupWithIdClassTest {
     @Test
     public void test() {
         try (Session session = SessionUtil.getSession()) {
