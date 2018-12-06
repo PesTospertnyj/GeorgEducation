@@ -22,13 +22,13 @@
 
         <!--<mapping class="chapter06.ourexamples.idembedable.GlobalStudentGroup2"/>-->
         <!--<mapping class="chapter06.ourexamples.embedableid.GlobalStudentGroup"/>-->
-        <mapping class="chapter06.ourexamples.idclass.GlobalStudentGroupWithIdClass"/>
+        <!--<mapping class="chapter06.ourexamples.idclass.GlobalStudentGroupWithIdClass"/>-->
 
         <!--<mapping class="chapter06.primarykey.after.Book"/>-->
         <!--<mapping class="chapter06.compoundpk.CPKBook"/>-->
         <!--<mapping class="chapter06.compoundpk.EmbeddedPKBook"/>-->
         <!--<mapping class="chapter06.compoundpk.IdClassBook"/>-->
-        <!--<mapping class="chapter06.twotables.Customer"/>-->
+        <mapping class="chapter06.twotables.Customer"/>
 
         <!--<mapping class="chapter06.mappedsuperclass.ComputerBook"/>-->
 
