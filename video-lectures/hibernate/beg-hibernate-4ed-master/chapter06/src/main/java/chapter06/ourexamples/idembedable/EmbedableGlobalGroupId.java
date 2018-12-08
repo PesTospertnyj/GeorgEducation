@@ -7,7 +7,8 @@ import java.io.Serializable;
  * Created by gd on 12/5/2018.
  */
 @Embeddable
-public class EmbedableGlobalGroupId implements Serializable {
+public class EmbedableGlobalGroupId implements Serializable
+ {
 
     private String univCode;
     private String groupCode;

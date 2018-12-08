@@ -11,6 +11,9 @@ import javax.persistence.IdClass;
 @IdClass(GlobalGroupIdClass.class)
 public class GlobalStudentGroupWithIdClass {
 
+    public GlobalStudentGroupWithIdClass() {
+    }
+
     public GlobalStudentGroupWithIdClass(String univCode, String groupCode, Integer studentsNumber) {
         this.univCode = univCode;
         this.groupCode = groupCode;
@@ -66,5 +69,14 @@ public class GlobalStudentGroupWithIdClass {
         result = 31 * result + (groupCode != null ? groupCode.hashCode() : 0);
         result = 31 * result + (studentsNumber != null ? studentsNumber.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "GlobalStudentGroupWithIdClass{" +
+                "univCode='" + univCode + '\'' +
+                ", groupCode='" + groupCode + '\'' +
+                ", studentsNumber=" + studentsNumber +
+                '}';
     }
 }

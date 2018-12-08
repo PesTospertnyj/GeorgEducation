@@ -21,5 +21,18 @@ public class GlobalStudentGroupWithIdClassTest {
 
         }
 
+        try (Session session = SessionUtil.getSession()) {
+            final Transaction transaction = session.beginTransaction();
+
+            GlobalGroupIdClass globalGroupIdClass = new GlobalGroupIdClass("KNU", "E-01");
+            GlobalStudentGroupWithIdClass globalStudentGroupWithIdClass
+                    = session.get(GlobalStudentGroupWithIdClass.class, globalGroupIdClass);
+
+            System.out.println(globalStudentGroupWithIdClass);
+
+            transaction.commit();
+
+        }
+
     }
 }

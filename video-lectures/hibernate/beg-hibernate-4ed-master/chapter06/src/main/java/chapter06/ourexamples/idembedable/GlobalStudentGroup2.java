@@ -16,6 +16,9 @@ public class GlobalStudentGroup2 {
 
     @Id
     private EmbedableGlobalGroupId embedableGlobalGroupId;
+
+//    private EmbedableGlobalGroupId embedableGlobalGroupId111111;
+
     private Integer studentsNumber;
 
     public EmbedableGlobalGroupId getEmbedableGlobalGroupId() {
