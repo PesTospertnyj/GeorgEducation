@@ -14,7 +14,7 @@ public class GlobalStudentGroup2 {
         this.studentsNumber = studentsNumber;
     }
 
-    @Id
+//    @Id
     private EmbedableGlobalGroupId embedableGlobalGroupId;
 
 //    private EmbedableGlobalGroupId embedableGlobalGroupId111111;

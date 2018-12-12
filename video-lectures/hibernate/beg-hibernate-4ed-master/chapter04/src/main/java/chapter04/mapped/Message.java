@@ -18,6 +18,11 @@ public class Message {
             @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     Email email;
 
+    @OneToOne(mappedBy = "message2")
+//            (cascade = {CascadeType.PERSIST})
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    Email email2;
+
     public Message() {
     }
 

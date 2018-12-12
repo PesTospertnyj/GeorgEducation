@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 @Entity
 public class GlobalStudentGroup {
 
+    public GlobalStudentGroup() {
+    }
+
     public GlobalStudentGroup(GlobalGroupId globalGroupId, Integer studentsNumber) {
         this.globalGroupId = globalGroupId;
         this.studentsNumber = studentsNumber;

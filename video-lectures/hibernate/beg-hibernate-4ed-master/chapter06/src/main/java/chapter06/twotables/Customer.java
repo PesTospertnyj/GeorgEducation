@@ -1,20 +1,33 @@
 package chapter06.twotables;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table(
-        name = "customer",
+        name = "customer_table",
         uniqueConstraints = {@UniqueConstraint(columnNames = "name")}
 )
-@SecondaryTable(name = "customer_details")
+@SecondaryTables
+        (
+        {
+                @SecondaryTable(name = "customer_address"),
+                @SecondaryTable(name = "customer_details")
+        }
+)
 //TODO try several columns in secondary table
 public class Customer {
     @Id
     private int id;
     private String name;
-    @Column(table = "customer_details")
+    @Column(table = "customer_address")
     private String address;
+
+    @Column(table = "customer_address")
+    private String city;
+
+    @Column(table = "customer_details")
+    private Date birthdate;
 
     public Customer() {
     }
@@ -47,6 +60,22 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
     }
 
     @Override

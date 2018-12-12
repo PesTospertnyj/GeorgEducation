@@ -17,6 +17,12 @@ public class Email {
 //            @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     Message message;
 
+    @OneToOne(
+            //, cascade = CascadeType.PERSIST
+    )
+//            @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+            Message message2;
+
     public Email() {
     }
 

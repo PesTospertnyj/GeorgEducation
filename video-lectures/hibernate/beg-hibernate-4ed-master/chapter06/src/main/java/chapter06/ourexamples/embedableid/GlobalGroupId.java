@@ -10,6 +10,9 @@ public class GlobalGroupId implements Serializable {
     private String univCode;
     private String groupCode;
 
+    public GlobalGroupId() {
+    }
+
     public GlobalGroupId(String univCode, String groupCode) {
         this.univCode = univCode;
         this.groupCode = groupCode;
