@@ -37,6 +37,8 @@
 
         <!--<mapping class="chapter06.twotables.Customer"/>-->
         <mapping class="chapter06.ourexamples.ex01Basic.OrderItem" />
+        <mapping class="chapter06.ourexamples.ex01Basic.Order" />
+        <mapping class="chapter06.ourexamples.ex01Basic.Address"/>
 
         <!--<mapping class="chapter06.mappedsuperclass.ComputerBook"/>-->
 
