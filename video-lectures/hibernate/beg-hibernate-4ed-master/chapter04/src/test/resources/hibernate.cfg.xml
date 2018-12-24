@@ -39,7 +39,7 @@
 
         <!--<mapping class="chapter04.model.SimpleObject"/>-->
 
-        <!--<mapping class="chapter04.orphan.Library"/>-->
-        <!--<mapping class="chapter04.orphan.Book"/>-->
+        <mapping class="chapter04.orphan.Library"/>
+        <mapping class="chapter04.orphan.Book"/>
     </session-factory>
 </hibernate-configuration>

@@ -6,7 +6,7 @@
     <session-factory>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/hiber1</property>
-        <property name="hibernate.connection.username">user1</property>
+        <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">pass</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 
@@ -36,9 +36,12 @@
         <!--<mapping class="chapter06.compoundpk.IdClassBook"/>-->
 
         <!--<mapping class="chapter06.twotables.Customer"/>-->
-        <mapping class="chapter06.ourexamples.ex01Basic.OrderItem" />
-        <mapping class="chapter06.ourexamples.ex01Basic.Order" />
-        <mapping class="chapter06.ourexamples.ex01Basic.Address"/>
+        <!--<mapping class="chapter06.ourexamples.ex01Basic.OrderItem" />-->
+        <!--<mapping class="chapter06.ourexamples.ex01Basic.Order" />-->
+        <!--<mapping class="chapter06.ourexamples.ex01Basic.Address"/>-->
+
+        <mapping class="chapter06.ourexamples.ex02relations.one2many.Department"/>
+        <mapping class="chapter06.ourexamples.ex02relations.one2many.Employee"/>
 
         <!--<mapping class="chapter06.mappedsuperclass.ComputerBook"/>-->
 
