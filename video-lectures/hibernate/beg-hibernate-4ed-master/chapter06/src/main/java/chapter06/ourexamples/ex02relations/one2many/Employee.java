@@ -18,9 +18,10 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_generator")
     private Long id;
 
-    private String name;
+    private String employeeName;
 
     @ManyToOne
+    @JoinColumn(name = "dep_id")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Department department;
 }

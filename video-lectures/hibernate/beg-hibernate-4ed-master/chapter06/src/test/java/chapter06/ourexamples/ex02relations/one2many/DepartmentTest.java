@@ -19,27 +19,35 @@ public class DepartmentTest {
         try (Session session = SessionUtil.getSession()) {
             final Transaction transaction = session.beginTransaction();
 
-            final Employee employee1 = new Employee();
-            employee1.setName("John");
+            final Employee john = new Employee();
+            john.setEmployeeName("John");
 
-            final Employee employee2 = new Employee();
-            employee2.setName("Bob");
+            final Employee bob = new Employee();
+            bob.setEmployeeName("Bob");
 
-            final Employee employee3 = new Employee();
-            employee3.setName("Alice");
+            final Employee alice = new Employee();
+            alice.setEmployeeName("Alice");
+
+            final Employee jane = new Employee();
+            alice.setEmployeeName("Jane");
 
             final Department department = new Department();
             department.setName("IT");
-            department.setEmployees(new ArrayList<>(Arrays.asList(employee1, employee2, employee3 )));
+            department.setEmployees(new ArrayList<>(Arrays.asList(john, alice, bob )));
 
-            employee1.setDepartment(department);
-            employee2.setDepartment(department);
-            employee3.setDepartment(department);
+            john.setDepartment(department);
+            bob.setDepartment(department);
+            alice.setDepartment(department);
 
-//            session.save(employee1);
-//            session.save(employee2);
+            final Department departmentGlobal = new Department();
+            departmentGlobal.setName("Minsk");
+            departmentGlobal.setGlobalEmployees(Arrays.asList(jane));
+
+//            session.save(john);
+//            session.save(bob);
 
             session.save(department);
+            session.save(departmentGlobal);
 
             depId = department.getId();
 

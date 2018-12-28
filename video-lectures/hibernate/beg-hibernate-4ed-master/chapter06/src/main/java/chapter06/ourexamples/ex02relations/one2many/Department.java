@@ -24,9 +24,17 @@ public class Department {
     private String name;
 
     @OneToMany(mappedBy = "department")
-    @OrderColumn
+//    @OrderColumn
+//    @OrderBy(value = "employeeName asc")
+    @org.hibernate.annotations.OrderBy(clause = "employeeName asc")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Employee> employees;
+
+    @OneToMany
+    @JoinTable(name = "dep2emp",
+            joinColumns = {@JoinColumn(name = "dep_id")},
+            inverseJoinColumns = {@JoinColumn(name = "epm_id")})
+    private List<Employee> globalEmployees;
 
 
 }
