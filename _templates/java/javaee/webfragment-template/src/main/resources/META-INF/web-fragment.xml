@@ -1,0 +1,26 @@
+<web-fragment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd"
+              id="WebAppFragment_ID" version="3.0">
+    <name>First Web fragment</name>
+    <context-param>
+        <param-name>p1</param-name>
+        <param-value>context param c1 value</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>p2</param-name>
+        <param-value>context param p1 in first fragment</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>firstFragmentServlet</servlet-name>
+        <servlet-class>gavryshg.webfragments.FragmentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>firstFragmentServlet</servlet-name>
+        <url-pattern>/fragment1/*</url-pattern>
+    </servlet-mapping>
+</web-fragment>

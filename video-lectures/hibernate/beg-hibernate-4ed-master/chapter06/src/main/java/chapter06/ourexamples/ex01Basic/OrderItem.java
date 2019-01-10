@@ -3,20 +3,26 @@ package chapter06.ourexamples.ex01Basic;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Getter
 @Setter
-//@Builder
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 //@Data
+@SecondaryTables({
+        @SecondaryTable(name = "comments")
+})
 public class OrderItem {
 
     @Id
     private Long id;
 
     @Basic(optional = false, fetch = FetchType.LAZY)
+    @Column(length = 25, unique = true)
     private String name;
 
     @Transient
@@ -26,6 +32,15 @@ public class OrderItem {
             insertable = false, updatable = false
     )
     private Integer quantity;
+
+    @Column(scale = 3, precision = 6)
+    private BigDecimal price;
+
+    @Column(nullable = false, table = "comments"
+    )
+    private String comment;
+
+
 
     public OrderItem(Long id, String name) {
         this.id = id;

@@ -5,14 +5,21 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.testng.annotations.Test;
 
+import java.math.BigDecimal;
+
 public class OrderItemTest {
     @Test
     public void test() {
         try (Session session = SessionUtil.getSession()) {
             final Transaction transaction = session.beginTransaction();
-            OrderItem orderItem = new OrderItem();
-            orderItem.setId(1L);
-            orderItem.setName("Phone");
+            OrderItem orderItem = OrderItem.builder()
+                    .id(1L)
+                    .comment("please deliver asap123")
+                    .name("phone")
+                    .price(new BigDecimal(111.0000001))
+                    .quantity(4)
+                    .build();
+
 //            orderItem.setQuantity(12);
             session.save(orderItem);
             transaction.commit();
