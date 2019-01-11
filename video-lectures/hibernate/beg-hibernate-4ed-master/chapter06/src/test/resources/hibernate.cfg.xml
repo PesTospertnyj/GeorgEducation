@@ -43,8 +43,10 @@
         <!--<mapping class="chapter06.ourexamples.ex02relations.one2many.Department"/>-->
         <!--<mapping class="chapter06.ourexamples.ex02relations.one2many.Employee"/>-->
 
-        <mapping class="chapter06.ourexamples.ex03many2many.Student"/>
-        <mapping class="chapter06.ourexamples.ex03many2many.Course"/>
+        <!--<mapping class="chapter06.ourexamples.ex03many2many.Student"/>-->
+        <!--<mapping class="chapter06.ourexamples.ex03many2many.Course"/>-->
+
+        <mapping class="chapter06.ourexamples.ex04elementCollection.Ex04Employee"/>
 
         <!--<mapping class="chapter06.mappedsuperclass.ComputerBook"/>-->
 
