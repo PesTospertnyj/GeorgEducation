@@ -18,7 +18,7 @@
         <!--  Drop and re-create the database schema on startup  -->
         <property name="hbm2ddl.auto">create</property>
 
-        <!--<mapping class="chapter06.ourexamples.Employee"/>-->
+        <!--<mapping class="chapter06.ourexamples.Ex02Employee"/>-->
 
         <!--<mapping class="chapter06.ourexamples.idembedable.GlobalStudentGroup2"/>-->
         <!--<mapping class="chapter06.ourexamples.embedableid.GlobalStudentGroup"/>-->
@@ -27,7 +27,7 @@
         <!--<mapping class="chapter06.ourexamples.idclass.GlobalStudentGroupWithIdClass"/>-->
         <!--<mapping class="chapter06.ourexamples.table.generator.EmployeeTableGeneator"/>-->
 
-        <!--<mapping class="chapter06.naturalid.Employee"/>-->
+        <!--<mapping class="chapter06.naturalid.Ex02Employee"/>-->
         <!--<mapping class="chapter06.naturalid.SimpleNaturalIdEmployee"/>-->
 
         <!--<mapping class="chapter06.primarykey.after.Book"/>-->
@@ -40,13 +40,13 @@
         <!--<mapping class="chapter06.ourexamples.ex01Basic.Order" />-->
         <!--<mapping class="chapter06.ourexamples.ex01Basic.Address"/>-->
 
-        <!--<mapping class="chapter06.ourexamples.ex02relations.one2many.Department"/>-->
-        <!--<mapping class="chapter06.ourexamples.ex02relations.one2many.Employee"/>-->
+        <mapping class="chapter06.ourexamples.ex02relations.one2many.Ex02Department"/>
+        <mapping class="chapter06.ourexamples.ex02relations.one2many.Ex02Employee"/>
 
         <!--<mapping class="chapter06.ourexamples.ex03many2many.Student"/>-->
         <!--<mapping class="chapter06.ourexamples.ex03many2many.Course"/>-->
 
-        <mapping class="chapter06.ourexamples.ex04elementCollection.Ex04Employee"/>
+        <!--<mapping class="chapter06.ourexamples.ex04elementCollection.Ex04Employee"/>-->
 
         <!--<mapping class="chapter06.mappedsuperclass.ComputerBook"/>-->
 

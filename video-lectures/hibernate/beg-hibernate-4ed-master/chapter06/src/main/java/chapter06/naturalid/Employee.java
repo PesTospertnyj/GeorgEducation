@@ -80,7 +80,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Employee{");
+        final StringBuilder sb = new StringBuilder("Ex02Employee{");
         sb.append("id=").append(id);
         sb.append(", section=").append(section);
         sb.append(", department=").append(department);

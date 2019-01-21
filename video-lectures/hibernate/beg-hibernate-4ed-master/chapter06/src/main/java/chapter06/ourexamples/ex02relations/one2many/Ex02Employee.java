@@ -8,9 +8,9 @@ import javax.persistence.*;
 @Entity
 @Data
 //@Builder
-public class Employee {
+public class Ex02Employee {
 
-    public Employee() {
+    public Ex02Employee() {
     }
 
     @Id
@@ -23,5 +23,5 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "dep_id")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    private Department department;
+    private Ex02Department ex02Department;
 }

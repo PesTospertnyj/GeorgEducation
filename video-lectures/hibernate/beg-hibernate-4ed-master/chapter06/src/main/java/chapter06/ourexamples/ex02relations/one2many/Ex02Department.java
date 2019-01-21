@@ -1,8 +1,6 @@
 package chapter06.ourexamples.ex02relations.one2many;
 
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
@@ -11,9 +9,9 @@ import java.util.List;
 @Entity
 @Data
 //@Builder
-public class Department {
+public class Ex02Department {
 
-    public Department() {
+    public Ex02Department() {
     }
 
     @Id
@@ -23,18 +21,19 @@ public class Department {
 
     private String name;
 
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "ex02Department")
 //    @OrderColumn
 //    @OrderBy(value = "employeeName asc")
     @org.hibernate.annotations.OrderBy(clause = "employeeName asc")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    private List<Employee> employees;
+    private List<Ex02Employee> ex02Employees;
 
     @OneToMany
     @JoinTable(name = "dep2emp",
             joinColumns = {@JoinColumn(name = "dep_id")},
             inverseJoinColumns = {@JoinColumn(name = "epm_id")})
-    private List<Employee> globalEmployees;
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<Ex02Employee> globalEx02Employees;
 
 
 }

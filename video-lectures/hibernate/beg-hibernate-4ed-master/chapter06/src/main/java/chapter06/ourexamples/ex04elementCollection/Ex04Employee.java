@@ -22,4 +22,7 @@ public class Ex04Employee {
     @CollectionTable(name = "employee_phones", joinColumns = {@JoinColumn(name = "emp_id")})
     @Column(name = "user_phone")
     private List<String> phones;
+
+    @Lob
+    private String cv;
 }

@@ -10,8 +10,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.testng.Assert.*;
-
 public class DepartmentTest {
     @Test
     public void test() {
@@ -19,48 +17,48 @@ public class DepartmentTest {
         try (Session session = SessionUtil.getSession()) {
             final Transaction transaction = session.beginTransaction();
 
-            final Employee john = new Employee();
+            final Ex02Employee john = new Ex02Employee();
             john.setEmployeeName("John");
 
-            final Employee bob = new Employee();
+            final Ex02Employee bob = new Ex02Employee();
             bob.setEmployeeName("Bob");
 
-            final Employee alice = new Employee();
+            final Ex02Employee alice = new Ex02Employee();
             alice.setEmployeeName("Alice");
 
-            final Employee jane = new Employee();
+            final Ex02Employee jane = new Ex02Employee();
             alice.setEmployeeName("Jane");
 
-            final Department department = new Department();
-            department.setName("IT");
-            department.setEmployees(new ArrayList<>(Arrays.asList(john, alice, bob )));
+            final Ex02Department ex02Department = new Ex02Department();
+            ex02Department.setName("IT");
+            ex02Department.setEx02Employees(new ArrayList<>(Arrays.asList(john, alice, bob )));
 
-            john.setDepartment(department);
-            bob.setDepartment(department);
-            alice.setDepartment(department);
+            john.setEx02Department(ex02Department);
+            bob.setEx02Department(ex02Department);
+            alice.setEx02Department(ex02Department);
 
-            final Department departmentGlobal = new Department();
-            departmentGlobal.setName("Minsk");
-            departmentGlobal.setGlobalEmployees(Arrays.asList(jane));
+            final Ex02Department ex02DepartmentGlobal = new Ex02Department();
+            ex02DepartmentGlobal.setName("Minsk");
+            ex02DepartmentGlobal.setGlobalEx02Employees(Arrays.asList(jane));
 
 //            session.save(john);
 //            session.save(bob);
 
-            session.save(department);
-            session.save(departmentGlobal);
+            session.save(ex02Department);
+            session.save(ex02DepartmentGlobal);
 
-            depId = department.getId();
+            depId = ex02Department.getId();
 
             transaction.commit();
         }
 
         try (Session session = SessionUtil.getSession()) {
             final Transaction transaction = session.beginTransaction();
-            final Department department = session.load(Department.class, depId);
-            List<Employee> employees = department.getEmployees();
-            Collections.shuffle(employees);
-//            System.out.println(employees);
-//            department.setEmployees(employees);
+            final Ex02Department ex02Department = session.load(Ex02Department.class, depId);
+            List<Ex02Employee> ex02Employees = ex02Department.getEx02Employees();
+            Collections.shuffle(ex02Employees);
+//            System.out.println(ex02Employees);
+//            department.setEx02Employees(ex02Employees);
             transaction.commit();
         }
     }
