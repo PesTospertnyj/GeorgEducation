@@ -58,5 +58,9 @@
         <mapping class="chapter06.ourexamples.ex05inheritance.joinedtable.Ex05JoinedStudent"/>
         <mapping class="chapter06.ourexamples.ex05inheritance.joinedtable.Ex05JoinedPerson"/>
 
+        <mapping class="chapter06.ourexamples.ex05inheritance.tableperclass.Ex05TablePerClassEmployee"/>
+        <mapping class="chapter06.ourexamples.ex05inheritance.tableperclass.Ex05TablePerClassStudent"/>
+        <mapping class="chapter06.ourexamples.ex05inheritance.tableperclass.Ex05TablePerClassPerson"/>
+
     </session-factory>
 </hibernate-configuration>

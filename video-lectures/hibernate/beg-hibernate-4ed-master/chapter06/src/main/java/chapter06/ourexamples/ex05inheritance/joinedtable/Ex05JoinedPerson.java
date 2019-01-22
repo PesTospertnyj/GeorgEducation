@@ -3,6 +3,7 @@ package chapter06.ourexamples.ex05inheritance.joinedtable;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by gd on 1/21/2019.
@@ -23,5 +24,8 @@ public class Ex05JoinedPerson {
     private Long id;
 
     private String name;
+
+    @Temporal(TemporalType.DATE)
+    private java.util.Date dateOfBirth;
 
 }
