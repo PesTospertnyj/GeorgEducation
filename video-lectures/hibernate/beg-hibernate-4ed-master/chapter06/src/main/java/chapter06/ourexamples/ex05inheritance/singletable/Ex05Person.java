@@ -11,11 +11,11 @@ import static javax.persistence.InheritanceType.SINGLE_TABLE;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-        name="DISCRIMINATOR",
-        discriminatorType= DiscriminatorType.INTEGER
-)
-@DiscriminatorValue("1")
+//@DiscriminatorColumn(
+//        name="DISCRIMINATOR",
+//        discriminatorType= DiscriminatorType.INTEGER
+//)
+//@DiscriminatorValue("1")
 @Data
 public class Ex05Person {
 

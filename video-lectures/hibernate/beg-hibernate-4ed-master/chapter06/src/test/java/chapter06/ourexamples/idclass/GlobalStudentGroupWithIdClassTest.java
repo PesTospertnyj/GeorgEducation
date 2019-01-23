@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 import static org.testng.Assert.*;
 
 public class GlobalStudentGroupWithIdClassTest {
@@ -15,6 +17,8 @@ public class GlobalStudentGroupWithIdClassTest {
         try (Session session = SessionUtil.getSession()) {
             final Transaction transaction = session.beginTransaction();
             GlobalStudentGroupWithIdClass globalStudentGroupWithIdClass = new GlobalStudentGroupWithIdClass("KNU", "E-01", 24);
+
+            globalStudentGroupWithIdClass.setPrices(Arrays.asList(10, 50, 70));
             session.save(globalStudentGroupWithIdClass);
 
             transaction.commit();

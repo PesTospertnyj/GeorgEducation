@@ -50,17 +50,19 @@
 
         <!--<mapping class="chapter06.mappedsuperclass.ComputerBook"/>-->
 
-        <mapping class="chapter06.ourexamples.ex05inheritance.singletable.Ex05Person"/>
-        <mapping class="chapter06.ourexamples.ex05inheritance.singletable.Ex05Student"/>
-        <mapping class="chapter06.ourexamples.ex05inheritance.singletable.Ex05Employee"/>
+        <!--<mapping class="chapter06.ourexamples.ex05inheritance.singletable.Ex05Person"/>-->
+        <!--<mapping class="chapter06.ourexamples.ex05inheritance.singletable.Ex05Student"/>-->
+        <!--<mapping class="chapter06.ourexamples.ex05inheritance.singletable.Ex05Employee"/>-->
 
-        <mapping class="chapter06.ourexamples.ex05inheritance.joinedtable.Ex05JoinedEmployee"/>
-        <mapping class="chapter06.ourexamples.ex05inheritance.joinedtable.Ex05JoinedStudent"/>
-        <mapping class="chapter06.ourexamples.ex05inheritance.joinedtable.Ex05JoinedPerson"/>
+        <!--<mapping class="chapter06.ourexamples.ex05inheritance.joinedtable.Ex05JoinedEmployee"/>-->
+        <!--<mapping class="chapter06.ourexamples.ex05inheritance.joinedtable.Ex05JoinedStudent"/>-->
+        <!--<mapping class="chapter06.ourexamples.ex05inheritance.joinedtable.Ex05JoinedPerson"/>-->
 
-        <mapping class="chapter06.ourexamples.ex05inheritance.tableperclass.Ex05TablePerClassEmployee"/>
-        <mapping class="chapter06.ourexamples.ex05inheritance.tableperclass.Ex05TablePerClassStudent"/>
-        <mapping class="chapter06.ourexamples.ex05inheritance.tableperclass.Ex05TablePerClassPerson"/>
+        <!--<mapping class="chapter06.ourexamples.ex05inheritance.tableperclass.Ex05TablePerClassEmployee"/>-->
+        <!--<mapping class="chapter06.ourexamples.ex05inheritance.tableperclass.Ex05TablePerClassStudent"/>-->
+        <!--<mapping class="chapter06.ourexamples.ex05inheritance.tableperclass.Ex05TablePerClassPerson"/>-->
+
+        <mapping class="chapter06.ourexamples.ex06superclass.Ex06Student" />
 
     </session-factory>
 </hibernate-configuration>

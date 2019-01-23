@@ -9,7 +9,7 @@ import javax.persistence.Entity;
  * Created by gd on 1/21/2019.
  */
 @Entity
-@DiscriminatorValue("3")
+//@DiscriminatorValue("3")
 @Data
 public class Ex05Employee extends Ex05Person {
 

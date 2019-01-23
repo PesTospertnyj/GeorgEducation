@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 /**
  * Created by gd on 1/21/2019.
  */
-public class Ex05PersonTest {
+public class Ex05SingleTableInheritanceTest {
     @Test
     public void test() {
 

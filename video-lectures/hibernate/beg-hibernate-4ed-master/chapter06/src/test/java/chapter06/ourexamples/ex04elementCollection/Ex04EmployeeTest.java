@@ -27,6 +27,14 @@ public class Ex04EmployeeTest {
             vasya.setCv("I am a super coder, bla-bla ....");
 
             session.save(vasya);
+
+            Ex04Employee katya = new Ex04Employee();
+            katya.setName("Katya");
+            katya.setPhones(Arrays.asList("02", "911"));
+            katya.setCv("I am a super policewoman, bla-bla ....");
+
+            session.save(katya);
+
             id = vasya.getId();
 
             transaction.commit();

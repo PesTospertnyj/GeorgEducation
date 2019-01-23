@@ -1,8 +1,7 @@
 package chapter06.ourexamples.idclass;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by gd on 12/5/2018.
@@ -24,6 +23,14 @@ public class GlobalStudentGroupWithIdClass {
     private String univCode;
     @Id
     private String groupCode;
+
+    @ElementCollection(targetClass = Integer.class, fetch = FetchType.LAZY)
+    @CollectionTable(name = "group_prices",
+            joinColumns = {@JoinColumn(name = "univ", referencedColumnName = "univCode"),
+                    @JoinColumn(name = "group_", referencedColumnName = "groupCode")}
+    )
+    @Column(name = "price")
+    private List<Integer> prices;
 
     private Integer studentsNumber;
 
@@ -49,6 +56,14 @@ public class GlobalStudentGroupWithIdClass {
 
     public void setGroupCode(String groupCode) {
         this.groupCode = groupCode;
+    }
+
+    public List<Integer> getPrices() {
+        return prices;
+    }
+
+    public void setPrices(List<Integer> prices) {
+        this.prices = prices;
     }
 
     @Override
