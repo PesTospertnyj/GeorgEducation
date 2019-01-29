@@ -27,7 +27,7 @@ public class DepartmentTest {
             alice.setEmployeeName("Alice");
 
             final Ex02Employee jane = new Ex02Employee();
-            alice.setEmployeeName("Jane");
+            jane.setEmployeeName("Jane");
 
             final Ex02Department ex02Department = new Ex02Department();
             ex02Department.setName("IT");
@@ -56,8 +56,9 @@ public class DepartmentTest {
             final Transaction transaction = session.beginTransaction();
             final Ex02Department ex02Department = session.load(Ex02Department.class, depId);
             List<Ex02Employee> ex02Employees = ex02Department.getEx02Employees();
+            System.out.println("before shuffle employees: " + ex02Employees);
             Collections.shuffle(ex02Employees);
-//            System.out.println(ex02Employees);
+            System.out.println("after shuffle employees: " + ex02Employees);
 //            department.setEx02Employees(ex02Employees);
             transaction.commit();
         }

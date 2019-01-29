@@ -1,4 +1,7 @@
 ***** chapter 6
-- find objects by IdClass
-- use several secondary tables, specify several "join" attribute
--
+
+- join using non primary key
+- show @elementCollection with embedable collection,
+Map (one2many, many2many)
+- key basic, embedable, entity
+- value basic, embedable, enity

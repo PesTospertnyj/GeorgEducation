@@ -62,7 +62,10 @@
         <!--<mapping class="chapter06.ourexamples.ex05inheritance.tableperclass.Ex05TablePerClassStudent"/>-->
         <!--<mapping class="chapter06.ourexamples.ex05inheritance.tableperclass.Ex05TablePerClassPerson"/>-->
 
-        <mapping class="chapter06.ourexamples.ex06superclass.Ex06Student" />
+        <!--<mapping class="chapter06.ourexamples.ex06superclass.Ex06Student" />-->
+        <!--<mapping class="chapter06.ourexamples.ex07temporal.Ex07Employee"/>-->
+
+        <mapping class="chapter06.ourexamples.ex08NamedQuery.Ex08Employee"/>
 
     </session-factory>
 </hibernate-configuration>

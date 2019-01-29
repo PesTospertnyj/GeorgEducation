@@ -24,4 +24,12 @@ public class Ex02Employee {
     @JoinColumn(name = "dep_id")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Ex02Department ex02Department;
+
+    @Override
+    public String toString() {
+        return "Ex02Employee{" +
+                "id=" + id +
+                ", employeeName='" + employeeName + '\'' +
+                '}';
+    }
 }
