@@ -65,7 +65,11 @@
         <!--<mapping class="chapter06.ourexamples.ex06superclass.Ex06Student" />-->
         <!--<mapping class="chapter06.ourexamples.ex07temporal.Ex07Employee"/>-->
 
-        <mapping class="chapter06.ourexamples.ex08NamedQuery.Ex08Employee"/>
+        <!--<mapping class="chapter06.ourexamples.ex08NamedQueryNativeQuery.Ex08Employee"/>-->
+
+        <mapping class="chapter06.ourexamples.ex09immutable.Ex09Gender"/>
+
 
     </session-factory>
+
 </hibernate-configuration>
