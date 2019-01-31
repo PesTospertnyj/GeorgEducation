@@ -20,9 +20,13 @@ public class Ex10Cv {
     private String title;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "preffered_type")
     private Ex10WorkTypeEnum preferredType;
 
     @ElementCollection
     @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "cv_2_types",
+    joinColumns = @JoinColumn(name = "cv_id"))
+    @Column(name = "work_type")
     private Set<Ex10WorkTypeEnum> workTypes;
 }
