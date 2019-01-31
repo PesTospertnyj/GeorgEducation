@@ -10,7 +10,6 @@
         <property name="hibernate.connection.password">pass</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 
-
         <!-- set up c3p0 for use -->
         <property name="c3p0.max_size">10</property>
         <!--  Echo all executed SQL to stdout  -->
@@ -54,10 +53,11 @@
         <!--<mapping class="chapter06.ourexamples.ex05inheritance.singletable.Ex05Student"/>-->
         <!--<mapping class="chapter06.ourexamples.ex05inheritance.singletable.Ex05Employee"/>-->
 
-        <!--<mapping class="chapter06.ourexamples.ex05inheritance.joinedtable.Ex05JoinedEmployee"/>-->
-        <!--<mapping class="chapter06.ourexamples.ex05inheritance.joinedtable.Ex05JoinedStudent"/>-->
-        <!--<mapping class="chapter06.ourexamples.ex05inheritance.joinedtable.Ex05JoinedPerson"/>-->
+        <mapping class="chapter06.ourexamples.ex05inheritance.joinedtable.Ex05JoinedEmployee"/>
+        <mapping class="chapter06.ourexamples.ex05inheritance.joinedtable.Ex05JoinedStudent"/>
+        <mapping class="chapter06.ourexamples.ex05inheritance.joinedtable.Ex05JoinedPerson"/>
 
+        <mapping package="chapter06.ourexamples.ex08NamedQueryNativeQuery"/>
         <!--<mapping class="chapter06.ourexamples.ex05inheritance.tableperclass.Ex05TablePerClassEmployee"/>-->
         <!--<mapping class="chapter06.ourexamples.ex05inheritance.tableperclass.Ex05TablePerClassStudent"/>-->
         <!--<mapping class="chapter06.ourexamples.ex05inheritance.tableperclass.Ex05TablePerClassPerson"/>-->
@@ -65,9 +65,9 @@
         <!--<mapping class="chapter06.ourexamples.ex06superclass.Ex06Student" />-->
         <!--<mapping class="chapter06.ourexamples.ex07temporal.Ex07Employee"/>-->
 
-        <!--<mapping class="chapter06.ourexamples.ex08NamedQueryNativeQuery.Ex08Employee"/>-->
+        <mapping class="chapter06.ourexamples.ex08NamedQueryNativeQuery.Ex08Employee"/>
 
-        <mapping class="chapter06.ourexamples.ex09immutable.Ex09Gender"/>
+        <!--<mapping class="chapter06.ourexamples.ex09immutable.Ex09Gender"/>-->
 
 
     </session-factory>
