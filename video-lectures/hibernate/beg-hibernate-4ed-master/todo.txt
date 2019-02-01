@@ -5,3 +5,6 @@
 Map (one2many, many2many)
 - key basic, embedable, entity
 - value basic, embedable, enity
+
+- query (and em.find()) inside transaction and outside it;
+- flushMode commit vs auto in queries and em.
