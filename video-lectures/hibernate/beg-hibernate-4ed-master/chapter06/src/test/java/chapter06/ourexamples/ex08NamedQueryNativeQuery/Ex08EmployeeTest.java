@@ -49,10 +49,10 @@ public class Ex08EmployeeTest {
 
             final EntityManager entityManager = (EntityManager) session;
 
-            org.hibernate.query.Query query2 = session.getNamedQuery("FIND_EMPLOYEE_BY_NAME2");
+            org.hibernate.query.Query query2 = session.getNamedQuery("FIND_EMPLOYEE_BY_NAME_AT_PACKAGE");
             query2.setParameter("name_param", "Alice");
             Object alice = query2.getSingleResult();
-            System.out.println("result of FIND_EMPLOYEE_BY_NAME2: " + alice);
+            System.out.println("result of FIND_EMPLOYEE_BY_NAME_AT_PACKAGE: " + alice);
 
             TypedQuery<Ex08Employee> query1 = entityManager.createNamedQuery("FIND_EMPLOYEE_BY_NAME", Ex08Employee.class);
             query1.setParameter("name_param", "John");

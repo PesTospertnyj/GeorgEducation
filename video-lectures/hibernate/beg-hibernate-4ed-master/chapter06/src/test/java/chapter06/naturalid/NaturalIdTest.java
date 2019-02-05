@@ -21,11 +21,14 @@ public class NaturalIdTest {
                             .byId(SimpleNaturalIdEmployee.class)
                             .load(id);
             assertNotNull(employee);
+
             SimpleNaturalIdEmployee badgedEmployee =
                     session
                             .bySimpleNaturalId(SimpleNaturalIdEmployee.class)
                             .load(5401);
             assertEquals(badgedEmployee, employee);
+
+            System.out.println("references are equal :" + (badgedEmployee == employee));
 
             tx.commit();
         }
@@ -44,6 +47,9 @@ public class NaturalIdTest {
                     .load();
             assertNotNull(arrowroot);
             assertEquals(initial, arrowroot);
+
+            System.out.println("testLoadByNaturalId references are equal :"
+                    + (initial == arrowroot));
 
             tx.commit();
         }
@@ -79,6 +85,9 @@ public class NaturalIdTest {
          /*
         load successful, let's delete it for the second half of the test
         */
+         boggit.setName("Updated");
+
+         session.flush();
             session.delete(boggit);
 
             tx.commit();
@@ -122,6 +131,7 @@ public class NaturalIdTest {
                 boggit.getDepartment();
                 fail("Should have had an exception thrown!");
             } catch (ObjectNotFoundException ignored) {
+                System.out.println("exception :" + ignored);
             }
 
             tx.commit();
