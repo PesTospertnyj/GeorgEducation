@@ -9,3 +9,6 @@ exploded/
 .gradle/
 
 video-lectures/pro-jpa-2-in-java-ee-8-master/database/
+build/
+dist/
+
