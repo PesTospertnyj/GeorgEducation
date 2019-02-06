@@ -9,7 +9,9 @@ import javax.persistence.*;
 public class Thing {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Integer id;
+//    @SequenceGenerator(name = "departments_generator", sequenceName = "seq_departments", allocationSize = 20)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "departments_generator")
+    private Integer id;
     @Column
-    String name;
+    private String name;
 }
