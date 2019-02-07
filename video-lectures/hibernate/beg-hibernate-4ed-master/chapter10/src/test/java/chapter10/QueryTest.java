@@ -2,6 +2,7 @@ package chapter10;
 
 import chapter10.model.*;
 import com.autumncode.jpa.util.JPASessionUtil;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -35,7 +36,7 @@ public class QueryTest {
         em.close();
     }
 
-    @BeforeMethod
+//    @BeforeMethod
     public void populateData() {
         doWithEntityManager((em) -> {
             Supplier supplier = new Supplier("Hardware, Inc.");
@@ -61,7 +62,7 @@ public class QueryTest {
         });
     }
 
-    @AfterMethod
+//    @AfterMethod
     public void cleanup() {
         doWithEntityManager((em) -> {
             em.createQuery("delete from Software").executeUpdate();
@@ -69,6 +70,46 @@ public class QueryTest {
             em.createQuery("delete from Supplier").executeUpdate();
         });
     }
+
+    ////////////////////////our examples
+
+    @Test
+    public void testGetAllSoftware() {
+        doWithEntityManager((em) -> {
+            final CriteriaBuilder cb = em.getCriteriaBuilder();
+            final CriteriaQuery<Software> criteriaQuery = cb.createQuery(Software.class);
+            final Root<Software> softwareRoot = criteriaQuery.from(Software.class);
+            criteriaQuery.select(softwareRoot);
+
+            final TypedQuery<Software> typedQuery = em.createQuery(criteriaQuery);
+            final List<Software> resultList = typedQuery.getResultList();
+            System.out.println(resultList);
+
+            Assert.assertEquals(resultList.size(), 7);
+        });
+    }
+
+    @Test
+    public void testGetSupplierByName() {
+        doWithEntityManager((em) -> {
+            final CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            final CriteriaQuery<Supplier> criteriaQuery = criteriaBuilder.createQuery(Supplier.class);
+            final Root<Supplier> supplierRoot = criteriaQuery.from(Supplier.class);
+            criteriaQuery.select(supplierRoot);
+            criteriaQuery.where(criteriaBuilder.equal(supplierRoot.get("name"),
+                    criteriaBuilder.parameter(String.class, "param_name")));
+
+            final TypedQuery<Supplier> supplierTypedQuery = em.createQuery(criteriaQuery).setParameter("param_name", "Hardware, Inc.");
+            final List<Supplier> supplierList = supplierTypedQuery.getResultList();
+            System.out.println(supplierList);
+
+            Assert.assertEquals(supplierList.size(), 1);
+
+
+        });
+    }
+
+    /////////////////
 
     @Test
     public void testSimpleCriteriaQuery() {
