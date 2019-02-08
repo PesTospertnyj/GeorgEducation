@@ -2,6 +2,8 @@ package chapter10;
 
 import chapter10.model.*;
 import com.autumncode.jpa.util.JPASessionUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -9,11 +11,10 @@ import org.testng.annotations.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -35,7 +36,7 @@ public class QueryTest {
         em.close();
     }
 
-    @BeforeMethod
+//    @BeforeMethod
     public void populateData() {
         doWithEntityManager((em) -> {
             Supplier supplier = new Supplier("Hardware, Inc.");
@@ -61,7 +62,7 @@ public class QueryTest {
         });
     }
 
-    @AfterMethod
+//    @AfterMethod
     public void cleanup() {
         doWithEntityManager((em) -> {
             em.createQuery("delete from Software").executeUpdate();
@@ -69,6 +70,115 @@ public class QueryTest {
             em.createQuery("delete from Supplier").executeUpdate();
         });
     }
+
+    ////////////////////////our examples BEGIN
+
+    @Test
+    public void testGetAllSoftware() {
+        doWithEntityManager((em) -> {
+            final CriteriaBuilder cb = em.getCriteriaBuilder();
+            final CriteriaQuery<Software> criteriaQuery = cb.createQuery(Software.class);
+            final Root<Software> softwareRoot = criteriaQuery.from(Software.class);
+            criteriaQuery.select(softwareRoot);
+
+            final TypedQuery<Software> typedQuery = em.createQuery(criteriaQuery);
+            final List<Software> resultList = typedQuery.getResultList();
+            System.out.println(resultList);
+
+            Assert.assertEquals(resultList.size(), 2);
+        });
+    }
+
+    @Test
+    public void testGetSupplierByName() {
+        doWithEntityManager((em) -> {
+            final CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            final CriteriaQuery<Supplier> criteriaQuery = criteriaBuilder.createQuery(Supplier.class);
+            final Root<Supplier> supplierRoot = criteriaQuery.from(Supplier.class);
+            criteriaQuery.select(supplierRoot);
+            criteriaQuery.where(criteriaBuilder.equal(
+                    supplierRoot.get("name"),
+                    criteriaBuilder.parameter(String.class, "param_name")));
+
+            final TypedQuery<Supplier> supplierTypedQuery = em.createQuery(criteriaQuery).setParameter("param_name", "Hardware, Inc.");
+            final List<Supplier> supplierList = supplierTypedQuery.getResultList();
+            System.out.println(supplierList);
+
+            Assert.assertEquals(supplierList.size(), 1);
+
+        });
+    }
+
+    @Test
+    public void testGetSupplierByNameLiteral() {
+        doWithEntityManager((em) -> {
+            final CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            final CriteriaQuery<Supplier> criteriaQuery = criteriaBuilder.createQuery(Supplier.class);
+            final Root<Supplier> supplierRoot = criteriaQuery.from(Supplier.class);
+            criteriaQuery.select(supplierRoot);
+            criteriaQuery.where(criteriaBuilder.equal(
+                    supplierRoot.get("name"),
+                    "Hardware, Inc."));
+
+            final TypedQuery<Supplier> supplierTypedQuery = em.createQuery(criteriaQuery);
+            final List<Supplier> supplierList = supplierTypedQuery.getResultList();
+            System.out.println(supplierList);
+
+            Assert.assertEquals(supplierList.size(), 1);
+        });
+    }
+
+    /**
+     * find product by product name and supplier name
+     */
+    @Test
+    public void testDynamicQuery() {
+        final String productNameSubstr = "Wildcat";
+        final String supplierNameSubstr = "Hardware Are We";
+
+        doWithEntityManager((em) -> {
+            final CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            final CriteriaQuery<Product> criteriaQuery = criteriaBuilder.createQuery(Product.class);
+            final Root<Product> productRoot = criteriaQuery.from(Product.class);
+            criteriaQuery.select(productRoot);
+
+            List<Predicate> criteria = new ArrayList<>();
+
+            if (StringUtils.isNotBlank(supplierNameSubstr)) {
+                final Join<Product, Supplier> supplierJoin = productRoot.join("supplier");
+
+                final ParameterExpression<String> supplierNameParam =
+                        criteriaBuilder.parameter(String.class, "suppl_name");
+                criteria.add(criteriaBuilder.like(supplierJoin.get("supplierName"), supplierNameParam));
+            }
+
+            if (StringUtils.isNotBlank(productNameSubstr)) {
+                final Predicate productNamePredicate = criteriaBuilder
+                        .equal(productRoot.get("name"), productNameSubstr);
+
+                criteria.add(productNamePredicate);
+            }
+
+            if (criteria.size() == 0) {
+                throw new RuntimeException();
+            } else if (criteria.size() == 1) {
+                criteriaQuery.where(criteria.get(0));
+            } else {
+                criteriaQuery.where(criteriaBuilder.and(criteria.toArray(new Predicate[criteria.size()])));
+            }
+
+            final TypedQuery<Product> query = em.createQuery(criteriaQuery);
+            if (StringUtils.isNotBlank(supplierNameSubstr)) {
+                query.setParameter("suppl_name", supplierNameSubstr);
+            }
+
+            final List<Product> resultList = query.getResultList();
+            System.out.println(resultList.size());
+            System.out.println(resultList);
+        });
+    }
+
+    /////////////////   END
 
     @Test
     public void testSimpleCriteriaQuery() {
@@ -489,7 +599,7 @@ public class QueryTest {
             Root<Product> root = criteria.from(Product.class);
             criteria.select(root);
             criteria.where(builder.equal(
-                    root.join(Product_.supplier).get(Supplier_.name),
+                    root.join(Product_.supplier).get(Supplier_.SUPPLIER_NAME),
                     builder.parameter(String.class, "supplier_name"))
             );
 
@@ -509,7 +619,7 @@ public class QueryTest {
             Root<Supplier> root = criteria.from(Supplier.class);
             criteria.select(root.join(Supplier_.products));
             criteria.where(builder.equal(
-                    root.get(Supplier_.name),
+                    root.get(Supplier_.SUPPLIER_NAME),
                     builder.parameter(String.class, "supplier_name"))
             );
             TypedQuery<Product> query = em.createQuery(criteria);
@@ -529,13 +639,13 @@ public class QueryTest {
             Root<Supplier> root = criteria.from(Supplier.class);
             criteria.select(builder.construct(
                     SupplierResult.class,
-                    root.get(Supplier_.name),
+                    root.get(Supplier_.SUPPLIER_NAME),
                     builder.count(root.join(Supplier_.products))
             ))
-                    .groupBy(root.get(Supplier_.name))
+                    .groupBy(root.get(Supplier_.SUPPLIER_NAME))
                     //
                     // .distinct(true)
-                    .orderBy(builder.asc(root.get(Supplier_.name)));
+                    .orderBy(builder.asc(root.get(Supplier_.SUPPLIER_NAME)));
 
             List<SupplierResult> supplierData = em.createQuery(criteria).getResultList();
             assertEquals(supplierData.get(0).count, 5);

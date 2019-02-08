@@ -13,13 +13,13 @@ public class Supplier implements Serializable {
     Integer id;
     @Column(unique = true)
     @NotNull
-    String name;
+    String supplierName;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,
             mappedBy = "supplier", targetEntity = Product.class)
     List<Product> products = new ArrayList<>();
 
-    public Supplier(String name) {
-        this.name = name;
+    public Supplier(String supplierName) {
+        this.supplierName = supplierName;
     }
 
     public Supplier() {
@@ -33,12 +33,12 @@ public class Supplier implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getSupplierName() {
+        return supplierName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
     }
 
     public List<Product> getProducts() {
@@ -57,14 +57,14 @@ public class Supplier implements Serializable {
         Supplier supplier = (Supplier) o;
 
         if (id != null ? !id.equals(supplier.id) : supplier.id != null) return false;
-        return name.equals(supplier.name);
+        return supplierName.equals(supplier.supplierName);
 
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + name.hashCode();
+        result = 31 * result + supplierName.hashCode();
         return result;
     }
 
@@ -72,7 +72,7 @@ public class Supplier implements Serializable {
     public String toString() {
         final StringBuilder sb = new StringBuilder("Supplier{");
         sb.append("id=").append(id);
-        sb.append(", name='").append(name).append('\'');
+        sb.append(", supplierName='").append(supplierName).append('\'');
         sb.append(", products=").append(products);
         sb.append('}');
         return sb.toString();

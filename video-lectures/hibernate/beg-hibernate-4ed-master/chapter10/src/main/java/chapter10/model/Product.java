@@ -110,8 +110,8 @@ public class Product implements Serializable {
     public String toString() {
         final StringBuilder sb = new StringBuilder("Product{");
         sb.append("id=").append(id);
-        sb.append(", supplier='").append(supplier.getName());
-        sb.append("', name='").append(name).append('\'');
+        sb.append(", supplier='").append(supplier.getSupplierName());
+        sb.append("', supplierName='").append(name).append('\'');
         sb.append(", description='").append(description).append('\'');
         sb.append(", price=").append(price);
         sb.append('}');
