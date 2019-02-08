@@ -14,6 +14,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -84,7 +85,7 @@ public class QueryTest {
             final List<Software> resultList = typedQuery.getResultList();
             System.out.println(resultList);
 
-            Assert.assertEquals(resultList.size(), 7);
+            Assert.assertEquals(resultList.size(), 2);
         });
     }
 
@@ -132,23 +133,48 @@ public class QueryTest {
      */
     @Test
     public void testDynamicQuery() {
-        final String productNameSubstr = "Super";
-        final String supplierNameSubstr = "Are we";
+        final String productNameSubstr = "Wildcat";
+        final String supplierNameSubstr = "Hardware Are We";
 
         doWithEntityManager((em) -> {
             final CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
             final CriteriaQuery<Product> criteriaQuery = criteriaBuilder.createQuery(Product.class);
             final Root<Product> productRoot = criteriaQuery.from(Product.class);
+            criteriaQuery.select(productRoot);
+
+            List<Predicate> criteria = new ArrayList<>();
 
             if (StringUtils.isNotBlank(supplierNameSubstr)) {
                 final Join<Product, Supplier> supplierJoin = productRoot.join("supplier");
 
+                final ParameterExpression<String> supplierNameParam =
+                        criteriaBuilder.parameter(String.class, "suppl_name");
+                criteria.add(criteriaBuilder.like(supplierJoin.get("supplierName"), supplierNameParam));
             }
 
             if (StringUtils.isNotBlank(productNameSubstr)) {
                 final Predicate productNamePredicate = criteriaBuilder
-                        .like(productRoot.get("name"), "%" + productNameSubstr + "%");
+                        .equal(productRoot.get("name"), productNameSubstr);
+
+                criteria.add(productNamePredicate);
             }
+
+            if (criteria.size() == 0) {
+                throw new RuntimeException();
+            } else if (criteria.size() == 1) {
+                criteriaQuery.where(criteria.get(0));
+            } else {
+                criteriaQuery.where(criteriaBuilder.and(criteria.toArray(new Predicate[criteria.size()])));
+            }
+
+            final TypedQuery<Product> query = em.createQuery(criteriaQuery);
+            if (StringUtils.isNotBlank(supplierNameSubstr)) {
+                query.setParameter("suppl_name", supplierNameSubstr);
+            }
+
+            final List<Product> resultList = query.getResultList();
+            System.out.println(resultList.size());
+            System.out.println(resultList);
         });
     }
 
@@ -573,7 +599,7 @@ public class QueryTest {
             Root<Product> root = criteria.from(Product.class);
             criteria.select(root);
             criteria.where(builder.equal(
-                    root.join(Product_.supplier).get(Supplier_.name),
+                    root.join(Product_.supplier).get(Supplier_.SUPPLIER_NAME),
                     builder.parameter(String.class, "supplier_name"))
             );
 
@@ -593,7 +619,7 @@ public class QueryTest {
             Root<Supplier> root = criteria.from(Supplier.class);
             criteria.select(root.join(Supplier_.products));
             criteria.where(builder.equal(
-                    root.get(Supplier_.name),
+                    root.get(Supplier_.SUPPLIER_NAME),
                     builder.parameter(String.class, "supplier_name"))
             );
             TypedQuery<Product> query = em.createQuery(criteria);
@@ -613,13 +639,13 @@ public class QueryTest {
             Root<Supplier> root = criteria.from(Supplier.class);
             criteria.select(builder.construct(
                     SupplierResult.class,
-                    root.get(Supplier_.name),
+                    root.get(Supplier_.SUPPLIER_NAME),
                     builder.count(root.join(Supplier_.products))
             ))
-                    .groupBy(root.get(Supplier_.name))
+                    .groupBy(root.get(Supplier_.SUPPLIER_NAME))
                     //
                     // .distinct(true)
-                    .orderBy(builder.asc(root.get(Supplier_.name)));
+                    .orderBy(builder.asc(root.get(Supplier_.SUPPLIER_NAME)));
 
             List<SupplierResult> supplierData = em.createQuery(criteria).getResultList();
             assertEquals(supplierData.get(0).count, 5);
