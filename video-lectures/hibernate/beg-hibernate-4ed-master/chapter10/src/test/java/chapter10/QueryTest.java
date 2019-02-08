@@ -2,6 +2,7 @@ package chapter10;
 
 import chapter10.model.*;
 import com.autumncode.jpa.util.JPASessionUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -10,9 +11,7 @@ import org.testng.annotations.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
 import java.util.List;
@@ -128,13 +127,28 @@ public class QueryTest {
         });
     }
 
+    /**
+     * find product by product name and supplier name
+     */
     @Test
     public void testDynamicQuery() {
         final String productNameSubstr = "Super";
         final String supplierNameSubstr = "Are we";
 
         doWithEntityManager((em) -> {
+            final CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            final CriteriaQuery<Product> criteriaQuery = criteriaBuilder.createQuery(Product.class);
+            final Root<Product> productRoot = criteriaQuery.from(Product.class);
 
+            if (StringUtils.isNotBlank(supplierNameSubstr)) {
+                final Join<Product, Supplier> supplierJoin = productRoot.join("supplier");
+
+            }
+
+            if (StringUtils.isNotBlank(productNameSubstr)) {
+                final Predicate productNamePredicate = criteriaBuilder
+                        .like(productRoot.get("name"), "%" + productNameSubstr + "%");
+            }
         });
     }
 
