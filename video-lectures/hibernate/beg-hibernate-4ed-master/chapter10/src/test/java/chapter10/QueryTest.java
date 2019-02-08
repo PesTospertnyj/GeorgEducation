@@ -71,7 +71,7 @@ public class QueryTest {
         });
     }
 
-    ////////////////////////our examples
+    ////////////////////////our examples BEGIN
 
     @Test
     public void testGetAllSoftware() {
@@ -96,7 +96,8 @@ public class QueryTest {
             final CriteriaQuery<Supplier> criteriaQuery = criteriaBuilder.createQuery(Supplier.class);
             final Root<Supplier> supplierRoot = criteriaQuery.from(Supplier.class);
             criteriaQuery.select(supplierRoot);
-            criteriaQuery.where(criteriaBuilder.equal(supplierRoot.get("name"),
+            criteriaQuery.where(criteriaBuilder.equal(
+                    supplierRoot.get("name"),
                     criteriaBuilder.parameter(String.class, "param_name")));
 
             final TypedQuery<Supplier> supplierTypedQuery = em.createQuery(criteriaQuery).setParameter("param_name", "Hardware, Inc.");
@@ -105,11 +106,39 @@ public class QueryTest {
 
             Assert.assertEquals(supplierList.size(), 1);
 
+        });
+    }
+
+    @Test
+    public void testGetSupplierByNameLiteral() {
+        doWithEntityManager((em) -> {
+            final CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            final CriteriaQuery<Supplier> criteriaQuery = criteriaBuilder.createQuery(Supplier.class);
+            final Root<Supplier> supplierRoot = criteriaQuery.from(Supplier.class);
+            criteriaQuery.select(supplierRoot);
+            criteriaQuery.where(criteriaBuilder.equal(
+                    supplierRoot.get("name"),
+                    "Hardware, Inc."));
+
+            final TypedQuery<Supplier> supplierTypedQuery = em.createQuery(criteriaQuery);
+            final List<Supplier> supplierList = supplierTypedQuery.getResultList();
+            System.out.println(supplierList);
+
+            Assert.assertEquals(supplierList.size(), 1);
+        });
+    }
+
+    @Test
+    public void testDynamicQuery() {
+        final String productNameSubstr = "Super";
+        final String supplierNameSubstr = "Are we";
+
+        doWithEntityManager((em) -> {
 
         });
     }
 
-    /////////////////
+    /////////////////   END
 
     @Test
     public void testSimpleCriteriaQuery() {
