@@ -45,7 +45,6 @@ public class StaticMetaDataTests {
             criteriaQuery.select(softwareRoot);
             criteriaQuery.where(cb.equal(softwareRoot.get(Software_.name), "SuperDetect"));
 
-
             final TypedQuery<Software> typedQuery = em.createQuery(criteriaQuery);
             final List<Software> resultList = typedQuery.getResultList();
             System.out.println(resultList);
@@ -53,4 +52,6 @@ public class StaticMetaDataTests {
             Assert.assertEquals(resultList.size(), 1);
         });
     }
+
+
 }
