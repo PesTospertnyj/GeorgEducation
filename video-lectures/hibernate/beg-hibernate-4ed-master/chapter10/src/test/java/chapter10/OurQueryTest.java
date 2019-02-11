@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static org.testng.Assert.assertEquals;
+
 /**
  * Created by gd on 2/11/2019.
  */
@@ -205,6 +207,18 @@ public class OurQueryTest {
             final List<Product> resultList = query.getResultList();
             System.out.println(resultList.size());
             System.out.println(resultList);
+        });
+    }
+
+    @Test
+    public void test() {
+        doWithEntityManager((em) -> {
+            CriteriaBuilder builder = em.getCriteriaBuilder();
+            CriteriaQuery<Product> criteria = builder.createQuery(Product.class);
+            Root<Product> root = criteria.from(Product.class);
+            criteria.select(root);
+
+            assertEquals(em.createQuery(criteria).getResultList().size(), 7);
         });
     }
 
