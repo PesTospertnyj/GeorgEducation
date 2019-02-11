@@ -178,6 +178,18 @@ public class QueryTest {
         });
     }
 
+    @Test
+    public void test() {
+        doWithEntityManager((em) -> {
+            CriteriaBuilder builder = em.getCriteriaBuilder();
+            CriteriaQuery<Product> criteria = builder.createQuery(Product.class);
+            Root<Product> root = criteria.from(Product.class);
+            criteria.select(root);
+
+            assertEquals(em.createQuery(criteria).getResultList().size(), 7);
+        });
+    }
+
     /////////////////   END
 
     @Test
