@@ -1,6 +1,7 @@
 package chapter10;
 
 import chapter10.model.*;
+import chapter10.our.Utils;
 import com.autumncode.jpa.util.JPASessionUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
@@ -22,53 +23,17 @@ import static org.testng.Assert.*;
 
 public class QueryTest {
     private void doWithEntityManager(Consumer<EntityManager> command) {
-        EntityManager em = JPASessionUtil.getEntityManager("chapter10");
-        em.getTransaction().begin();
-
-        command.accept(em);
-        if (em.getTransaction().isActive() &&
-                !em.getTransaction().getRollbackOnly()) {
-            em.getTransaction().commit();
-        } else {
-            em.getTransaction().rollback();
-        }
-
-        em.close();
+        Utils.doWithEntityManager(command);
     }
 
 //    @BeforeMethod
     public void populateData() {
-        doWithEntityManager((em) -> {
-            Supplier supplier = new Supplier("Hardware, Inc.");
-            supplier.getProducts().add(
-                    new Product(supplier, "Optical Wheel Mouse", "Mouse", 5.00));
-            supplier.getProducts().add(
-                    new Product(supplier, "Trackball Mouse", "Mouse", 22.00));
-            em.persist(supplier);
-
-            supplier = new Supplier("Hardware Are We");
-            supplier.getProducts().add(
-                    new Software(supplier, "SuperDetect", "Antivirus", 14.95, "1.0"));
-            supplier.getProducts().add(
-                    new Software(supplier, "Wildcat", "Browser", 19.95, "2.2"));
-            supplier.getProducts().add(
-                    new Product(supplier, "AxeGrinder", "Gaming Mouse", 42.00));
-            supplier.getProducts().add(
-                    new Product(supplier, "I5 Tablet", "Computer", 849.99));
-            supplier.getProducts().add(
-                    new Product(supplier, "I7 Desktop", "Computer", 1599.99));
-
-            em.persist(supplier);
-        });
+        Utils.fillData();
     }
 
 //    @AfterMethod
     public void cleanup() {
-        doWithEntityManager((em) -> {
-            em.createQuery("delete from Software").executeUpdate();
-            em.createQuery("delete from Product").executeUpdate();
-            em.createQuery("delete from Supplier").executeUpdate();
-        });
+        Utils.cleanData();
     }
 
     ////////////////////////our examples BEGIN
