@@ -72,6 +72,10 @@
 
         <!--<mapping class="chapter06.ourexamples.ex10enumSet.Ex10Cv"/>-->
 
+        <!--<mapping class="chapter06.ourexamples.ex11relation.Ex11Employee"/>-->
+        <!--<mapping class="chapter06.ourexamples.ex11relation.Ex11EmployeeHistory"/>-->
+
+
     </session-factory>
 
 </hibernate-configuration>
