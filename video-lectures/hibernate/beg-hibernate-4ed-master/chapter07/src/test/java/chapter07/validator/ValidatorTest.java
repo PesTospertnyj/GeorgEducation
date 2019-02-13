@@ -12,6 +12,20 @@ import javax.validation.ConstraintViolationException;
 import static org.testng.Assert.fail;
 
 public class ValidatorTest {
+
+    @Test
+    public void readTest() {
+        Long id = null;
+        try (Session session = SessionUtil.getSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            final ValidatedSimplePerson validatedSimplePerson = session.find(ValidatedSimplePerson.class, 1L);
+            System.out.println(validatedSimplePerson);
+            transaction.commit();
+        }
+    }
+
+
     @Test
     public void createUnvalidatedUnderagePerson() {
         Long id = null;
