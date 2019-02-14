@@ -11,7 +11,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- *
  * @author Georgii_Gavrysh
  */
 public class Main {
@@ -23,6 +22,7 @@ public class Main {
 
         final OrderService myService = APPLICATION_CONTEXT.getBean(OrderService.class);
         myService.placeIphoneOrder();
+
 
     }
 }

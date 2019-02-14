@@ -5,17 +5,23 @@ import com.mycompany.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
 public class OrderServiceImpl implements OrderService {
 
     private String someProp;
 
-    @Autowired
     private ProductService productService;
 
     @Override
     public void placeIphoneOrder() {
         System.out.println("OrderServiceImpl.placeIphoneOrder with price " + productService.getIphonePrice());
+    }
+
+    public ProductService getProductService() {
+        return productService;
+    }
+
+    public void setProductService(ProductService productService) {
+        this.productService = productService;
     }
 
     public String getSomeProp() {

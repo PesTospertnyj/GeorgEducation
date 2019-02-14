@@ -4,7 +4,6 @@ import com.mycompany.service.ProductService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component
 public class ProductServiceImpl implements ProductService {
 
     @Value("${iphone.price}")
